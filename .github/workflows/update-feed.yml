@@ -1,0 +1,36 @@
+name: Update NFL RSS Feed
+
+on:
+  schedule:
+    - cron: '*/5 * * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  update-feed:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Update feed
+        run: python update_feed.py
+
+      - name: Commit changes if feed changed
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add feed.xml
+          if git diff --cached --quiet; then
+            echo "No feed changes to commit"
+          else
+            git commit -m "Auto-update NFL live scores"
+            git push
+          fi
