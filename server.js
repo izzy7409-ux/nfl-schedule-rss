@@ -67,6 +67,8 @@ function gameText(event) {
     if ((period === 2 && clock === '0:00') || /halftime/i.test(phase)) phase = 'HALFTIME';
     else if (!phase) phase = period ? `Q${period}${clock ? ` ${clock}` : ''}` : 'LIVE';
     return {
+      state,
+      key: `live-${away.score}-${home.score}-${period}-${clock || phase}`,
       title: `LIVE | ${away.name} ${away.score} - ${home.name} ${home.score} | ${phase}${netSuffix}`,
       description: `${away.name} ${away.score}, ${home.name} ${home.score}. ${phase}.`
     };
@@ -75,6 +77,8 @@ function gameText(event) {
   if (state === 'post') {
     const detail = /final/i.test(status.type?.shortDetail || '') ? String(status.type.shortDetail).toUpperCase() : 'FINAL';
     return {
+      state,
+      key: `final-${away.score}-${home.score}`,
       title: `${detail} | ${away.name} ${away.score} - ${home.name} ${home.score}`,
       description: `Final: ${away.name} ${away.score}, ${home.name} ${home.score}.`
     };
@@ -82,19 +86,23 @@ function gameText(event) {
 
   const k = kickoff(event.date);
   return {
+    state,
+    key: `pregame-${event.date}`,
     title: `${k.day} ${k.mon} ${k.date} | ${away.name} at ${home.name} | ${k.time} ET${netSuffix}`,
     description: `${away.name} at ${home.name}. Kickoff ${k.time} ET.${net ? ` TV: ${net}.` : ''}`
   };
 }
 
 function buildFeed(events, week) {
+  const buildDate = new Date().toUTCString();
   const items = [...events].sort((a,b) => new Date(a.date) - new Date(b.date)).map(event => {
     const text = gameText(event);
     const link = event.links?.find(l => l.href)?.href || `https://www.espn.com/nfl/game/_/gameId/${event.id || ''}`;
-    return `    <item>\n      <title>${esc(text.title)}</title>\n      <description>${esc(text.description)}</description>\n      <link>${esc(link)}</link>\n      <guid isPermaLink="false">espn-nfl-${esc(event.id || '')}</guid>\n    </item>`;
+    const eventId = event.id || 'unknown';
+    return `    <item>\n      <title>${esc(text.title)}</title>\n      <link>${esc(link)}</link>\n      <description>${esc(text.description)}</description>\n      <pubDate>${buildDate}</pubDate>\n      <guid isPermaLink="false">espn-nfl-${esc(eventId)}-${esc(text.key)}</guid>\n    </item>`;
   }).join('\n');
 
-  return `<?xml version="1.0" encoding="UTF-8"?>\n<rss version="2.0">\n  <channel>\n    <title>2026 NFL Week ${week} Live Schedule &amp; Scores</title>\n    <link>https://www.nfl.com/schedules/</link>\n    <description>Live NFL schedule, scores and final results for EVMux.</description>\n    <language>en-us</language>\n    <lastBuildDate>${new Date().toUTCString()}</lastBuildDate>\n    <ttl>1</ttl>\n${items}\n  </channel>\n</rss>\n`;
+  return `<?xml version="1.0" encoding="UTF-8"?>\n<rss version="2.0">\n  <channel>\n    <title>2026 NFL Week ${week} Live Schedule &amp; Scores</title>\n    <link>https://www.nfl.com/schedules/</link>\n    <description>Live NFL schedule, scores and final results for EVMux.</description>\n    <language>en-us</language>\n    <pubDate>${buildDate}</pubDate>\n    <lastBuildDate>${buildDate}</lastBuildDate>\n    <generator>Purple Reign NFL Live RSS</generator>\n    <ttl>1</ttl>\n${items}\n  </channel>\n</rss>\n`;
 }
 
 async function loadFeed() {
@@ -114,7 +122,10 @@ async function loadFeed() {
 
 const server = http.createServer(async (req, res) => {
   if (req.url === '/' || req.url === '/health') {
-    res.writeHead(200, {'Content-Type':'text/plain; charset=utf-8'});
+    res.writeHead(200, {
+      'Content-Type':'text/plain; charset=utf-8',
+      'Cache-Control':'no-store'
+    });
     res.end('NFL RSS service is running');
     return;
   }
@@ -124,13 +135,18 @@ const server = http.createServer(async (req, res) => {
       const xml = await loadFeed();
       res.writeHead(200, {
         'Content-Type': 'application/rss+xml; charset=utf-8',
-        'Cache-Control': 'public, max-age=0, s-maxage=15, stale-while-revalidate=30',
+        'Cache-Control': 'no-cache, no-store, must-revalidate',
+        'Pragma': 'no-cache',
+        'Expires': '0',
         'Access-Control-Allow-Origin': '*'
       });
       res.end(xml);
     } catch (err) {
-      res.writeHead(503, {'Content-Type':'application/rss+xml; charset=utf-8'});
-      res.end(`<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"><channel><title>NFL Live Feed</title><description>${esc(err.message || 'Feed unavailable')}</description></channel></rss>`);
+      res.writeHead(503, {
+        'Content-Type':'application/rss+xml; charset=utf-8',
+        'Cache-Control':'no-store'
+      });
+      res.end(`<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"><channel><title>NFL Live Feed</title><link>https://www.nfl.com/schedules/</link><description>${esc(err.message || 'Feed unavailable')}</description></channel></rss>`);
     }
     return;
   }
