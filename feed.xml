@@ -1,90 +1,107 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <rss version="2.0">
   <channel>
-    <title>2026 NFL Week 1 Schedule</title>
-    <link>https://www.nfl.com/schedules/2026/by-week/week-1</link>
-    <description>NFL Week 1 schedule formatted for an EVMux RSS ticker.</description>
+    <title>2026 NFL Week 1 Live Schedule &amp; Scores</title>
+    <link>https://www.nfl.com/schedules/</link>
+    <description>Automatic NFL schedule, live scores and final results for EVMux.</description>
     <language>en-us</language>
-    <ttl>60</ttl>
+    <lastBuildDate>Wed, 09 Sep 2026 21:09:34 +0000</lastBuildDate>
+    <ttl>5</ttl>
     <item>
       <title>WED SEP 9 | New England Patriots at Seattle Seahawks | 8:20 PM ET | NBC</title>
-      <description>2026 NFL Week 1. New England Patriots at Seattle Seahawks. Kickoff 8:20 PM ET. TV NBC.</description>
-      <guid isPermaLink="false">nfl-2026-week1-01</guid>
+      <description>New England Patriots at Seattle Seahawks. Kickoff 8:20 PM ET. TV: NBC.</description>
+      <link>https://www.espn.com/nfl/game/_/gameId/401872656/patriots-seahawks</link>
+      <guid isPermaLink="false">espn-nfl-401872656</guid>
     </item>
     <item>
       <title>THU SEP 10 | San Francisco 49ers at Los Angeles Rams | 8:35 PM ET | Netflix</title>
-      <description>2026 NFL Week 1. San Francisco 49ers at Los Angeles Rams. Kickoff 8:35 PM ET. TV Netflix.</description>
-      <guid isPermaLink="false">nfl-2026-week1-02</guid>
-    </item>
-    <item>
-      <title>SUN SEP 13 | Chicago Bears at Carolina Panthers | 1:00 PM ET | FOX</title>
-      <description>2026 NFL Week 1. Chicago Bears at Carolina Panthers. Kickoff 1:00 PM ET. TV FOX.</description>
-      <guid isPermaLink="false">nfl-2026-week1-03</guid>
+      <description>San Francisco 49ers at Los Angeles Rams. Kickoff 8:35 PM ET. TV: Netflix.</description>
+      <link>https://www.espn.com/nfl/game/_/gameId/401872657/49ers-rams</link>
+      <guid isPermaLink="false">espn-nfl-401872657</guid>
     </item>
     <item>
       <title>SUN SEP 13 | Tampa Bay Buccaneers at Cincinnati Bengals | 1:00 PM ET | FOX</title>
-      <description>2026 NFL Week 1. Tampa Bay Buccaneers at Cincinnati Bengals. Kickoff 1:00 PM ET. TV FOX.</description>
-      <guid isPermaLink="false">nfl-2026-week1-04</guid>
+      <description>Tampa Bay Buccaneers at Cincinnati Bengals. Kickoff 1:00 PM ET. TV: FOX.</description>
+      <link>https://www.espn.com/nfl/game/_/gameId/401872925/buccaneers-bengals</link>
+      <guid isPermaLink="false">espn-nfl-401872925</guid>
     </item>
     <item>
       <title>SUN SEP 13 | New Orleans Saints at Detroit Lions | 1:00 PM ET | FOX</title>
-      <description>2026 NFL Week 1. New Orleans Saints at Detroit Lions. Kickoff 1:00 PM ET. TV FOX.</description>
-      <guid isPermaLink="false">nfl-2026-week1-05</guid>
-    </item>
-    <item>
-      <title>SUN SEP 13 | Buffalo Bills at Houston Texans | 1:00 PM ET | CBS</title>
-      <description>2026 NFL Week 1. Buffalo Bills at Houston Texans. Kickoff 1:00 PM ET. TV CBS.</description>
-      <guid isPermaLink="false">nfl-2026-week1-06</guid>
-    </item>
-    <item>
-      <title>SUN SEP 13 | Baltimore Ravens at Indianapolis Colts | 1:00 PM ET | CBS</title>
-      <description>2026 NFL Week 1. Baltimore Ravens at Indianapolis Colts. Kickoff 1:00 PM ET. TV CBS.</description>
-      <guid isPermaLink="false">nfl-2026-week1-07</guid>
-    </item>
-    <item>
-      <title>SUN SEP 13 | Cleveland Browns at Jacksonville Jaguars | 1:00 PM ET | CBS</title>
-      <description>2026 NFL Week 1. Cleveland Browns at Jacksonville Jaguars. Kickoff 1:00 PM ET. TV CBS.</description>
-      <guid isPermaLink="false">nfl-2026-week1-08</guid>
-    </item>
-    <item>
-      <title>SUN SEP 13 | Atlanta Falcons at Pittsburgh Steelers | 1:00 PM ET | FOX</title>
-      <description>2026 NFL Week 1. Atlanta Falcons at Pittsburgh Steelers. Kickoff 1:00 PM ET. TV FOX.</description>
-      <guid isPermaLink="false">nfl-2026-week1-09</guid>
+      <description>New Orleans Saints at Detroit Lions. Kickoff 1:00 PM ET. TV: FOX.</description>
+      <link>https://www.espn.com/nfl/game/_/gameId/401872923/saints-lions</link>
+      <guid isPermaLink="false">espn-nfl-401872923</guid>
     </item>
     <item>
       <title>SUN SEP 13 | New York Jets at Tennessee Titans | 1:00 PM ET | CBS</title>
-      <description>2026 NFL Week 1. New York Jets at Tennessee Titans. Kickoff 1:00 PM ET. TV CBS.</description>
-      <guid isPermaLink="false">nfl-2026-week1-10</guid>
+      <description>New York Jets at Tennessee Titans. Kickoff 1:00 PM ET. TV: CBS.</description>
+      <link>https://www.espn.com/nfl/game/_/gameId/401872924/jets-titans</link>
+      <guid isPermaLink="false">espn-nfl-401872924</guid>
     </item>
     <item>
-      <title>SUN SEP 13 | Arizona Cardinals at Los Angeles Chargers | 4:25 PM ET | CBS</title>
-      <description>2026 NFL Week 1. Arizona Cardinals at Los Angeles Chargers. Kickoff 4:25 PM ET. TV CBS.</description>
-      <guid isPermaLink="false">nfl-2026-week1-11</guid>
+      <title>SUN SEP 13 | Baltimore Ravens at Indianapolis Colts | 1:00 PM ET | CBS</title>
+      <description>Baltimore Ravens at Indianapolis Colts. Kickoff 1:00 PM ET. TV: CBS.</description>
+      <link>https://www.espn.com/nfl/game/_/gameId/401872659/ravens-colts</link>
+      <guid isPermaLink="false">espn-nfl-401872659</guid>
+    </item>
+    <item>
+      <title>SUN SEP 13 | Atlanta Falcons at Pittsburgh Steelers | 1:00 PM ET | FOX</title>
+      <description>Atlanta Falcons at Pittsburgh Steelers. Kickoff 1:00 PM ET. TV: FOX.</description>
+      <link>https://www.espn.com/nfl/game/_/gameId/401872658/falcons-steelers</link>
+      <guid isPermaLink="false">espn-nfl-401872658</guid>
+    </item>
+    <item>
+      <title>SUN SEP 13 | Chicago Bears at Carolina Panthers | 1:00 PM ET | FOX</title>
+      <description>Chicago Bears at Carolina Panthers. Kickoff 1:00 PM ET. TV: FOX.</description>
+      <link>https://www.espn.com/nfl/game/_/gameId/401872661/bears-panthers</link>
+      <guid isPermaLink="false">espn-nfl-401872661</guid>
+    </item>
+    <item>
+      <title>SUN SEP 13 | Cleveland Browns at Jacksonville Jaguars | 1:00 PM ET | CBS</title>
+      <description>Cleveland Browns at Jacksonville Jaguars. Kickoff 1:00 PM ET. TV: CBS.</description>
+      <link>https://www.espn.com/nfl/game/_/gameId/401872922/browns-jaguars</link>
+      <guid isPermaLink="false">espn-nfl-401872922</guid>
+    </item>
+    <item>
+      <title>SUN SEP 13 | Buffalo Bills at Houston Texans | 1:00 PM ET | CBS</title>
+      <description>Buffalo Bills at Houston Texans. Kickoff 1:00 PM ET. TV: CBS.</description>
+      <link>https://www.espn.com/nfl/game/_/gameId/401872660/bills-texans</link>
+      <guid isPermaLink="false">espn-nfl-401872660</guid>
     </item>
     <item>
       <title>SUN SEP 13 | Miami Dolphins at Las Vegas Raiders | 4:25 PM ET | FOX</title>
-      <description>2026 NFL Week 1. Miami Dolphins at Las Vegas Raiders. Kickoff 4:25 PM ET. TV FOX.</description>
-      <guid isPermaLink="false">nfl-2026-week1-12</guid>
+      <description>Miami Dolphins at Las Vegas Raiders. Kickoff 4:25 PM ET. TV: FOX.</description>
+      <link>https://www.espn.com/nfl/game/_/gameId/401872928/dolphins-raiders</link>
+      <guid isPermaLink="false">espn-nfl-401872928</guid>
     </item>
     <item>
       <title>SUN SEP 13 | Green Bay Packers at Minnesota Vikings | 4:25 PM ET | CBS</title>
-      <description>2026 NFL Week 1. Green Bay Packers at Minnesota Vikings. Kickoff 4:25 PM ET. TV CBS.</description>
-      <guid isPermaLink="false">nfl-2026-week1-13</guid>
+      <description>Green Bay Packers at Minnesota Vikings. Kickoff 4:25 PM ET. TV: CBS.</description>
+      <link>https://www.espn.com/nfl/game/_/gameId/401872927/packers-vikings</link>
+      <guid isPermaLink="false">espn-nfl-401872927</guid>
     </item>
     <item>
       <title>SUN SEP 13 | Washington Commanders at Philadelphia Eagles | 4:25 PM ET | FOX</title>
-      <description>2026 NFL Week 1. Washington Commanders at Philadelphia Eagles. Kickoff 4:25 PM ET. TV FOX.</description>
-      <guid isPermaLink="false">nfl-2026-week1-14</guid>
+      <description>Washington Commanders at Philadelphia Eagles. Kickoff 4:25 PM ET. TV: FOX.</description>
+      <link>https://www.espn.com/nfl/game/_/gameId/401872929/commanders-eagles</link>
+      <guid isPermaLink="false">espn-nfl-401872929</guid>
+    </item>
+    <item>
+      <title>SUN SEP 13 | Arizona Cardinals at Los Angeles Chargers | 4:25 PM ET | CBS</title>
+      <description>Arizona Cardinals at Los Angeles Chargers. Kickoff 4:25 PM ET. TV: CBS.</description>
+      <link>https://www.espn.com/nfl/game/_/gameId/401872926/cardinals-chargers</link>
+      <guid isPermaLink="false">espn-nfl-401872926</guid>
     </item>
     <item>
       <title>SUN SEP 13 | Dallas Cowboys at New York Giants | 8:20 PM ET | NBC</title>
-      <description>2026 NFL Week 1. Dallas Cowboys at New York Giants. Kickoff 8:20 PM ET. TV NBC.</description>
-      <guid isPermaLink="false">nfl-2026-week1-15</guid>
+      <description>Dallas Cowboys at New York Giants. Kickoff 8:20 PM ET. TV: NBC.</description>
+      <link>https://www.espn.com/nfl/game/_/gameId/401872930/cowboys-giants</link>
+      <guid isPermaLink="false">espn-nfl-401872930</guid>
     </item>
     <item>
-      <title>MON SEP 14 | Denver Broncos at Kansas City Chiefs | 8:15 PM ET | ABC / ESPN</title>
-      <description>2026 NFL Week 1. Denver Broncos at Kansas City Chiefs. Kickoff 8:15 PM ET. TV ABC / ESPN.</description>
-      <guid isPermaLink="false">nfl-2026-week1-16</guid>
+      <title>MON SEP 14 | Denver Broncos at Kansas City Chiefs | 8:15 PM ET | ESPN / ABC</title>
+      <description>Denver Broncos at Kansas City Chiefs. Kickoff 8:15 PM ET. TV: ESPN / ABC.</description>
+      <link>https://www.espn.com/nfl/game/_/gameId/401872931/broncos-chiefs</link>
+      <guid isPermaLink="false">espn-nfl-401872931</guid>
     </item>
   </channel>
 </rss>
