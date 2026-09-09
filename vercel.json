@@ -1,0 +1,15 @@
+{
+  "rewrites": [
+    { "source": "/feed.xml", "destination": "/api/live-feed" },
+    { "source": "/", "destination": "/api/live-feed" }
+  ],
+  "headers": [
+    {
+      "source": "/feed.xml",
+      "headers": [
+        { "key": "Content-Type", "value": "application/rss+xml; charset=utf-8" },
+        { "key": "Cache-Control", "value": "public, s-maxage=15, stale-while-revalidate=30" }
+      ]
+    }
+  ]
+}
