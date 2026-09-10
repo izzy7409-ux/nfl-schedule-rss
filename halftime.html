@@ -1,0 +1,118 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>PRP Halftime Review</title>
+<style>
+:root{
+  --glass:rgba(255,255,255,.115);
+  --glass2:rgba(255,255,255,.075);
+  --stroke:rgba(255,255,255,.18);
+  --stroke2:rgba(255,255,255,.10);
+  --text:#f8f7fb;
+  --muted:rgba(248,247,251,.70);
+  --purple:#b999ff;
+  --purple2:#8c6fd6;
+  --gold:#efd690;
+  --red:#ff8585;
+  --green:#8ff0b5;
+  --shadow:0 24px 70px rgba(0,0,0,.30);
+}
+*{box-sizing:border-box}
+html,body{width:100%;height:100%}
+body{margin:0;background:transparent;color:var(--text);font-family:Inter,Montserrat,Arial,sans-serif;overflow:hidden}
+.stage{width:100%;height:100%;display:flex;justify-content:flex-end;align-items:flex-start;padding:14px}
+.board{width:min(820px,calc(100vw - 28px));max-height:calc(100vh - 28px);display:grid;grid-template-columns:minmax(0,1.18fr) minmax(280px,.82fr);gap:12px;transform-origin:top right}
+.stack{display:grid;gap:12px;align-content:start}
+.card{background:linear-gradient(180deg,var(--glass),var(--glass2));border:1px solid var(--stroke);border-radius:24px;box-shadow:var(--shadow);backdrop-filter:blur(22px) saturate(125%);-webkit-backdrop-filter:blur(22px) saturate(125%)}
+.pad{padding:14px 16px}
+.header{grid-column:1/-1;display:flex;align-items:center;justify-content:space-between;gap:16px;padding:12px 16px}
+.brand{display:flex;align-items:center;gap:12px}.brand-logo{width:42px;height:42px;border-radius:14px;overflow:hidden;background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.15);display:grid;place-items:center}.brand-logo img{width:100%;height:100%;object-fit:cover}.eyebrow{font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--muted)}.title{font-size:20px;font-weight:850;letter-spacing:.01em;line-height:1.05}.updated{font-size:10px;color:var(--muted);text-align:right}
+.hero{padding:14px 16px}.hero-head{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:14px}.phase{display:inline-flex;align-items:center;gap:7px;padding:6px 9px;border-radius:999px;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.14);font-size:10px;font-weight:900;letter-spacing:.12em;text-transform:uppercase}.phase.live:before{content:'';width:7px;height:7px;border-radius:50%;background:var(--red);box-shadow:0 0 0 4px rgba(255,133,133,.15)}.phase.pre{color:var(--gold)}.phase.final{color:#fff}.game-meta{text-align:right;font-size:10px;color:var(--muted)}
+.matchup{display:grid;grid-template-columns:1fr 108px 1fr;gap:12px;align-items:center}.team{display:flex;align-items:center;gap:10px;min-width:0}.team.right{justify-content:flex-end;text-align:right}.team-logo{width:54px;height:54px;border-radius:16px;background:rgba(255,255,255,.10);border:1px solid rgba(255,255,255,.13);display:grid;place-items:center;overflow:hidden;flex:0 0 auto}.team-logo img{width:84%;height:84%;object-fit:contain}.abbr{font-size:20px;font-weight:900}.team-name{font-size:11px;color:var(--muted);margin-top:4px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.score{font-size:44px;font-weight:900;line-height:1;letter-spacing:-.05em;text-align:center}.clock{text-align:center;font-size:11px;color:var(--muted);margin-top:6px}.posdot{display:none;width:8px;height:8px;border-radius:50%;background:var(--gold);box-shadow:0 0 0 5px rgba(239,214,144,.14);margin-left:5px}.posdot.on{display:inline-block}
+.quick{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px;margin-top:14px}.pillstat{padding:9px 10px;border-radius:16px;background:rgba(255,255,255,.075);border:1px solid var(--stroke2)}.pillstat label{display:block;font-size:8px;color:var(--muted);letter-spacing:.12em;text-transform:uppercase;margin-bottom:4px}.pillstat b{display:block;font-size:14px;line-height:1.12}
+.section-head{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:10px}.section-title{font-size:10px;font-weight:900;letter-spacing:.16em;text-transform:uppercase;color:var(--muted)}.section-note{font-size:9px;color:var(--muted)}
+.stats{padding:13px 15px}.stat-header,.stat-row{display:grid;grid-template-columns:1fr 120px 1fr;align-items:center;gap:10px}.stat-header{padding:0 3px 8px;font-size:10px;color:var(--muted);font-weight:800}.stat-header span:last-child{text-align:right}.stat-row{padding:8px 10px;border-radius:15px;background:rgba(255,255,255,.055);border:1px solid rgba(255,255,255,.07);margin-top:6px}.stat-val{font-size:16px;font-weight:850}.stat-val.right{text-align:right}.stat-name{text-align:center;font-size:9px;color:var(--muted);letter-spacing:.05em}.statbar{grid-column:1/-1;height:3px;border-radius:999px;background:rgba(255,255,255,.07);overflow:hidden;display:flex;margin-top:1px}.statbar .l{height:100%;background:linear-gradient(90deg,var(--purple),var(--purple2))}.statbar .r{height:100%;background:linear-gradient(90deg,var(--gold),#d4ad4d)}
+.leaders{padding:13px 15px}.leaders-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}.leader{padding:10px;border-radius:16px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.08)}.leader label{display:block;font-size:8px;color:var(--muted);letter-spacing:.12em;text-transform:uppercase}.leader strong{display:block;margin-top:6px;font-size:12px}.leader span{display:block;margin-top:4px;font-size:9px;color:var(--muted);line-height:1.25}
+.around{padding:13px 15px;min-height:220px;display:grid;align-content:start}.carousel-wrap{position:relative;overflow:hidden}.league-game{padding:14px;border-radius:19px;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.09);transition:opacity .25s ease,transform .25s ease}.league-game.fade{opacity:0;transform:translateY(6px)}.league-top{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:12px}.league-phase{font-size:9px;font-weight:900;letter-spacing:.13em;text-transform:uppercase;color:var(--gold)}.league-network{font-size:9px;color:var(--muted)}.league-team{display:grid;grid-template-columns:36px 1fr 38px;align-items:center;gap:9px;padding:6px 0}.league-logo{width:34px;height:34px;border-radius:11px;background:rgba(255,255,255,.09);display:grid;place-items:center}.league-logo img{width:82%;height:82%;object-fit:contain}.league-name{font-size:13px;font-weight:800}.league-record{font-size:9px;color:var(--muted);margin-top:2px}.league-score{font-size:26px;font-weight:900;text-align:right}.dots{display:flex;gap:5px;justify-content:center;margin-top:12px}.dot{width:5px;height:5px;border-radius:50%;background:rgba(255,255,255,.22)}.dot.on{background:#fff;box-shadow:0 0 0 3px rgba(255,255,255,.08)}
+.plays{padding:13px 15px}.playbox{padding:11px 12px;border-radius:16px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.08)}.playbox+.playbox{margin-top:7px}.playmeta{font-size:8px;color:var(--muted);letter-spacing:.09em;text-transform:uppercase}.playtext{font-size:11px;line-height:1.32;margin-top:4px}
+.footer{grid-column:1/-1;display:flex;justify-content:space-between;align-items:center;gap:10px;padding:0 4px;font-size:9px;color:var(--muted)}.footer strong{font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:#fff}
+@media(max-height:760px){.stage{padding:10px}.board{width:min(760px,calc(100vw - 20px));gap:10px}.card{border-radius:21px}.pad,.hero,.stats,.leaders,.around,.plays{padding:11px 13px}.matchup{grid-template-columns:1fr 92px 1fr}.team-logo{width:46px;height:46px}.score{font-size:38px}.quick{margin-top:10px}.stat-row{padding:6px 9px}.around{min-height:195px}}
+@media(max-width:860px){body{overflow:auto}.board{grid-template-columns:1fr;width:100%;max-height:none}.header,.footer{grid-column:auto}.stage{justify-content:center}}
+</style>
+</head>
+<body>
+<div class="stage">
+  <div class="board">
+    <section class="card header">
+      <div class="brand">
+        <div class="brand-logo"><img src="/prp-logo.svg" alt="PRP logo"></div>
+        <div><div class="eyebrow">Purple Reign Podcast</div><div class="title">Halftime Review</div></div>
+      </div>
+      <div id="updated" class="updated">Waiting for live data...</div>
+    </section>
+    <div class="stack">
+      <section class="card hero">
+        <div class="hero-head"><div id="phase" class="phase pre">Pregame</div><div id="gameMeta" class="game-meta"></div></div>
+        <div class="matchup">
+          <div class="team"><div class="team-logo"><img id="ravLogo"></div><div><div><span id="ravAbbr" class="abbr">BAL</span><span id="ravPos" class="posdot"></span></div><div id="ravName" class="team-name">Baltimore Ravens</div></div></div>
+          <div><div class="score"><span id="ravScore">0</span> · <span id="oppScore">0</span></div><div id="clock" class="clock">UPCOMING</div></div>
+          <div class="team right"><div><div><span id="oppPos" class="posdot"></span><span id="oppAbbr" class="abbr">OPP</span></div><div id="oppName" class="team-name">Opponent</div></div><div class="team-logo"><img id="oppLogo"></div></div>
+        </div>
+        <div class="quick">
+          <div class="pillstat"><label>Down & Distance</label><b id="down">--</b></div>
+          <div class="pillstat"><label>Possession</label><b id="poss">--</b></div>
+          <div class="pillstat"><label>Field Position</label><b id="field">--</b></div>
+          <div class="pillstat"><label>Timeouts</label><b id="timeouts">-- / --</b></div>
+        </div>
+      </section>
+      <section class="card stats">
+        <div class="section-head"><div class="section-title">Halftime Team Stats</div><div class="section-note">BAL vs <span id="statsOpp">OPP</span></div></div>
+        <div class="stat-header"><span>BAL</span><span style="text-align:center">Category</span><span id="statOppHead">OPP</span></div>
+        <div id="statsRows"></div>
+      </section>
+      <section class="card leaders">
+        <div class="section-head"><div class="section-title">Ravens Leaders</div><div class="section-note">Live box score</div></div>
+        <div id="leadersGrid" class="leaders-grid"></div>
+      </section>
+    </div>
+    <div class="stack">
+      <section class="card around">
+        <div class="section-head"><div class="section-title">Around the NFL</div><div class="section-note">Next game every 7s</div></div>
+        <div class="carousel-wrap"><div id="leagueGame" class="league-game"></div></div>
+        <div id="dots" class="dots"></div>
+      </section>
+      <section class="card plays">
+        <div class="section-head"><div class="section-title">Last Ravens Play</div><div id="lastMeta" class="section-note"></div></div>
+        <div class="playbox"><div id="lastPlay" class="playtext">Waiting for play-by-play...</div><div id="lastScore" class="playmeta" style="margin-top:7px"></div></div>
+      </section>
+      <section class="card plays">
+        <div class="section-head"><div class="section-title">Recent Scoring Plays</div><div class="section-note">Ravens game</div></div>
+        <div id="scoringPlays"></div>
+      </section>
+    </div>
+    <div class="footer"><span id="mode">Auto-refresh 10s</span><strong>PRP Live · Halftime</strong></div>
+  </div>
+</div>
+<script>
+const DATA_REFRESH = 10000;
+const CAROUSEL_MS = 7000;
+const el = id => document.getElementById(id);
+let league = [];
+let gameIndex = 0;
+function phaseMarkup(state){if(state==='in') return '<span class="phase live">Live</span>';if(state==='post') return '<span class="phase final">Final</span>';return '<span class="phase pre">Pregame</span>';}
+function clockText(d){if(d.state==='in') return [d.period ? 'Q'+d.period : '', d.clock].filter(Boolean).join(' ') || 'LIVE';if(d.state==='post') return 'FINAL';return 'UPCOMING';}
+function stamp(s){try{return new Date(s).toLocaleTimeString('en-US',{hour:'numeric',minute:'2-digit',second:'2-digit'});}catch{return'';}}
+function pctValue(v){const n=parseFloat(String(v).replace(/[^0-9.-]/g,''));return Number.isFinite(n)?Math.max(0,n):0;}
+function renderStats(rows, oppAbbr){el('statsOpp').textContent=oppAbbr||'OPP';el('statOppHead').textContent=oppAbbr||'OPP';const html=(rows||[]).map(r=>{const a=pctValue(r.ravens),b=pctValue(r.opponent),total=a+b;const lp=total>0?(a/total*100):50;const rp=100-lp;return '<div class="stat-row"><div class="stat-val">'+r.ravens+'</div><div class="stat-name">'+r.label+'</div><div class="stat-val right">'+r.opponent+'</div><div class="statbar"><div class="l" style="width:'+lp+'%"></div><div class="r" style="width:'+rp+'%"></div></div></div>';}).join('');el('statsRows').innerHTML=html||'<div class="section-note">Stats populate once the game has live box-score data.</div>';}
+function renderLeaders(items){el('leadersGrid').innerHTML=(items||[]).map(x=>'<div class="leader"><label>'+x.label+'</label><strong>'+x.name+'</strong><span>'+x.value+'</span></div>').join('')||'<div class="section-note">Player leaders will populate during the game.</div>';}
+function renderScoring(items){const target=el('scoringPlays');if(!items||!items.length){target.innerHTML='<div class="section-note">No scoring plays yet.</div>';return;}target.innerHTML=items.slice(0,3).map(p=>'<div class="playbox"><div class="playmeta">'+[p.period,p.clock,p.scoreLine].filter(Boolean).join(' · ')+'</div><div class="playtext">'+p.text+'</div></div>').join('');}
+function leagueStatus(g){if(g.state==='in') return [g.period?'Q'+g.period:'',g.clock].filter(Boolean).join(' ')||'LIVE';if(g.state==='post') return 'FINAL';return g.statusText||'UPCOMING';}
+function renderLeague(){const box=el('leagueGame');if(!league.length){box.innerHTML='<div class="section-note">Other NFL games will appear here.</div>';el('dots').innerHTML='';return;}const g=league[gameIndex%league.length];box.classList.add('fade');setTimeout(()=>{box.innerHTML='<div class="league-top"><div class="league-phase">'+leagueStatus(g)+'</div><div class="league-network">'+(g.network||'NFL')+'</div></div>'+'<div class="league-team"><div class="league-logo"><img src="'+(g.away.logo||'')+'"></div><div><div class="league-name">'+g.away.short+'</div><div class="league-record">'+(g.away.record||'')+'</div></div><div class="league-score">'+g.away.score+'</div></div>'+'<div class="league-team"><div class="league-logo"><img src="'+(g.home.logo||'')+'"></div><div><div class="league-name">'+g.home.short+'</div><div class="league-record">'+(g.home.record||'')+'</div></div><div class="league-score">'+g.home.score+'</div></div>';box.classList.remove('fade');const dots=league.slice(0,12).map((_,i)=>'<span class="dot '+(i===gameIndex%Math.min(league.length,12)?'on':'')+'"></span>').join('');el('dots').innerHTML=dots;},220);}
+function render(data){const d=data.ravens;el('updated').textContent='Updated '+stamp(data.updatedAt);el('phase').outerHTML=phaseMarkup(d.state).replace('class="phase','id="phase" class="phase');el('gameMeta').textContent=[d.weekLabel,d.stadium].filter(Boolean).join(' · ');el('ravLogo').src=d.ravens.logo||'';el('oppLogo').src=d.opponent.logo||'';el('ravAbbr').textContent=d.ravens.abbr||'BAL';el('oppAbbr').textContent=d.opponent.abbr||'OPP';el('ravName').textContent=d.ravens.short||d.ravens.name||'Baltimore Ravens';el('oppName').textContent=d.opponent.short||d.opponent.name||'Opponent';el('ravScore').textContent=String(d.ravensScore??0);el('oppScore').textContent=String(d.opponentScore??0);el('ravPos').className=d.possession===d.ravens.abbr?'posdot on':'posdot';el('oppPos').className=d.possession===d.opponent.abbr?'posdot on':'posdot';el('clock').textContent=clockText(d);el('down').textContent=d.downDistanceText||'--';el('poss').textContent=d.possession||'--';el('field').textContent=d.fieldPositionLabel||'--';el('timeouts').textContent=(d.timeouts?.ravens??'--')+' / '+(d.timeouts?.opponent??'--');renderStats(d.teamStats,d.opponent.abbr);renderLeaders(d.playerLeaders);el('lastPlay').textContent=d.lastPlay?.text||'No play description yet.';el('lastMeta').textContent=[d.lastPlay?.period,d.lastPlay?.clock].filter(Boolean).join(' · ');el('lastScore').textContent=d.lastPlay?.scoreLine||'';renderScoring(d.scoringPlays||[]);league=data.league||[];if(gameIndex>=league.length) gameIndex=0;renderLeague();el('mode').textContent='Auto-refresh 10s · League carousel 7s · '+(d.dataMode==='play-by-play'?'Play-by-play active':'Scoreboard fallback');}
+async function load(){const r=await fetch('/api/halftime-state?ts='+Date.now(),{cache:'no-store'});if(!r.ok) throw new Error('HTTP '+r.status);render(await r.json());}
+load().catch(()=>{});setInterval(()=>load().catch(()=>{}),DATA_REFRESH);setInterval(()=>{if(league.length){gameIndex=(gameIndex+1)%league.length;renderLeague();}},CAROUSEL_MS);
+</script>
+</body>
+</html>
