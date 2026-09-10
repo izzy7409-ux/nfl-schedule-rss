@@ -4,14 +4,17 @@ const path = require('path');
 const PICKEM_HTML = fs.readFileSync(path.join(__dirname, 'pickem.html'), 'utf8');
 const CONTROL_HTML = fs.readFileSync(path.join(__dirname, 'pickem-control.html'), 'utf8');
 const ESPN = 'https://site.api.espn.com/apis/site/v2/sports/football/nfl/scoreboard';
+const ESPN_SUMMARY = 'https://site.api.espn.com/apis/site/v2/sports/football/nfl/summary';
 const SEASON = 2026;
 const WEEK1_START = Date.UTC(2026, 8, 9);
 const CONTROL_SECRET = process.env.PICKEM_CONTROL_SECRET || process.env.CONFIDENCE_CONTROL_SECRET || '';
 const REFRESH_MS = 10 * 60 * 1000;
 const WEATHER_CACHE_MS = 30 * 60 * 1000;
+const ODDS_CACHE_MS = 10 * 60 * 1000;
 
 const clients = new Set();
 const weatherCache = new Map();
+const oddsCache = new Map();
 const state = {
   seasonType: 2,
   week: 1,
@@ -32,7 +35,7 @@ const STADIUMS = {
   LV:[36.0908,-115.1830], LAC:[33.9535,-118.3392], LAR:[33.9535,-118.3392], MIA:[25.9580,-80.2389],
   MIN:[44.9736,-93.2575], NE:[42.0909,-71.2643], NO:[29.9511,-90.0812], NYG:[40.8135,-74.0745],
   NYJ:[40.8135,-74.0745], PHI:[39.9008,-75.1675], PIT:[40.4468,-80.0158], SEA:[47.5952,-122.3316],
-  SF:[37.4030,-121.9700], TB:[27.9759,-82.5033], TEN:[36.1665,-86.7713], WAS:[38.9076,-76.8645]
+  SF:[37.4030,-121.9700], TB:[27.9759,-82.5033], TEN:[36.1665,-86.7713], WAS:[38.9076,-76.8645], WSH:[38.9076,-76.8645]
 };
 
 function json(res, code, obj, extra = {}) {
@@ -113,6 +116,64 @@ function spreadInfo(comp = {}) {
     overUnder: pick.overUnder ?? null,
   };
 }
+function normalizeOddsCandidate(o = {}, game = null) {
+  const details = String(o.details || o.summary || o.displayValue || '').trim();
+  const provider = o.provider?.name || o.provider?.displayName || o.provider?.shortName || '';
+  const overUnder = o.overUnder ?? o.total ?? null;
+  if (details) return { text: details, provider, overUnder };
+
+  const rawSpread = Number(o.spread);
+  if (Number.isFinite(rawSpread) && rawSpread !== 0 && game) {
+    const homeFav = o.homeTeamOdds?.favorite === true || o.homeTeamOdds?.favorite === 'true';
+    const awayFav = o.awayTeamOdds?.favorite === true || o.awayTeamOdds?.favorite === 'true';
+    const fav = homeFav ? game.home?.abbr : awayFav ? game.away?.abbr : '';
+    if (fav) return { text: `${fav} -${Math.abs(rawSpread)}`, provider, overUnder };
+  }
+  if (Number.isFinite(rawSpread) && rawSpread === 0) return { text:'PK', provider, overUnder };
+  return { text:'Line pending', provider, overUnder };
+}
+function summaryOdds(summary = {}, game = null) {
+  const candidates = [];
+  const add = x => {
+    if (Array.isArray(x)) candidates.push(...x);
+    else if (x && typeof x === 'object') candidates.push(x);
+  };
+  add(summary.pickcenter);
+  add(summary.odds);
+  add(summary.header?.competitions?.[0]?.odds);
+  add(summary.gameInfo?.odds);
+  add(summary.gameInfo?.pickcenter);
+  for (const o of candidates) {
+    const out = normalizeOddsCandidate(o, game);
+    if (out.text !== 'Line pending') return out;
+  }
+  const first = candidates[0];
+  return first ? normalizeOddsCandidate(first, game) : null;
+}
+async function fetchSpread(game) {
+  if (!game?.id) return game?.spread || { text:'Line pending', provider:'', overUnder:null };
+  if (game.spread?.text && game.spread.text !== 'Line pending') return game.spread;
+  const cached = oddsCache.get(game.id);
+  if (cached && Date.now() - cached.at < ODDS_CACHE_MS) return cached.value;
+  try {
+    const summary = await fetchJson(`${ESPN_SUMMARY}?event=${encodeURIComponent(game.id)}`);
+    const found = summaryOdds(summary, game) || game.spread || { text:'Line pending', provider:'', overUnder:null };
+    oddsCache.set(game.id, { value:found, at:Date.now() });
+    return found;
+  } catch {
+    return game.spread || { text:'Line pending', provider:'', overUnder:null };
+  }
+}
+async function ensureSpread(index = state.selectedIndex) {
+  const game = state.games[index];
+  if (!game || (game.spread?.text && game.spread.text !== 'Line pending')) return;
+  const spread = await fetchSpread(game);
+  if (spread && JSON.stringify(spread) !== JSON.stringify(game.spread)) {
+    game.spread = spread;
+    broadcast();
+  }
+}
+
 function weatherFromEspn(comp = {}, event = {}) {
   const w = comp.weather || event.weather || {};
   const display = String(w.displayValue || '').trim();
@@ -232,10 +293,10 @@ async function ensureWeather(index = state.selectedIndex) {
     broadcast();
   }
 }
-async function warmWeather() {
+async function warmDetails() {
   for (let i=0;i<state.games.length;i++) {
     if (i === state.selectedIndex) continue;
-    await ensureWeather(i);
+    await Promise.all([ensureWeather(i), ensureSpread(i)]);
   }
 }
 async function refreshSlate(force = false) {
@@ -253,9 +314,9 @@ async function refreshSlate(force = false) {
     state.selectedIndex = same >= 0 ? same : 0;
     state.updatedAt = new Date().toISOString();
     state.lastError = '';
-    await ensureWeather(state.selectedIndex);
+    await Promise.all([ensureWeather(state.selectedIndex), ensureSpread(state.selectedIndex)]);
     broadcast();
-    warmWeather().catch(()=>{});
+    warmDetails().catch(()=>{});
   } catch (e) {
     state.lastError = e.message || 'Unable to refresh NFL slate';
     broadcast();
@@ -264,7 +325,7 @@ async function refreshSlate(force = false) {
   }
 }
 function liteGame(g, i) {
-  return { id:g.id, index:i, away:g.away.abbr, home:g.home.abbr, kickoff:g.kickoff, date:g.date };
+  return { id:g.id, index:i, away:g.away.abbr, home:g.home.abbr, kickoff:g.kickoff, date:g.date, spread:g.spread?.text || 'Line pending', weather:g.weather || 'Forecast pending', network:g.network || '' };
 }
 function publicState() {
   const game = state.games[state.selectedIndex] || null;
@@ -290,7 +351,7 @@ async function selectIndex(index) {
   if (!state.games.length) return;
   const n = state.games.length;
   state.selectedIndex = ((Number(index) % n) + n) % n;
-  await ensureWeather(state.selectedIndex);
+  await Promise.all([ensureWeather(state.selectedIndex), ensureSpread(state.selectedIndex)]);
   broadcast();
 }
 async function action(body = {}) {
