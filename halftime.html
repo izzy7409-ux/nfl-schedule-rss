@@ -147,6 +147,10 @@ function leagueStatus(g){
   if(g.state==='in') return [g.period?'Q'+g.period:'',g.clock].filter(Boolean).join(' ') || g.statusText || 'LIVE';
   return g.statusText || (g.state==='post'?'FINAL':'UPCOMING');
 }
+function nflLogo(t){
+  const a=String(t?.abbr||'').toLowerCase();
+  return a ? 'https://a.espncdn.com/i/teamlogos/nfl/500/'+a+'.png' : '';
+}
 function renderLeague(immediate=false){
   const box=el('leagueGame');
   if(!league.length){box.innerHTML='<div class="section-note">Other NFL games will appear here.</div>';el('dots').innerHTML='';return;}
@@ -155,9 +159,9 @@ function renderLeague(immediate=false){
   const paint=()=>{
     box.innerHTML='<div class="league-top"><div>'+leaguePhase(g)+'</div><div class="league-network">'+(g.network||'')+'</div></div>'+
       '<div class="league-matchup">'+
-        '<div class="league-team"><div class="league-logo"><img src="'+(g.away.logo||'')+'" alt="'+(g.away.abbr||'Away')+'"></div><div><div class="league-name">'+(g.away.abbr||g.away.short||g.away.name)+'</div><div class="league-record">'+(g.away.short||g.away.name||'')+'</div></div></div>'+
+        '<div class="league-team"><div class="league-logo"><img src="'+nflLogo(g.away)+'" alt="'+(g.away.abbr||'Away')+'"></div><div><div class="league-name">'+(g.away.abbr||g.away.short||g.away.name)+'</div><div class="league-record">'+(g.away.short||g.away.name||'')+'</div></div></div>'+
         '<div class="league-scorebox"><div class="league-scorelabel">Score</div><div class="league-scorepair">'+(g.away.score??0)+' · '+(g.home.score??0)+'</div></div>'+
-        '<div class="league-team right"><div><div class="league-name">'+(g.home.abbr||g.home.short||g.home.name)+'</div><div class="league-record">'+(g.home.short||g.home.name||'')+'</div></div><div class="league-logo"><img src="'+(g.home.logo||'')+'" alt="'+(g.home.abbr||'Home')+'"></div></div>'+
+        '<div class="league-team right"><div><div class="league-name">'+(g.home.abbr||g.home.short||g.home.name)+'</div><div class="league-record">'+(g.home.short||g.home.name||'')+'</div></div><div class="league-logo"><img src="'+nflLogo(g.home)+'" alt="'+(g.home.abbr||'Home')+'"></div></div>'+
       '</div><div class="league-status">'+leagueStatus(g)+'</div>';
     el('dots').innerHTML=league.map((_,i)=>'<span class="dot '+(i===gameIndex?'on':'')+'"></span>').join('');
     box.classList.remove('fade');
