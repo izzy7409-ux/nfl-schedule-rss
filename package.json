@@ -4,5 +4,5 @@
   "private": true,
   "type": "commonjs",
   "engines": { "node": ">=20" },
-  "scripts": { "start": "node server.js" }
+  "scripts": { "start": "node -r ./confidence-preload.js server.js" }
 }
