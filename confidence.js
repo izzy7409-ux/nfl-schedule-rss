@@ -14,11 +14,17 @@ const state = {
   videoTitle: '',
   liveChatId: '',
   connected: false,
+  connectionMode: '',
   votingOpen: false,
   lastError: '',
   nextPageToken: '',
   pollTimer: null,
   pollingIntervalMs: 5000,
+  armedVideoId: '',
+  armedVideoTitle: '',
+  armedAt: '',
+  armTimer: null,
+  armPollingIntervalMs: 30000,
   votes: new Map(),
   matchup: null,
   matchupUpdatedAt: 0,
@@ -139,10 +145,16 @@ function voteSummary() {
 function publicState() {
   return {
     connected: state.connected,
+    connectionMode: state.connectionMode,
     votingOpen: state.votingOpen,
     videoId: state.videoId,
     videoTitle: state.videoTitle,
     liveChatId: state.liveChatId ? 'connected' : '',
+    armed: Boolean(state.armedVideoId),
+    armedVideoId: state.armedVideoId,
+    armedVideoTitle: state.armedVideoTitle,
+    armedAt: state.armedAt,
+    armPollingIntervalMs: state.armPollingIntervalMs,
     lastError: state.lastError,
     matchup: state.matchup,
     votes: voteSummary(),
@@ -207,36 +219,116 @@ async function pollOnce() {
   }
   state.pollTimer = setTimeout(pollOnce, state.pollingIntervalMs);
 }
-async function connectYouTube(input) {
-  const videoId = extractVideoId(input);
-  if (!videoId) throw new Error('Paste a valid YouTube live URL or 11-character video ID');
-  const item = await ytVideo(videoId);
+function clearArmTimer() {
+  clearTimeout(state.armTimer);
+  state.armTimer = null;
+}
+function clearArmedTarget() {
+  clearArmTimer();
+  state.armedVideoId = '';
+  state.armedVideoTitle = '';
+  state.armedAt = '';
+}
+async function activateChat(item, videoId, mode = 'manual') {
   const chatId = item.liveStreamingDetails?.activeLiveChatId || '';
-  if (!chatId) throw new Error('This video does not currently have an active live chat. Start/go live first, then connect.');
+  if (!chatId) throw new Error('This video does not currently have an active live chat');
+  clearArmTimer();
   state.videoId = videoId;
-  state.videoTitle = item.snippet?.title || '';
+  state.videoTitle = item.snippet?.title || state.armedVideoTitle || '';
   state.liveChatId = chatId;
   state.connected = true;
+  state.connectionMode = mode;
   state.votingOpen = false;
   state.lastError = '';
-  state.votes.clear();
+  state.nextPageToken = '';
+  clearArmedTarget();
   await primeCursor();
   broadcast();
   pollOnce();
 }
-function disconnect() {
+function scheduleArmPoll(delay = state.armPollingIntervalMs) {
+  clearArmTimer();
+  if (!state.armedVideoId || state.connected) return;
+  state.armTimer = setTimeout(async () => {
+    await tryAutoConnectArmed();
+    if (state.armedVideoId && !state.connected) scheduleArmPoll();
+  }, Math.max(5000, Number(delay || state.armPollingIntervalMs)));
+  state.armTimer.unref?.();
+}
+async function tryAutoConnectArmed() {
+  if (!state.armedVideoId || state.connected || !state.apiKey) return false;
+  try {
+    const item = await ytVideo(state.armedVideoId);
+    state.armedVideoTitle = item.snippet?.title || state.armedVideoTitle || '';
+    const chatId = item.liveStreamingDetails?.activeLiveChatId || '';
+    if (!chatId) {
+      state.lastError = '';
+      broadcast();
+      return false;
+    }
+    await activateChat(item, state.armedVideoId, 'auto');
+    return true;
+  } catch (e) {
+    state.lastError = `Armed stream check: ${e.message || 'YouTube check failed'}`;
+    broadcast();
+    return false;
+  }
+}
+async function armYouTube(input) {
+  const videoId = extractVideoId(input);
+  if (!videoId) throw new Error('Paste a valid YouTube scheduled/live URL or 11-character video ID');
+  if (!state.apiKey) throw new Error('Save your YouTube API key first');
+
   clearTimeout(state.pollTimer);
   state.pollTimer = null;
   state.connected = false;
+  state.connectionMode = '';
   state.votingOpen = false;
   state.videoId = '';
   state.videoTitle = '';
   state.liveChatId = '';
   state.nextPageToken = '';
+  state.votes.clear();
+  clearArmTimer();
+
+  const item = await ytVideo(videoId);
+  state.armedVideoId = videoId;
+  state.armedVideoTitle = item.snippet?.title || '';
+  state.armedAt = new Date().toISOString();
+  state.lastError = '';
+  broadcast();
+
+  const connectedNow = await tryAutoConnectArmed();
+  if (!connectedNow && state.armedVideoId) scheduleArmPoll();
+}
+async function connectYouTube(input) {
+  const videoId = extractVideoId(input);
+  if (!videoId) throw new Error('Paste a valid YouTube live URL or 11-character video ID');
+  const item = await ytVideo(videoId);
+  const chatId = item.liveStreamingDetails?.activeLiveChatId || '';
+  if (!chatId) throw new Error('This video does not currently have an active live chat. Use Arm Scheduled Stream if you are not live yet.');
+  state.votes.clear();
+  await activateChat(item, videoId, 'manual');
+}
+function disconnect() {
+  clearTimeout(state.pollTimer);
+  state.pollTimer = null;
+  clearArmedTarget();
+  state.connected = false;
+  state.connectionMode = '';
+  state.votingOpen = false;
+  state.videoId = '';
+  state.videoTitle = '';
+  state.liveChatId = '';
+  state.nextPageToken = '';
+  state.lastError = '';
   broadcast();
 }
 async function openVoting() {
-  if (!state.connected) throw new Error('Connect a YouTube live video first');
+  if (!state.connected) {
+    if (state.armedVideoId) throw new Error('Scheduled stream is armed, but YouTube live chat is not active yet');
+    throw new Error('Connect or arm a YouTube live video first');
+  }
   await primeCursor();
   state.votingOpen = true;
   state.lastError = '';
@@ -256,11 +348,13 @@ async function handleAction(body) {
   if (action === 'setApiKey') {
     state.apiKey = String(body.apiKey || '').trim();
     state.lastError = '';
+    if (state.armedVideoId && state.apiKey && !state.connected) scheduleArmPoll(1000);
     broadcast();
     return { ok: true, apiKeyConfigured: Boolean(state.apiKey) };
   }
+  if (action === 'arm') { await armYouTube(body.video || body.videoId || ''); return { ok: true }; }
   if (action === 'connect') { await connectYouTube(body.video || body.videoId || ''); return { ok: true }; }
-  if (action === 'disconnect') { disconnect(); return { ok: true }; }
+  if (action === 'disconnect' || action === 'disarm') { disconnect(); return { ok: true }; }
   if (action === 'open') { await openVoting(); return { ok: true }; }
   if (action === 'close') { closeVoting(); return { ok: true }; }
   if (action === 'reset') { resetVotes(); return { ok: true }; }
