@@ -3,173 +3,270 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>PRP Ravens Live Tracker</title>
+<title>PRP Ravens Live Tracker, Glass UI</title>
 <style>
 :root{
-  --purple:#9271d6;
-  --purple2:#a98cf0;
-  --gold:#dfc16f;
-  --ink:#0a0712;
-  --panel:rgba(16,10,30,.94);
-  --panel2:rgba(23,15,42,.94);
-  --line:rgba(255,255,255,.08);
-  --text:#f7f5fb;
-  --muted:#c9bfd9;
-  --shadow:0 18px 54px rgba(0,0,0,.34);
+  --bg1:rgba(255,255,255,.12);
+  --bg2:rgba(255,255,255,.08);
+  --stroke:rgba(255,255,255,.18);
+  --stroke-soft:rgba(255,255,255,.1);
+  --text:#f7f7fb;
+  --muted:rgba(247,247,251,.72);
+  --gold:#efd690;
+  --gold-soft:rgba(239,214,144,.16);
+  --purple:#b895ff;
+  --purple-soft:rgba(184,149,255,.18);
+  --green:#9ef2bc;
+  --red:#ff8686;
+  --shadow:0 22px 60px rgba(0,0,0,.28);
 }
 *{box-sizing:border-box}
 html,body{width:100%;height:100%}
-body{margin:0;background:transparent;color:var(--text);font-family:Montserrat,Inter,Arial,sans-serif;overflow:hidden}
-.stage{width:100%;height:100%;padding:10px;display:flex;justify-content:flex-end;align-items:flex-start}
-.sidecar{width:min(460px,calc(100vw - 20px));max-height:calc(100vh - 20px);overflow:hidden;border-radius:26px;background:linear-gradient(180deg,rgba(20,13,37,.97),rgba(8,6,16,.985));border:1px solid rgba(255,255,255,.07);box-shadow:var(--shadow);transform-origin:top right}
-.brandbar{min-height:58px;padding:10px 14px;display:flex;align-items:center;justify-content:space-between;gap:10px;background:linear-gradient(90deg,rgba(146,113,214,.24),rgba(223,193,111,.10));border-bottom:1px solid var(--line)}
-.brand{display:flex;align-items:center;gap:10px;min-width:0}
-.logo-badge{width:38px;height:38px;flex:0 0 auto;border-radius:12px;overflow:hidden;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.08);display:grid;place-items:center}
-.logo-badge img{width:100%;height:100%;object-fit:cover}
-.brandcopy strong{display:block;font-size:13px;line-height:1.05;letter-spacing:.08em;text-transform:uppercase;white-space:nowrap}
-.brandcopy span{display:block;margin-top:3px;font-size:9px;color:var(--muted);letter-spacing:.15em;text-transform:uppercase}
-.updated{font-size:9px;line-height:1.2;color:var(--muted);text-align:right;white-space:nowrap}
-.body{padding:10px;display:grid;gap:8px}
-.scorebox,.panel,.fieldcard,.statusbar{background:var(--panel);border:1px solid var(--line);border-radius:18px}
-.scorebox{padding:10px}
-.teams{display:grid;grid-template-columns:1fr 84px 1fr;gap:8px;align-items:center}
-.team{min-width:0;display:flex;align-items:center;gap:8px}
-.team.away{justify-content:flex-end;text-align:right}
-.teamlogo{width:42px;height:42px;flex:0 0 auto;border-radius:12px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.05);display:grid;place-items:center;overflow:hidden}
-.teamlogo img{width:82%;height:82%;object-fit:contain}
-.teaminfo{min-width:0}
-.abbrline{display:flex;align-items:center;gap:5px}
-.abbr{font-size:16px;font-weight:900;line-height:1;letter-spacing:.02em}
-.name{font-size:10px;color:var(--muted);margin-top:3px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.posdot{display:none;width:7px;height:7px;border-radius:50%;background:var(--gold);box-shadow:0 0 0 4px rgba(223,193,111,.13)}
-.posdot.on{display:inline-block}
-.score{font-size:38px;font-weight:900;line-height:1;letter-spacing:-.05em}
-.center{text-align:center}
-.statuspill{display:inline-flex;align-items:center;justify-content:center;padding:4px 8px;border-radius:999px;font-size:8px;font-weight:900;letter-spacing:.13em;text-transform:uppercase;border:1px solid rgba(255,255,255,.08)}
-.statuspill.live{background:rgba(184,28,28,.18);color:#fecaca}
-.statuspill.live:before{content:'';width:6px;height:6px;border-radius:50%;background:#ef4444;margin-right:6px;box-shadow:0 0 0 3px rgba(239,68,68,.17)}
-.statuspill.pre{background:rgba(223,193,111,.12);color:#f5e6b0}
-.statuspill.final{background:rgba(255,255,255,.08);color:#fff}
-.clock{font-size:15px;font-weight:900;margin-top:4px;line-height:1.1}
-.meta{margin-top:5px;font-size:9px;line-height:1.2;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.statusbar{padding:10px 12px;background:linear-gradient(180deg,rgba(146,113,214,.18),rgba(146,113,214,.07))}
-.statusrow{display:flex;align-items:center;justify-content:space-between;gap:10px}
-.statuslabel{font-size:9px;color:var(--muted);letter-spacing:.12em;text-transform:uppercase}
-.statgrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
-.stat{background:var(--panel2);border:1px solid var(--line);border-radius:14px;padding:8px 10px;min-height:52px}
-.stat label{display:block;font-size:8px;color:var(--muted);text-transform:uppercase;letter-spacing:.12em;margin-bottom:4px}
-.stat b{display:block;font-size:15px;line-height:1.15}
-.fieldcard{padding:9px 10px;background:rgba(11,28,20,.95)}
-.sectionhead{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:8px;font-size:9px;font-weight:900;color:var(--gold);text-transform:uppercase;letter-spacing:.13em}
-.rz{display:none;padding:4px 7px;border-radius:999px;background:rgba(223,193,111,.14);color:#f8edc5;font-size:8px}
-.rz.on{display:inline-block}
-.turf{position:relative;height:82px;border-radius:13px;overflow:hidden;background:linear-gradient(180deg,#1f8045,#135f35);border:1px solid rgba(255,255,255,.14)}
-.ez{position:absolute;top:0;bottom:0;width:9%;display:grid;place-items:center;font-size:9px;font-weight:900;letter-spacing:.15em;color:rgba(255,255,255,.22)}
-.ez.left{left:0;background:linear-gradient(90deg,rgba(0,0,0,.24),transparent)}
-.ez.right{right:0;background:linear-gradient(270deg,rgba(0,0,0,.24),transparent)}
-.line{position:absolute;top:0;bottom:0;width:1px;background:rgba(255,255,255,.30)}
-.line.major{width:2px;background:rgba(255,255,255,.48)}
-.num{position:absolute;top:4px;transform:translateX(-50%);font-size:7px;font-weight:800;color:rgba(255,255,255,.74)}
-.ball{display:none;position:absolute;top:50%;transform:translate(-50%,-50%);width:14px;height:14px;border-radius:50%;background:#8b4513;border:2px solid #f6e3c2;box-shadow:0 0 0 4px rgba(255,255,255,.12)}
+body{margin:0;background:transparent;color:var(--text);font-family:Inter,Montserrat,Arial,sans-serif;overflow:hidden}
+.stage{width:100%;height:100%;display:flex;justify-content:flex-end;align-items:flex-start;padding:14px}
+.panel{width:min(420px, calc(100vw - 28px));display:grid;gap:12px}
+.card{background:linear-gradient(180deg,var(--bg1),var(--bg2));border:1px solid var(--stroke);border-radius:24px;box-shadow:var(--shadow);backdrop-filter:blur(20px) saturate(125%);-webkit-backdrop-filter:blur(20px) saturate(125%);overflow:hidden}
+.pad{padding:14px 16px}
+.header{display:flex;justify-content:space-between;align-items:flex-start;gap:14px}
+.brand{display:flex;align-items:center;gap:12px;min-width:0}
+.brand-badge{width:42px;height:42px;border-radius:14px;background:rgba(255,255,255,.16);border:1px solid rgba(255,255,255,.16);display:grid;place-items:center;overflow:hidden;flex:0 0 auto}
+.brand-badge img{width:100%;height:100%;object-fit:cover}
+.kicker{font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--muted)}
+.brand-title{font-size:18px;font-weight:800;letter-spacing:.02em;line-height:1.05}
+.updated{text-align:right;white-space:nowrap}
+.updated .time{font-size:12px;color:var(--muted)}
+.updated .refresh{font-size:11px;color:var(--muted);margin-top:6px}
+.hero{display:grid;gap:12px}
+.hero-top{display:flex;justify-content:space-between;align-items:flex-start;gap:10px}
+.phase{display:inline-flex;align-items:center;gap:7px;padding:7px 10px;border-radius:999px;background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.15);font-size:11px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:#fff}
+.phase.live::before{content:'';width:8px;height:8px;border-radius:50%;background:var(--red);box-shadow:0 0 0 5px rgba(255,134,134,.16)}
+.phase.pre{color:var(--gold)}
+.phase.final{color:#fff}
+.big-clock{font-size:30px;font-weight:900;line-height:1;letter-spacing:-.03em}
+.subline{margin-top:6px;font-size:13px;color:var(--muted)}
+.status-text{font-size:17px;font-weight:800;line-height:1.25;text-align:right;max-width:170px}
+.matchup{display:grid;grid-template-columns:1fr 72px 1fr;align-items:center;gap:10px;padding-top:2px}
+.team{display:flex;align-items:center;gap:10px;min-width:0}
+.team.right{justify-content:flex-end;text-align:right}
+.tlogo{width:44px;height:44px;border-radius:14px;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.13);display:grid;place-items:center;overflow:hidden;flex:0 0 auto}
+.tlogo img{width:84%;height:84%;object-fit:contain}
+.team-meta{min-width:0}
+.abbr-row{display:flex;align-items:center;gap:6px;font-size:18px;font-weight:900;line-height:1}
+.team.right .abbr-row{justify-content:flex-end}
+.team-name{margin-top:4px;font-size:11px;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.pos{display:none;width:8px;height:8px;border-radius:50%;background:var(--gold);box-shadow:0 0 0 5px rgba(239,214,144,.14)}
+.pos.on{display:inline-block}
+.scoreblock{display:grid;place-items:center;text-align:center}
+.scorelabel{font-size:12px;color:var(--muted);letter-spacing:.14em;text-transform:uppercase}
+.scorepair{margin-top:4px;font-size:34px;font-weight:900;letter-spacing:-.05em}
+.scorepair span{display:inline-block;min-width:24px}
+.statgrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.stat{padding:12px 13px;border-radius:18px;background:rgba(255,255,255,.08);border:1px solid var(--stroke-soft)}
+.stat label{display:block;font-size:10px;color:var(--muted);letter-spacing:.14em;text-transform:uppercase;margin-bottom:5px}
+.stat b{display:block;font-size:20px;line-height:1.08;font-weight:800;word-break:break-word}
+.field-card{padding:12px 14px 14px}
+.section-top{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:10px}
+.section-title{font-size:11px;font-weight:800;letter-spacing:.16em;text-transform:uppercase;color:var(--muted)}
+.rz{display:none;padding:6px 9px;border-radius:999px;background:var(--gold-soft);border:1px solid rgba(239,214,144,.2);font-size:10px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--gold)}
+.rz.on{display:inline-flex}
+.field{position:relative;height:84px;border-radius:18px;background:linear-gradient(180deg,rgba(42,162,96,.92),rgba(24,121,72,.92));border:1px solid rgba(255,255,255,.16);overflow:hidden}
+.endzone{position:absolute;top:0;bottom:0;width:10%;display:grid;place-items:center;font-size:10px;font-weight:900;letter-spacing:.16em;color:rgba(255,255,255,.28)}
+.endzone.left{left:0;background:linear-gradient(90deg,rgba(0,0,0,.18),transparent)}
+.endzone.right{right:0;background:linear-gradient(270deg,rgba(0,0,0,.18),transparent)}
+.yard{position:absolute;top:0;bottom:0;width:1px;background:rgba(255,255,255,.28)}
+.yard.major{width:2px;background:rgba(255,255,255,.48)}
+.ynum{position:absolute;top:6px;transform:translateX(-50%);font-size:8px;font-weight:800;color:rgba(255,255,255,.78)}
+.ball{display:none;position:absolute;top:50%;transform:translate(-50%,-50%);width:15px;height:15px;border-radius:50%;background:#8b4513;border:2px solid #f6e3c2;box-shadow:0 0 0 5px rgba(255,255,255,.14)}
 .ball.on{display:block}
-.ball:before{content:'';position:absolute;left:50%;top:1px;bottom:1px;width:1px;background:#f6e3c2}
-.fieldfoot{display:flex;justify-content:space-between;gap:8px;margin-top:6px;font-size:8px;color:var(--muted)}
-.panel{padding:10px 12px}
-.headrow{display:flex;justify-content:space-between;align-items:center;gap:8px;margin-bottom:6px}
-.title{font-size:9px;font-weight:900;color:var(--gold);text-transform:uppercase;letter-spacing:.13em}
-.muted{font-size:8px;color:var(--muted)}
-.drivepill{display:inline-flex;align-items:center;padding:4px 8px;border-radius:999px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.07);font-size:8px;color:var(--muted);text-transform:uppercase;letter-spacing:.10em;max-width:180px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-.playtext{font-size:14px;font-weight:800;line-height:1.28}
-.plays{display:grid;gap:6px}
-.playrow{background:rgba(255,255,255,.035);border:1px solid rgba(255,255,255,.07);border-radius:12px;padding:8px 9px}
-.playrowtop{display:flex;justify-content:space-between;gap:8px;margin-bottom:3px;font-size:8px;color:var(--muted);text-transform:uppercase;letter-spacing:.08em}
-.playrowtext{font-size:10px;line-height:1.28}
-.empty{font-size:10px;color:var(--muted)}
-.footer{display:flex;justify-content:space-between;align-items:center;gap:8px;padding:1px 2px 0;font-size:8px;color:var(--muted)}
-.footer strong{color:#f5e6b0;letter-spacing:.09em;text-transform:uppercase}
-@media (max-height: 760px){.stage{padding:8px}.sidecar{width:min(430px,calc(100vw - 16px));max-height:calc(100vh - 16px)}.body{gap:7px;padding:9px}.playrowtext{font-size:9px}.playtext{font-size:13px}}
-@media (max-width: 560px){body{overflow:auto}.stage{justify-content:center;padding:8px}.sidecar{width:100%;max-height:none}}
+.ball:before{content:'';position:absolute;left:50%;transform:translateX(-50%);top:1px;bottom:1px;width:1px;background:#f6e3c2}
+.field-foot{display:flex;justify-content:space-between;gap:8px;margin-top:8px;font-size:10px;color:var(--muted)}
+.play-card .title-row{display:flex;justify-content:space-between;align-items:center;gap:8px;margin-bottom:10px}
+.small-title{font-size:11px;font-weight:800;letter-spacing:.16em;text-transform:uppercase;color:var(--muted)}
+.small-meta{font-size:10px;color:var(--muted)}
+.last-play{font-size:18px;font-weight:800;line-height:1.3}
+.last-score{margin-top:8px;font-size:12px;color:var(--muted)}
+.feed{display:grid;gap:8px}
+.feed-item{padding:10px 12px;border-radius:16px;background:rgba(255,255,255,.07);border:1px solid var(--stroke-soft)}
+.feed-top{display:flex;justify-content:space-between;gap:8px;margin-bottom:5px;font-size:10px;color:var(--muted);letter-spacing:.1em;text-transform:uppercase}
+.feed-text{font-size:12px;line-height:1.33}
+.empty{font-size:12px;color:var(--muted)}
+.footer{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:0 4px;font-size:10px;color:var(--muted)}
+.footer strong{font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:#fff}
+.compact-note{padding:6px 2px 0}
+@media (max-height:760px){
+  .stage{padding:10px}
+  .panel{width:min(392px, calc(100vw - 20px));gap:10px}
+  .card{border-radius:22px}
+  .pad{padding:13px 14px}
+  .big-clock{font-size:26px}
+  .last-play{font-size:16px}
+}
+@media (max-width:520px){
+  body{overflow:auto}
+  .stage{justify-content:center}
+  .panel{width:100%}
+}
 </style>
 </head>
 <body>
 <div class="stage">
-  <div id="sidecar" class="sidecar">
-    <div class="brandbar">
+  <div class="panel">
+    <section class="card pad header">
       <div class="brand">
-        <div class="logo-badge"><img src="https://raw.githubusercontent.com/izzy7409-ux/nfl-schedule-rss/ravens-tracker/prp-logo.svg" alt="PRP logo"></div>
-        <div class="brandcopy"><strong>Purple Reign Podcast</strong><span>Ravens live tracker</span></div>
+        <div class="brand-badge"><img src="https://raw.githubusercontent.com/izzy7409-ux/nfl-schedule-rss/ravens-tracker/prp-logo.svg" alt="PRP logo"></div>
+        <div>
+          <div class="kicker">Purple Reign Podcast</div>
+          <div class="brand-title">Ravens Live Tracker</div>
+        </div>
       </div>
-      <div id="updated" class="updated">Waiting for live data...</div>
-    </div>
-    <div class="body">
-      <section class="scorebox">
-        <div class="teams">
-          <div class="team">
-            <div class="teamlogo"><img id="ravLogo" alt="Ravens"></div>
-            <div class="teaminfo"><div class="abbrline"><span id="ravAbbr" class="abbr">BAL</span><span id="ravDot" class="posdot"></span></div><div id="ravName" class="name">Baltimore Ravens</div></div>
-            <div id="ravScore" class="score">0</div>
-          </div>
-          <div class="center">
-            <div id="liveBox"><span class="statuspill pre">Pregame</span></div>
-            <div id="clock" class="clock">UPCOMING</div>
-            <div id="statusMeta" class="meta"></div>
-          </div>
-          <div class="team away">
-            <div id="oppScore" class="score">0</div>
-            <div class="teaminfo"><div class="abbrline" style="justify-content:flex-end"><span id="oppDot" class="posdot"></span><span id="oppAbbr" class="abbr">OPP</span></div><div id="oppName" class="name">Opponent</div></div>
-            <div class="teamlogo"><img id="oppLogo" alt="Opponent"></div>
+      <div id="updated" class="updated">
+        <div class="time">Updating...</div>
+        <div class="refresh">Auto refresh 10s</div>
+      </div>
+    </section>
+
+    <section class="card pad hero">
+      <div class="hero-top">
+        <div>
+          <div id="phase" class="phase pre">Pregame</div>
+          <div id="bigClock" class="big-clock">UP NEXT</div>
+          <div id="subline" class="subline">Waiting for game details...</div>
+        </div>
+        <div id="statusText" class="status-text">Loading...</div>
+      </div>
+      <div class="matchup">
+        <div class="team">
+          <div class="tlogo"><img id="ravLogo" alt="Ravens"></div>
+          <div class="team-meta">
+            <div class="abbr-row"><span id="ravAbbr">BAL</span><span id="ravPos" class="pos"></span></div>
+            <div id="ravName" class="team-name">Baltimore Ravens</div>
           </div>
         </div>
-      </section>
-      <section class="statusbar">
-        <div class="statusrow">
-          <div>
-            <div class="statuslabel">Game Status</div>
-            <div id="statusText" style="font-size:16px;font-weight:900;line-height:1.2;margin-top:4px">Waiting for game...</div>
-          </div>
-          <div id="driveResultPill" class="drivepill">Drive result unavailable</div>
+        <div class="scoreblock">
+          <div class="scorelabel">Score</div>
+          <div class="scorepair"><span id="ravScore">0</span> <span>·</span> <span id="oppScore">0</span></div>
         </div>
-      </section>
-      <section class="statgrid">
-        <div class="stat"><label>Down & Distance</label><b id="down">--</b></div>
-        <div class="stat"><label>Possession</label><b id="possession">--</b></div>
-        <div class="stat"><label>Field Position</label><b id="fieldPos">--</b></div>
-        <div class="stat"><label>Timeouts BAL / OPP</label><b id="timeouts">-- / --</b></div>
-      </section>
-      <section class="fieldcard">
-        <div class="sectionhead"><span>Virtual Field</span><span id="rz" class="rz">Red Zone</span></div>
-        <div class="turf"><div class="ez left">BAL</div><div id="oppEz" class="ez right">OPP</div><div id="fieldLines"></div><div id="ball" class="ball"></div></div>
-        <div class="fieldfoot"><span>BAL goal</span><span id="spotText">Ball spot unavailable</span><span id="oppGoal">OPP goal</span></div>
-      </section>
-      <section class="panel">
-        <div class="headrow"><span class="title">Last Play</span><span id="lastMeta" class="muted"></span></div>
-        <div id="lastPlay" class="playtext">Waiting for play-by-play...</div>
-        <div id="lastScore" class="muted" style="margin-top:6px"></div>
-      </section>
-      <section class="panel">
-        <div class="headrow"><span class="title">Recent Plays</span><span id="recentCount" class="muted"></span></div>
-        <div id="recent" class="plays"><div class="empty">Recent plays will appear here.</div></div>
-      </section>
-      <div class="footer"><span id="dataMode">Auto-refresh 10s</span><strong>PRP Live</strong></div>
-    </div>
+        <div class="team right">
+          <div class="team-meta">
+            <div class="abbr-row"><span id="oppPos" class="pos"></span><span id="oppAbbr">OPP</span></div>
+            <div id="oppName" class="team-name">Opponent</div>
+          </div>
+          <div class="tlogo"><img id="oppLogo" alt="Opponent"></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="card pad statgrid">
+      <div class="stat"><label>Down & Distance</label><b id="down">--</b></div>
+      <div class="stat"><label>Possession</label><b id="possession">--</b></div>
+      <div class="stat"><label>Field Position</label><b id="fieldPos">--</b></div>
+      <div class="stat"><label>Timeouts BAL / OPP</label><b id="timeouts">-- / --</b></div>
+    </section>
+
+    <section class="card field-card">
+      <div class="section-top"><div class="section-title">Virtual Field</div><div id="rz" class="rz">Red Zone</div></div>
+      <div class="field">
+        <div class="endzone left">BAL</div>
+        <div id="oppEz" class="endzone right">OPP</div>
+        <div id="yardLines"></div>
+        <div id="ball" class="ball"></div>
+      </div>
+      <div class="field-foot"><span>BAL goal</span><span id="spot">Ball spot unavailable</span><span id="oppGoal">OPP goal</span></div>
+    </section>
+
+    <section class="card pad play-card">
+      <div class="title-row"><div class="small-title">Last Play</div><div id="lastMeta" class="small-meta"></div></div>
+      <div id="lastPlay" class="last-play">Waiting for play-by-play...</div>
+      <div id="lastScore" class="last-score"></div>
+    </section>
+
+    <section class="card pad">
+      <div class="title-row"><div class="small-title">Recent Plays</div><div id="recentMeta" class="small-meta"></div></div>
+      <div id="recent" class="feed"><div class="empty">Recent plays will appear here.</div></div>
+    </section>
+
+    <div class="footer compact-note"><span id="dataMode">Play feed waiting...</span><strong>PRP Live</strong></div>
   </div>
 </div>
 <script>
-const query = new URLSearchParams(location.search);
-const REFRESH = Number(query.get('refresh')) || 10000;
-const SCALE = Math.max(0.7, Math.min(1, Number(query.get('scale')) || 1));
-const sidecar = document.getElementById('sidecar');
-sidecar.style.transform = 'scale(' + SCALE + ')';
-if (SCALE < 1) sidecar.style.marginTop = '-' + ((1 - SCALE) * 20) + 'px';
+const REFRESH = Number(new URLSearchParams(location.search).get('refresh')) || 10000;
 const el = id => document.getElementById(id);
-const val = (v, f='--') => (v === 0 || v ? v : f);
-function drawField(){let h='';for(let i=0;i<=10;i++){const left=i*10;const cls=(i===0||i===5||i===10)?'line major':'line';h+='<div class="'+cls+'" style="left:'+left+'%"></div>';if(i>0&&i<10){const n=i<=5?i*10:(10-i)*10;h+='<div class="num" style="left:'+left+'%">'+n+'</div>';}}el('fieldLines').innerHTML=h;}
-function stamp(s){try{return new Date(s).toLocaleTimeString('en-US',{hour:'numeric',minute:'2-digit',second:'2-digit'});}catch{return'';}}
-function statusTag(state){if(state==='in') return '<span class="statuspill live">Live</span>';if(state==='post') return '<span class="statuspill final">Final</span>';return '<span class="statuspill pre">Pregame</span>';}
-function rows(items,max=2){if(!items||!items.length) return '<div class="empty">Recent plays will appear here.</div>';return items.slice(0,max).map(p=>{const meta=[p.period,p.clock].filter(Boolean).join(' · ');return '<div class="playrow"><div class="playrowtop"><span>'+(meta||'')+'</span><span>'+(p.scoreLine||'')+'</span></div><div class="playrowtext">'+p.text+'</div></div>';}).join('');}
-function render(d){el('updated').textContent='Updated '+stamp(d.updatedAt);el('ravLogo').src=d.ravens.logo||'';el('oppLogo').src=d.opponent.logo||'';el('ravAbbr').textContent=d.ravens.abbr||'BAL';el('oppAbbr').textContent=d.opponent.abbr||'OPP';el('ravName').textContent=d.ravens.short||d.ravens.name||'Baltimore Ravens';el('oppName').textContent=d.opponent.short||d.opponent.name||'Opponent';el('ravScore').textContent=String(d.ravensScore??0);el('oppScore').textContent=String(d.opponentScore??0);el('ravDot').className=d.possession===d.ravens.abbr?'posdot on':'posdot';el('oppDot').className=d.possession===d.opponent.abbr?'posdot on':'posdot';el('liveBox').innerHTML=statusTag(d.state);el('clock').textContent=d.state==='in'?([d.period?'Q'+d.period:'',d.clock].filter(Boolean).join(' ')||'LIVE'):(d.state==='post'?'FINAL':'UPCOMING');el('statusMeta').textContent=[d.weekLabel,d.stadium].filter(Boolean).join(' · ');el('statusText').textContent=d.statusText||'Waiting for game...';el('driveResultPill').textContent=d.driveResult||'Drive result unavailable';el('down').textContent=val(d.downDistanceText);el('possession').textContent=val(d.possession);el('fieldPos').textContent=val(d.fieldPositionLabel);el('timeouts').textContent=(d.timeouts?.ravens??'--')+' / '+(d.timeouts?.opponent??'--');el('oppEz').textContent=d.opponent.abbr||'OPP';el('oppGoal').textContent=(d.opponent.abbr||'OPP')+' goal';el('spotText').textContent=d.fieldPositionLabel?'Ball at '+d.fieldPositionLabel:'Ball spot unavailable';const ball=el('ball');if(typeof d.fieldMarkerPct==='number'&&!Number.isNaN(d.fieldMarkerPct)){ball.className='ball on';ball.style.left=Math.max(0,Math.min(100,d.fieldMarkerPct))+'%';}else{ball.className='ball';}el('rz').className=d.redZone?'rz on':'rz';el('lastPlay').textContent=val(d.lastPlay?.text,'No play description yet.');el('lastMeta').textContent=[d.lastPlay?.period,d.lastPlay?.clock].filter(Boolean).join(' · ');el('lastScore').textContent=d.lastPlay?.scoreLine||'';const recent=d.recentPlays||[];el('recent').innerHTML=rows(recent,2);el('recentCount').textContent=recent.length?Math.min(recent.length,2)+' shown':'';el('dataMode').textContent='Auto-refresh '+Math.round(REFRESH/1000)+'s · '+(d.dataMode==='play-by-play'?'Play-by-play active':'Scoreboard fallback');}
-async function load(){const r = await fetch('/api/ravens-state?ts='+Date.now(),{cache:'no-store'});if(!r.ok) throw new Error('HTTP '+r.status);render(await r.json());}
-drawField();load().catch(()=>{});setInterval(()=>load().catch(()=>{}), REFRESH);
+const safe = (v, f='--') => (v === 0 || v ? v : f);
+function drawField(){
+  let h='';
+  for(let i=0;i<=10;i++){
+    const left=i*10;
+    const major=(i===0||i===5||i===10);
+    h += '<div class="yard '+(major?'major':'')+'" style="left:'+left+'%"></div>';
+    if(i>0&&i<10){
+      const n=i<=5?i*10:(10-i)*10;
+      h += '<div class="ynum" style="left:'+left+'%">'+n+'</div>';
+    }
+  }
+  el('yardLines').innerHTML=h;
+}
+function timeStamp(s){
+  try{return new Date(s).toLocaleTimeString('en-US', {hour:'numeric', minute:'2-digit', second:'2-digit'});}catch{return '';}
+}
+function phaseTag(state){
+  if(state==='in') return '<div class="phase live">Live</div>';
+  if(state==='post') return '<div class="phase final">Final</div>';
+  return '<div class="phase pre">Pregame</div>';
+}
+function recentRows(items, max=2){
+  if(!items || !items.length) return '<div class="empty">Recent plays will appear here.</div>';
+  return items.slice(0,max).map(p => {
+    const meta=[p.period,p.clock].filter(Boolean).join(' · ');
+    return '<div class="feed-item"><div class="feed-top"><span>'+meta+'</span><span>'+(p.scoreLine||'')+'</span></div><div class="feed-text">'+p.text+'</div></div>';
+  }).join('');
+}
+function render(d){
+  el('updated').innerHTML = '<div class="time">Updated '+timeStamp(d.updatedAt)+'</div><div class="refresh">Auto refresh '+Math.round(REFRESH/1000)+'s</div>';
+  el('phase').outerHTML = phaseTag(d.state).replace('class="phase', 'id="phase" class="phase');
+  el('bigClock').textContent = d.state==='in' ? ([d.period ? 'Q'+d.period : '', d.clock].filter(Boolean).join(' ') || 'LIVE') : (d.state==='post' ? 'FINAL' : 'UP NEXT');
+  el('subline').textContent = [d.weekLabel, d.stadium].filter(Boolean).join(' · ') || 'Ravens game tracker';
+  el('statusText').textContent = d.statusText || 'Loading';
+  el('ravLogo').src = d.ravens.logo || '';
+  el('oppLogo').src = d.opponent.logo || '';
+  el('ravAbbr').textContent = d.ravens.abbr || 'BAL';
+  el('oppAbbr').textContent = d.opponent.abbr || 'OPP';
+  el('ravName').textContent = d.ravens.short || d.ravens.name || 'Baltimore Ravens';
+  el('oppName').textContent = d.opponent.short || d.opponent.name || 'Opponent';
+  el('ravScore').textContent = String(d.ravensScore ?? 0);
+  el('oppScore').textContent = String(d.opponentScore ?? 0);
+  el('ravPos').className = d.possession===d.ravens.abbr ? 'pos on' : 'pos';
+  el('oppPos').className = d.possession===d.opponent.abbr ? 'pos on' : 'pos';
+  el('down').textContent = safe(d.downDistanceText);
+  el('possession').textContent = safe(d.possession);
+  el('fieldPos').textContent = safe(d.fieldPositionLabel);
+  el('timeouts').textContent = (d.timeouts?.ravens ?? '--') + ' / ' + (d.timeouts?.opponent ?? '--');
+  el('oppEz').textContent = d.opponent.abbr || 'OPP';
+  el('oppGoal').textContent = (d.opponent.abbr || 'OPP') + ' goal';
+  el('spot').textContent = d.fieldPositionLabel ? 'Ball at ' + d.fieldPositionLabel : 'Ball spot unavailable';
+  const ball = el('ball');
+  if(typeof d.fieldMarkerPct === 'number' && !Number.isNaN(d.fieldMarkerPct)){
+    ball.className = 'ball on';
+    ball.style.left = Math.max(0, Math.min(100, d.fieldMarkerPct)) + '%';
+  } else {
+    ball.className = 'ball';
+  }
+  el('rz').className = d.redZone ? 'rz on' : 'rz';
+  el('lastPlay').textContent = safe(d.lastPlay?.text, 'No play description yet.');
+  el('lastMeta').textContent = [d.lastPlay?.period, d.lastPlay?.clock].filter(Boolean).join(' · ');
+  el('lastScore').textContent = d.lastPlay?.scoreLine || '';
+  const recent = d.recentPlays || [];
+  el('recent').innerHTML = recentRows(recent, 2);
+  el('recentMeta').textContent = recent.length ? Math.min(recent.length,2)+' shown' : '';
+  el('dataMode').textContent = d.dataMode === 'play-by-play' ? 'Play-by-play active' : 'Scoreboard fallback active';
+}
+async function load(){
+  const res = await fetch('/api/ravens-state?ts='+Date.now(), {cache:'no-store'});
+  if(!res.ok) throw new Error('HTTP '+res.status);
+  render(await res.json());
+}
+drawField();
+load().catch(()=>{});
+setInterval(()=>load().catch(()=>{}), REFRESH);
 </script>
 </body>
 </html>
