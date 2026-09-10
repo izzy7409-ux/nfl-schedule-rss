@@ -58,8 +58,9 @@ body{margin:0;background:transparent;color:var(--text);font-family:Inter,Montser
 .pos.on{display:inline-block}
 .scoreblock{display:grid;place-items:center;text-align:center}
 .scorelabel{font-size:12px;color:var(--muted);letter-spacing:.14em;text-transform:uppercase}
-.scorepair{margin-top:4px;font-size:34px;font-weight:900;letter-spacing:-.05em}
-.scorepair span{display:inline-block;min-width:24px}
+.scorepair{margin-top:4px;font-size:34px;font-weight:900;letter-spacing:-.05em;display:flex;align-items:baseline;justify-content:center;gap:10px;white-space:nowrap;flex-wrap:nowrap}
+.scorepair span{display:inline-block;min-width:24px;flex:0 0 auto;white-space:nowrap}
+.scorepair .sep{min-width:auto;opacity:.85}
 .statgrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
 .stat{padding:12px 13px;border-radius:18px;background:rgba(255,255,255,.08);border:1px solid var(--stroke-soft)}
 .stat label{display:block;font-size:10px;color:var(--muted);letter-spacing:.14em;text-transform:uppercase;margin-bottom:5px}
@@ -144,7 +145,7 @@ body{margin:0;background:transparent;color:var(--text);font-family:Inter,Montser
         </div>
         <div class="scoreblock">
           <div class="scorelabel">Score</div>
-          <div class="scorepair"><span id="ravScore">0</span> <span>·</span> <span id="oppScore">0</span></div>
+          <div class="scorepair"><span id="ravScore">0</span><span class="sep">·</span><span id="oppScore">0</span></div>
         </div>
         <div class="team right">
           <div class="team-meta">
