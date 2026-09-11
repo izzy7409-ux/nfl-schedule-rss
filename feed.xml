@@ -5,7 +5,7 @@
     <link>https://www.nfl.com/schedules/</link>
     <description>Automatic NFL schedule, live scores and final results for EVMux.</description>
     <language>en-us</language>
-    <lastBuildDate>Fri, 11 Sep 2026 01:21:36 +0000</lastBuildDate>
+    <lastBuildDate>Fri, 11 Sep 2026 01:37:06 +0000</lastBuildDate>
     <ttl>5</ttl>
     <item>
       <title>FINAL | New England Patriots 10 - Seattle Seahawks 13</title>
@@ -14,8 +14,8 @@
       <guid isPermaLink="false">espn-nfl-401872656</guid>
     </item>
     <item>
-      <title>LIVE | San Francisco 49ers 3 - Los Angeles Rams 7 | 11:28 - 2nd | Netflix</title>
-      <description>San Francisco 49ers 3, Los Angeles Rams 7. 11:28 - 2nd.</description>
+      <title>LIVE | San Francisco 49ers 10 - Los Angeles Rams 7 | 4:28 - 2nd | Netflix</title>
+      <description>San Francisco 49ers 10, Los Angeles Rams 7. 4:28 - 2nd.</description>
       <link>https://www.espn.com/nfl/game?gameId=401872657</link>
       <guid isPermaLink="false">espn-nfl-401872657</guid>
     </item>
