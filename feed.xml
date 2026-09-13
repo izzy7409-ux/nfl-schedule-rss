@@ -5,7 +5,7 @@
     <link>https://www.nfl.com/schedules/</link>
     <description>Automatic NFL schedule, live scores and final results for EVMux.</description>
     <language>en-us</language>
-    <lastBuildDate>Sun, 13 Sep 2026 20:20:03 +0000</lastBuildDate>
+    <lastBuildDate>Sun, 13 Sep 2026 20:35:26 +0000</lastBuildDate>
     <ttl>5</ttl>
     <item>
       <title>FINAL | New England Patriots 10 - Seattle Seahawks 13</title>
@@ -20,22 +20,16 @@
       <guid isPermaLink="false">espn-nfl-401872657</guid>
     </item>
     <item>
-      <title>LIVE | New Orleans Saints 24 - Detroit Lions 24 | End of 4th | FOX</title>
-      <description>New Orleans Saints 24, Detroit Lions 24. End of 4th.</description>
+      <title>LIVE | New Orleans Saints 24 - Detroit Lions 31 | 4:17 - OT | FOX</title>
+      <description>New Orleans Saints 24, Detroit Lions 31. 4:17 - OT.</description>
       <link>https://www.espn.com/nfl/game?gameId=401872923</link>
       <guid isPermaLink="false">espn-nfl-401872923</guid>
     </item>
     <item>
-      <title>LIVE | Chicago Bears 52 - Carolina Panthers 37 | 4:00 - 4th | FOX</title>
-      <description>Chicago Bears 52, Carolina Panthers 37. 4:00 - 4th.</description>
+      <title>LIVE | Chicago Bears 59 - Carolina Panthers 37 | 0:34 - 4th | FOX</title>
+      <description>Chicago Bears 59, Carolina Panthers 37. 0:34 - 4th.</description>
       <link>https://www.espn.com/nfl/game?gameId=401872661</link>
       <guid isPermaLink="false">espn-nfl-401872661</guid>
-    </item>
-    <item>
-      <title>FINAL | Buffalo Bills 36 - Houston Texans 31</title>
-      <description>Final: Buffalo Bills 36, Houston Texans 31.</description>
-      <link>https://www.espn.com/nfl/game/_/gameId/401872660/bills-texans</link>
-      <guid isPermaLink="false">espn-nfl-401872660</guid>
     </item>
     <item>
       <title>FINAL | Tampa Bay Buccaneers 27 - Cincinnati Bengals 33</title>
@@ -68,27 +62,33 @@
       <guid isPermaLink="false">espn-nfl-401872922</guid>
     </item>
     <item>
-      <title>SUN SEP 13 | Miami Dolphins at Las Vegas Raiders | 4:25 PM ET | FOX</title>
-      <description>Miami Dolphins at Las Vegas Raiders. Kickoff 4:25 PM ET. TV: FOX.</description>
-      <link>https://www.espn.com/nfl/game/_/gameId/401872928/dolphins-raiders</link>
+      <title>FINAL | Buffalo Bills 36 - Houston Texans 31</title>
+      <description>Final: Buffalo Bills 36, Houston Texans 31.</description>
+      <link>https://www.espn.com/nfl/game/_/gameId/401872660/bills-texans</link>
+      <guid isPermaLink="false">espn-nfl-401872660</guid>
+    </item>
+    <item>
+      <title>LIVE | Miami Dolphins 0 - Las Vegas Raiders 0 | 9:34 - 1st | FOX</title>
+      <description>Miami Dolphins 0, Las Vegas Raiders 0. 9:34 - 1st.</description>
+      <link>https://www.espn.com/nfl/game?gameId=401872928</link>
       <guid isPermaLink="false">espn-nfl-401872928</guid>
     </item>
     <item>
-      <title>SUN SEP 13 | Green Bay Packers at Minnesota Vikings | 4:25 PM ET | CBS</title>
-      <description>Green Bay Packers at Minnesota Vikings. Kickoff 4:25 PM ET. TV: CBS.</description>
-      <link>https://www.espn.com/nfl/game/_/gameId/401872927/packers-vikings</link>
+      <title>LIVE | Green Bay Packers 3 - Minnesota Vikings 0 | 12:11 - 1st | CBS</title>
+      <description>Green Bay Packers 3, Minnesota Vikings 0. 12:11 - 1st.</description>
+      <link>https://www.espn.com/nfl/game?gameId=401872927</link>
       <guid isPermaLink="false">espn-nfl-401872927</guid>
     </item>
     <item>
-      <title>SUN SEP 13 | Washington Commanders at Philadelphia Eagles | 4:25 PM ET | FOX</title>
-      <description>Washington Commanders at Philadelphia Eagles. Kickoff 4:25 PM ET. TV: FOX.</description>
-      <link>https://www.espn.com/nfl/game/_/gameId/401872929/commanders-eagles</link>
+      <title>LIVE | Washington Commanders 3 - Philadelphia Eagles 0 | 11:18 - 1st | FOX</title>
+      <description>Washington Commanders 3, Philadelphia Eagles 0. 11:18 - 1st.</description>
+      <link>https://www.espn.com/nfl/game?gameId=401872929</link>
       <guid isPermaLink="false">espn-nfl-401872929</guid>
     </item>
     <item>
-      <title>SUN SEP 13 | Arizona Cardinals at Los Angeles Chargers | 4:25 PM ET | CBS</title>
-      <description>Arizona Cardinals at Los Angeles Chargers. Kickoff 4:25 PM ET. TV: CBS.</description>
-      <link>https://www.espn.com/nfl/game/_/gameId/401872926/cardinals-chargers</link>
+      <title>LIVE | Arizona Cardinals 7 - Los Angeles Chargers 0 | 8:49 - 1st | CBS</title>
+      <description>Arizona Cardinals 7, Los Angeles Chargers 0. 8:49 - 1st.</description>
+      <link>https://www.espn.com/nfl/game?gameId=401872926</link>
       <guid isPermaLink="false">espn-nfl-401872926</guid>
     </item>
     <item>
