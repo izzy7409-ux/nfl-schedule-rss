@@ -1,6 +1,6 @@
 const http = require('http');
 const { URL } = require('url');
-const confidence = require('./confidence');
+const confidence = require('./confidence-v2');
 const pickem = require('./pickem');
 const pickTracker = require('./pick-tracker');
 
