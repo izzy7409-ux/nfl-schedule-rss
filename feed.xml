@@ -5,7 +5,7 @@
     <link>https://www.nfl.com/schedules/</link>
     <description>Automatic NFL schedule, live scores and final results for EVMux.</description>
     <language>en-us</language>
-    <lastBuildDate>Mon, 14 Sep 2026 03:14:38 +0000</lastBuildDate>
+    <lastBuildDate>Mon, 14 Sep 2026 03:33:48 +0000</lastBuildDate>
     <ttl>5</ttl>
     <item>
       <title>FINAL | New England Patriots 10 - Seattle Seahawks 13</title>
@@ -92,9 +92,9 @@
       <guid isPermaLink="false">espn-nfl-401872926</guid>
     </item>
     <item>
-      <title>LIVE | Dallas Cowboys 20 - New York Giants 28 | 5:21 - 4th | NBC</title>
-      <description>Dallas Cowboys 20, New York Giants 28. 5:21 - 4th.</description>
-      <link>https://www.espn.com/nfl/game?gameId=401872930</link>
+      <title>FINAL | Dallas Cowboys 20 - New York Giants 28</title>
+      <description>Final: Dallas Cowboys 20, New York Giants 28.</description>
+      <link>https://www.espn.com/nfl/game/_/gameId/401872930/cowboys-giants</link>
       <guid isPermaLink="false">espn-nfl-401872930</guid>
     </item>
     <item>
