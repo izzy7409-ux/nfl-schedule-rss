@@ -5,19 +5,13 @@
     <link>https://www.nfl.com/schedules/</link>
     <description>Automatic NFL schedule, live scores and final results for EVMux.</description>
     <language>en-us</language>
-    <lastBuildDate>Sun, 20 Sep 2026 20:38:15 +0000</lastBuildDate>
+    <lastBuildDate>Sun, 20 Sep 2026 20:50:14 +0000</lastBuildDate>
     <ttl>5</ttl>
     <item>
       <title>FINAL | Detroit Lions 31 - Buffalo Bills 41</title>
       <description>Final: Detroit Lions 31, Buffalo Bills 41.</description>
       <link>https://www.espn.com/nfl/game/_/gameId/401872932/lions-bills</link>
       <guid isPermaLink="false">espn-nfl-401872932</guid>
-    </item>
-    <item>
-      <title>FINAL/OT | Green Bay Packers 20 - New York Jets 17</title>
-      <description>Final: Green Bay Packers 20, New York Jets 17.</description>
-      <link>https://www.espn.com/nfl/game/_/gameId/401872936/packers-jets</link>
-      <guid isPermaLink="false">espn-nfl-401872936</guid>
     </item>
     <item>
       <title>LIVE | Cleveland Browns 23 - Tampa Bay Buccaneers 19 | Delayed | CBS</title>
@@ -50,6 +44,12 @@
       <guid isPermaLink="false">espn-nfl-401872946</guid>
     </item>
     <item>
+      <title>FINAL/OT | Green Bay Packers 20 - New York Jets 17</title>
+      <description>Final: Green Bay Packers 20, New York Jets 17.</description>
+      <link>https://www.espn.com/nfl/game/_/gameId/401872936/packers-jets</link>
+      <guid isPermaLink="false">espn-nfl-401872936</guid>
+    </item>
+    <item>
       <title>FINAL | New Orleans Saints 24 - Baltimore Ravens 17</title>
       <description>Final: New Orleans Saints 24, Baltimore Ravens 17.</description>
       <link>https://www.espn.com/nfl/game/_/gameId/401872938/saints-ravens</link>
@@ -62,32 +62,32 @@
       <guid isPermaLink="false">espn-nfl-401872934</guid>
     </item>
     <item>
-      <title>LIVE | Jacksonville Jaguars 0 - Denver Broncos 0 | 2:05 - 1st | CBS</title>
-      <description>Jacksonville Jaguars 0, Denver Broncos 0. 2:05 - 1st.</description>
+      <title>LIVE | Jacksonville Jaguars 7 - Denver Broncos 0 | 12:13 - 2nd | CBS</title>
+      <description>Jacksonville Jaguars 7, Denver Broncos 0. 12:13 - 2nd.</description>
       <link>https://www.espn.com/nfl/game?gameId=401872940</link>
       <guid isPermaLink="false">espn-nfl-401872940</guid>
     </item>
     <item>
-      <title>LIVE | Las Vegas Raiders 0 - Los Angeles Chargers 0 | 0:35 - 1st | CBS</title>
-      <description>Las Vegas Raiders 0, Los Angeles Chargers 0. 0:35 - 1st.</description>
+      <title>LIVE | Las Vegas Raiders 0 - Los Angeles Chargers 0 | 14:15 - 2nd | CBS</title>
+      <description>Las Vegas Raiders 0, Los Angeles Chargers 0. 14:15 - 2nd.</description>
       <link>https://www.espn.com/nfl/game?gameId=401872941</link>
       <guid isPermaLink="false">espn-nfl-401872941</guid>
     </item>
     <item>
-      <title>LIVE | Washington Commanders 0 - Dallas Cowboys 7 | 8:48 - 1st | FOX</title>
-      <description>Washington Commanders 0, Dallas Cowboys 7. 8:48 - 1st.</description>
+      <title>LIVE | Washington Commanders 0 - Dallas Cowboys 10 | 4:56 - 1st | FOX</title>
+      <description>Washington Commanders 0, Dallas Cowboys 10. 4:56 - 1st.</description>
       <link>https://www.espn.com/nfl/game?gameId=401872944</link>
       <guid isPermaLink="false">espn-nfl-401872944</guid>
     </item>
     <item>
-      <title>LIVE | Seattle Seahawks 7 - Arizona Cardinals 0 | 8:34 - 1st | FOX</title>
-      <description>Seattle Seahawks 7, Arizona Cardinals 0. 8:34 - 1st.</description>
+      <title>LIVE | Seattle Seahawks 7 - Arizona Cardinals 0 | 2:53 - 1st | FOX</title>
+      <description>Seattle Seahawks 7, Arizona Cardinals 0. 2:53 - 1st.</description>
       <link>https://www.espn.com/nfl/game?gameId=401872943</link>
       <guid isPermaLink="false">espn-nfl-401872943</guid>
     </item>
     <item>
-      <title>LIVE | Miami Dolphins 0 - San Francisco 49ers 0 | 7:22 - 1st | FOX</title>
-      <description>Miami Dolphins 0, San Francisco 49ers 0. 7:22 - 1st.</description>
+      <title>LIVE | Miami Dolphins 0 - San Francisco 49ers 7 | 0:49 - 1st | FOX</title>
+      <description>Miami Dolphins 0, San Francisco 49ers 7. 0:49 - 1st.</description>
       <link>https://www.espn.com/nfl/game?gameId=401872942</link>
       <guid isPermaLink="false">espn-nfl-401872942</guid>
     </item>
