@@ -5,7 +5,7 @@
     <link>https://www.nfl.com/schedules/</link>
     <description>Automatic NFL schedule, live scores and final results for EVMux.</description>
     <language>en-us</language>
-    <lastBuildDate>Sun, 20 Sep 2026 22:45:43 +0000</lastBuildDate>
+    <lastBuildDate>Sun, 20 Sep 2026 22:57:23 +0000</lastBuildDate>
     <ttl>5</ttl>
     <item>
       <title>FINAL | Detroit Lions 31 - Buffalo Bills 41</title>
@@ -62,32 +62,32 @@
       <guid isPermaLink="false">espn-nfl-401872934</guid>
     </item>
     <item>
-      <title>LIVE | Jacksonville Jaguars 13 - Denver Broncos 20 | 4:41 - 4th | CBS</title>
-      <description>Jacksonville Jaguars 13, Denver Broncos 20. 4:41 - 4th.</description>
+      <title>LIVE | Jacksonville Jaguars 13 - Denver Broncos 20 | 2:00 - 4th | CBS</title>
+      <description>Jacksonville Jaguars 13, Denver Broncos 20. 2:00 - 4th.</description>
       <link>https://www.espn.com/nfl/game?gameId=401872940</link>
       <guid isPermaLink="false">espn-nfl-401872940</guid>
     </item>
     <item>
-      <title>LIVE | Las Vegas Raiders 17 - Los Angeles Chargers 14 | 4:49 - 4th | CBS</title>
-      <description>Las Vegas Raiders 17, Los Angeles Chargers 14. 4:49 - 4th.</description>
+      <title>LIVE | Las Vegas Raiders 24 - Los Angeles Chargers 14 | 2:29 - 4th | CBS</title>
+      <description>Las Vegas Raiders 24, Los Angeles Chargers 14. 2:29 - 4th.</description>
       <link>https://www.espn.com/nfl/game?gameId=401872941</link>
       <guid isPermaLink="false">espn-nfl-401872941</guid>
     </item>
     <item>
-      <title>LIVE | Washington Commanders 13 - Dallas Cowboys 27 | 2:49 - 3rd | FOX</title>
-      <description>Washington Commanders 13, Dallas Cowboys 27. 2:49 - 3rd.</description>
+      <title>LIVE | Washington Commanders 13 - Dallas Cowboys 27 | 13:35 - 4th | FOX</title>
+      <description>Washington Commanders 13, Dallas Cowboys 27. 13:35 - 4th.</description>
       <link>https://www.espn.com/nfl/game?gameId=401872944</link>
       <guid isPermaLink="false">espn-nfl-401872944</guid>
     </item>
     <item>
-      <title>LIVE | Seattle Seahawks 17 - Arizona Cardinals 7 | 14:20 - 4th | FOX</title>
-      <description>Seattle Seahawks 17, Arizona Cardinals 7. 14:20 - 4th.</description>
+      <title>LIVE | Seattle Seahawks 24 - Arizona Cardinals 7 | 11:25 - 4th | FOX</title>
+      <description>Seattle Seahawks 24, Arizona Cardinals 7. 11:25 - 4th.</description>
       <link>https://www.espn.com/nfl/game?gameId=401872943</link>
       <guid isPermaLink="false">espn-nfl-401872943</guid>
     </item>
     <item>
-      <title>LIVE | Miami Dolphins 6 - San Francisco 49ers 35 | 10:18 - 4th | FOX</title>
-      <description>Miami Dolphins 6, San Francisco 49ers 35. 10:18 - 4th.</description>
+      <title>LIVE | Miami Dolphins 6 - San Francisco 49ers 35 | 6:56 - 4th | FOX</title>
+      <description>Miami Dolphins 6, San Francisco 49ers 35. 6:56 - 4th.</description>
       <link>https://www.espn.com/nfl/game?gameId=401872942</link>
       <guid isPermaLink="false">espn-nfl-401872942</guid>
     </item>
