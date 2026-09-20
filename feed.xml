@@ -5,7 +5,7 @@
     <link>https://www.nfl.com/schedules/</link>
     <description>Automatic NFL schedule, live scores and final results for EVMux.</description>
     <language>en-us</language>
-    <lastBuildDate>Sun, 20 Sep 2026 20:23:16 +0000</lastBuildDate>
+    <lastBuildDate>Sun, 20 Sep 2026 20:38:15 +0000</lastBuildDate>
     <ttl>5</ttl>
     <item>
       <title>FINAL | Detroit Lions 31 - Buffalo Bills 41</title>
@@ -14,9 +14,9 @@
       <guid isPermaLink="false">espn-nfl-401872932</guid>
     </item>
     <item>
-      <title>LIVE | Green Bay Packers 17 - New York Jets 17 | End of 4th | FOX</title>
-      <description>Green Bay Packers 17, New York Jets 17. End of 4th.</description>
-      <link>https://www.espn.com/nfl/game?gameId=401872936</link>
+      <title>FINAL/OT | Green Bay Packers 20 - New York Jets 17</title>
+      <description>Final: Green Bay Packers 20, New York Jets 17.</description>
+      <link>https://www.espn.com/nfl/game/_/gameId/401872936/packers-jets</link>
       <guid isPermaLink="false">espn-nfl-401872936</guid>
     </item>
     <item>
@@ -24,12 +24,6 @@
       <description>Cleveland Browns 23, Tampa Bay Buccaneers 19. Delayed.</description>
       <link>https://www.espn.com/nfl/game?gameId=401872935</link>
       <guid isPermaLink="false">espn-nfl-401872935</guid>
-    </item>
-    <item>
-      <title>FINAL | Cincinnati Bengals 20 - Houston Texans 6</title>
-      <description>Final: Cincinnati Bengals 20, Houston Texans 6.</description>
-      <link>https://www.espn.com/nfl/game/_/gameId/401872934/bengals-texans</link>
-      <guid isPermaLink="false">espn-nfl-401872934</guid>
     </item>
     <item>
       <title>FINAL | Carolina Panthers 34 - Atlanta Falcons 3</title>
@@ -62,33 +56,39 @@
       <guid isPermaLink="false">espn-nfl-401872938</guid>
     </item>
     <item>
-      <title>LIVE | Jacksonville Jaguars 0 - Denver Broncos 0 | 7:10 - 1st | CBS</title>
-      <description>Jacksonville Jaguars 0, Denver Broncos 0. 7:10 - 1st.</description>
+      <title>FINAL | Cincinnati Bengals 20 - Houston Texans 6</title>
+      <description>Final: Cincinnati Bengals 20, Houston Texans 6.</description>
+      <link>https://www.espn.com/nfl/game/_/gameId/401872934/bengals-texans</link>
+      <guid isPermaLink="false">espn-nfl-401872934</guid>
+    </item>
+    <item>
+      <title>LIVE | Jacksonville Jaguars 0 - Denver Broncos 0 | 2:05 - 1st | CBS</title>
+      <description>Jacksonville Jaguars 0, Denver Broncos 0. 2:05 - 1st.</description>
       <link>https://www.espn.com/nfl/game?gameId=401872940</link>
       <guid isPermaLink="false">espn-nfl-401872940</guid>
     </item>
     <item>
-      <title>LIVE | Las Vegas Raiders 0 - Los Angeles Chargers 0 | 6:56 - 1st | CBS</title>
-      <description>Las Vegas Raiders 0, Los Angeles Chargers 0. 6:56 - 1st.</description>
+      <title>LIVE | Las Vegas Raiders 0 - Los Angeles Chargers 0 | 0:35 - 1st | CBS</title>
+      <description>Las Vegas Raiders 0, Los Angeles Chargers 0. 0:35 - 1st.</description>
       <link>https://www.espn.com/nfl/game?gameId=401872941</link>
       <guid isPermaLink="false">espn-nfl-401872941</guid>
     </item>
     <item>
-      <title>SUN SEP 20 | Washington Commanders at Dallas Cowboys | 4:25 PM ET | FOX</title>
-      <description>Washington Commanders at Dallas Cowboys. Kickoff 4:25 PM ET. TV: FOX.</description>
-      <link>https://www.espn.com/nfl/game/_/gameId/401872944/commanders-cowboys</link>
+      <title>LIVE | Washington Commanders 0 - Dallas Cowboys 7 | 8:48 - 1st | FOX</title>
+      <description>Washington Commanders 0, Dallas Cowboys 7. 8:48 - 1st.</description>
+      <link>https://www.espn.com/nfl/game?gameId=401872944</link>
       <guid isPermaLink="false">espn-nfl-401872944</guid>
     </item>
     <item>
-      <title>SUN SEP 20 | Seattle Seahawks at Arizona Cardinals | 4:25 PM ET | FOX</title>
-      <description>Seattle Seahawks at Arizona Cardinals. Kickoff 4:25 PM ET. TV: FOX.</description>
-      <link>https://www.espn.com/nfl/game/_/gameId/401872943/seahawks-cardinals</link>
+      <title>LIVE | Seattle Seahawks 7 - Arizona Cardinals 0 | 8:34 - 1st | FOX</title>
+      <description>Seattle Seahawks 7, Arizona Cardinals 0. 8:34 - 1st.</description>
+      <link>https://www.espn.com/nfl/game?gameId=401872943</link>
       <guid isPermaLink="false">espn-nfl-401872943</guid>
     </item>
     <item>
-      <title>SUN SEP 20 | Miami Dolphins at San Francisco 49ers | 4:25 PM ET | FOX</title>
-      <description>Miami Dolphins at San Francisco 49ers. Kickoff 4:25 PM ET. TV: FOX.</description>
-      <link>https://www.espn.com/nfl/game/_/gameId/401872942/dolphins-49ers</link>
+      <title>LIVE | Miami Dolphins 0 - San Francisco 49ers 0 | 7:22 - 1st | FOX</title>
+      <description>Miami Dolphins 0, San Francisco 49ers 0. 7:22 - 1st.</description>
+      <link>https://www.espn.com/nfl/game?gameId=401872942</link>
       <guid isPermaLink="false">espn-nfl-401872942</guid>
     </item>
     <item>
