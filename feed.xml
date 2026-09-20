@@ -5,7 +5,7 @@
     <link>https://www.nfl.com/schedules/</link>
     <description>Automatic NFL schedule, live scores and final results for EVMux.</description>
     <language>en-us</language>
-    <lastBuildDate>Sun, 20 Sep 2026 18:55:56 +0000</lastBuildDate>
+    <lastBuildDate>Sun, 20 Sep 2026 19:12:43 +0000</lastBuildDate>
     <ttl>5</ttl>
     <item>
       <title>FINAL | Detroit Lions 31 - Buffalo Bills 41</title>
@@ -14,50 +14,50 @@
       <guid isPermaLink="false">espn-nfl-401872932</guid>
     </item>
     <item>
-      <title>LIVE | Carolina Panthers 20 - Atlanta Falcons 3 | HALFTIME | FOX</title>
-      <description>Carolina Panthers 20, Atlanta Falcons 3. HALFTIME.</description>
+      <title>LIVE | Carolina Panthers 27 - Atlanta Falcons 3 | 9:04 - 3rd | FOX</title>
+      <description>Carolina Panthers 27, Atlanta Falcons 3. 9:04 - 3rd.</description>
       <link>https://www.espn.com/nfl/game?gameId=401872933</link>
       <guid isPermaLink="false">espn-nfl-401872933</guid>
     </item>
     <item>
-      <title>LIVE | Minnesota Vikings 6 - Chicago Bears 3 | 6:30 - 3rd | FOX</title>
-      <description>Minnesota Vikings 6, Chicago Bears 3. 6:30 - 3rd.</description>
+      <title>LIVE | Minnesota Vikings 6 - Chicago Bears 3 | 1:02 - 3rd | FOX</title>
+      <description>Minnesota Vikings 6, Chicago Bears 3. 1:02 - 3rd.</description>
       <link>https://www.espn.com/nfl/game?gameId=401872937</link>
       <guid isPermaLink="false">espn-nfl-401872937</guid>
     </item>
     <item>
-      <title>LIVE | Philadelphia Eagles 17 - Tennessee Titans 10 | 8:02 - 3rd | FOX</title>
-      <description>Philadelphia Eagles 17, Tennessee Titans 10. 8:02 - 3rd.</description>
+      <title>LIVE | Philadelphia Eagles 17 - Tennessee Titans 17 | 15:00 - 4th | FOX</title>
+      <description>Philadelphia Eagles 17, Tennessee Titans 17. 15:00 - 4th.</description>
       <link>https://www.espn.com/nfl/game?gameId=401872939</link>
       <guid isPermaLink="false">espn-nfl-401872939</guid>
     </item>
     <item>
-      <title>LIVE | Pittsburgh Steelers 3 - New England Patriots 10 | 9:05 - 3rd | CBS</title>
-      <description>Pittsburgh Steelers 3, New England Patriots 10. 9:05 - 3rd.</description>
+      <title>LIVE | Pittsburgh Steelers 3 - New England Patriots 10 | 1:55 - 3rd | CBS</title>
+      <description>Pittsburgh Steelers 3, New England Patriots 10. 1:55 - 3rd.</description>
       <link>https://www.espn.com/nfl/game?gameId=401872946</link>
       <guid isPermaLink="false">espn-nfl-401872946</guid>
     </item>
     <item>
-      <title>LIVE | Green Bay Packers 7 - New York Jets 7 | 12:25 - 3rd | FOX</title>
-      <description>Green Bay Packers 7, New York Jets 7. 12:25 - 3rd.</description>
+      <title>LIVE | Green Bay Packers 7 - New York Jets 7 | 4:15 - 3rd | FOX</title>
+      <description>Green Bay Packers 7, New York Jets 7. 4:15 - 3rd.</description>
       <link>https://www.espn.com/nfl/game?gameId=401872936</link>
       <guid isPermaLink="false">espn-nfl-401872936</guid>
     </item>
     <item>
-      <title>LIVE | Cleveland Browns 6 - Tampa Bay Buccaneers 16 | 8:51 - 3rd | CBS</title>
-      <description>Cleveland Browns 6, Tampa Bay Buccaneers 16. 8:51 - 3rd.</description>
+      <title>LIVE | Cleveland Browns 9 - Tampa Bay Buccaneers 16 | 2:29 - 3rd | CBS</title>
+      <description>Cleveland Browns 9, Tampa Bay Buccaneers 16. 2:29 - 3rd.</description>
       <link>https://www.espn.com/nfl/game?gameId=401872935</link>
       <guid isPermaLink="false">espn-nfl-401872935</guid>
     </item>
     <item>
-      <title>LIVE | New Orleans Saints 9 - Baltimore Ravens 17 | 3:23 - 3rd | CBS</title>
-      <description>New Orleans Saints 9, Baltimore Ravens 17. 3:23 - 3rd.</description>
+      <title>LIVE | New Orleans Saints 9 - Baltimore Ravens 17 | 12:17 - 4th | CBS</title>
+      <description>New Orleans Saints 9, Baltimore Ravens 17. 12:17 - 4th.</description>
       <link>https://www.espn.com/nfl/game?gameId=401872938</link>
       <guid isPermaLink="false">espn-nfl-401872938</guid>
     </item>
     <item>
-      <title>LIVE | Cincinnati Bengals 7 - Houston Texans 3 | 13:14 - 3rd | CBS</title>
-      <description>Cincinnati Bengals 7, Houston Texans 3. 13:14 - 3rd.</description>
+      <title>LIVE | Cincinnati Bengals 10 - Houston Texans 3 | 5:06 - 3rd | CBS</title>
+      <description>Cincinnati Bengals 10, Houston Texans 3. 5:06 - 3rd.</description>
       <link>https://www.espn.com/nfl/game?gameId=401872934</link>
       <guid isPermaLink="false">espn-nfl-401872934</guid>
     </item>
