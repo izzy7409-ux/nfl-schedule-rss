@@ -5,7 +5,7 @@
     <link>https://www.nfl.com/schedules/</link>
     <description>Automatic NFL schedule, live scores and final results for EVMux.</description>
     <language>en-us</language>
-    <lastBuildDate>Sun, 20 Sep 2026 19:52:02 +0000</lastBuildDate>
+    <lastBuildDate>Sun, 20 Sep 2026 20:06:51 +0000</lastBuildDate>
     <ttl>5</ttl>
     <item>
       <title>FINAL | Detroit Lions 31 - Buffalo Bills 41</title>
@@ -14,63 +14,63 @@
       <guid isPermaLink="false">espn-nfl-401872932</guid>
     </item>
     <item>
-      <title>LIVE | Carolina Panthers 34 - Atlanta Falcons 3 | 5:45 - 4th | FOX</title>
-      <description>Carolina Panthers 34, Atlanta Falcons 3. 5:45 - 4th.</description>
+      <title>LIVE | Carolina Panthers 34 - Atlanta Falcons 3 | 0:42 - 4th | FOX</title>
+      <description>Carolina Panthers 34, Atlanta Falcons 3. 0:42 - 4th.</description>
       <link>https://www.espn.com/nfl/game?gameId=401872933</link>
       <guid isPermaLink="false">espn-nfl-401872933</guid>
     </item>
     <item>
-      <title>LIVE | Minnesota Vikings 6 - Chicago Bears 3 | 1:13 - 4th | FOX</title>
-      <description>Minnesota Vikings 6, Chicago Bears 3. 1:13 - 4th.</description>
-      <link>https://www.espn.com/nfl/game?gameId=401872937</link>
+      <title>FINAL | Minnesota Vikings 9 - Chicago Bears 3</title>
+      <description>Final: Minnesota Vikings 9, Chicago Bears 3.</description>
+      <link>https://www.espn.com/nfl/game/_/gameId/401872937/vikings-bears</link>
       <guid isPermaLink="false">espn-nfl-401872937</guid>
     </item>
     <item>
-      <title>LIVE | Philadelphia Eagles 17 - Tennessee Titans 20 | 1:56 - 4th | FOX</title>
-      <description>Philadelphia Eagles 17, Tennessee Titans 20. 1:56 - 4th.</description>
-      <link>https://www.espn.com/nfl/game?gameId=401872939</link>
+      <title>FINAL | Philadelphia Eagles 24 - Tennessee Titans 20</title>
+      <description>Final: Philadelphia Eagles 24, Tennessee Titans 20.</description>
+      <link>https://www.espn.com/nfl/game/_/gameId/401872939/eagles-titans</link>
       <guid isPermaLink="false">espn-nfl-401872939</guid>
     </item>
     <item>
-      <title>LIVE | Pittsburgh Steelers 3 - New England Patriots 20 | 1:57 - 4th | CBS</title>
-      <description>Pittsburgh Steelers 3, New England Patriots 20. 1:57 - 4th.</description>
-      <link>https://www.espn.com/nfl/game?gameId=401872946</link>
+      <title>FINAL | Pittsburgh Steelers 3 - New England Patriots 20</title>
+      <description>Final: Pittsburgh Steelers 3, New England Patriots 20.</description>
+      <link>https://www.espn.com/nfl/game/_/gameId/401872946/steelers-patriots</link>
       <guid isPermaLink="false">espn-nfl-401872946</guid>
     </item>
     <item>
-      <title>LIVE | Green Bay Packers 7 - New York Jets 17 | 8:47 - 4th | FOX</title>
-      <description>Green Bay Packers 7, New York Jets 17. 8:47 - 4th.</description>
+      <title>LIVE | Green Bay Packers 17 - New York Jets 17 | 2:59 - 4th | FOX</title>
+      <description>Green Bay Packers 17, New York Jets 17. 2:59 - 4th.</description>
       <link>https://www.espn.com/nfl/game?gameId=401872936</link>
       <guid isPermaLink="false">espn-nfl-401872936</guid>
     </item>
     <item>
-      <title>LIVE | Cleveland Browns 23 - Tampa Bay Buccaneers 19 | 3:51 - 4th | CBS</title>
-      <description>Cleveland Browns 23, Tampa Bay Buccaneers 19. 3:51 - 4th.</description>
+      <title>LIVE | Cleveland Browns 23 - Tampa Bay Buccaneers 19 | Delayed | CBS</title>
+      <description>Cleveland Browns 23, Tampa Bay Buccaneers 19. Delayed.</description>
       <link>https://www.espn.com/nfl/game?gameId=401872935</link>
       <guid isPermaLink="false">espn-nfl-401872935</guid>
     </item>
     <item>
-      <title>LIVE | New Orleans Saints 24 - Baltimore Ravens 17 | 1:21 - 4th | CBS</title>
-      <description>New Orleans Saints 24, Baltimore Ravens 17. 1:21 - 4th.</description>
-      <link>https://www.espn.com/nfl/game?gameId=401872938</link>
+      <title>FINAL | New Orleans Saints 24 - Baltimore Ravens 17</title>
+      <description>Final: New Orleans Saints 24, Baltimore Ravens 17.</description>
+      <link>https://www.espn.com/nfl/game/_/gameId/401872938/saints-ravens</link>
       <guid isPermaLink="false">espn-nfl-401872938</guid>
     </item>
     <item>
-      <title>LIVE | Cincinnati Bengals 20 - Houston Texans 6 | 8:24 - 4th | CBS</title>
-      <description>Cincinnati Bengals 20, Houston Texans 6. 8:24 - 4th.</description>
+      <title>LIVE | Cincinnati Bengals 20 - Houston Texans 6 | 2:10 - 4th | CBS</title>
+      <description>Cincinnati Bengals 20, Houston Texans 6. 2:10 - 4th.</description>
       <link>https://www.espn.com/nfl/game?gameId=401872934</link>
       <guid isPermaLink="false">espn-nfl-401872934</guid>
     </item>
     <item>
-      <title>SUN SEP 20 | Jacksonville Jaguars at Denver Broncos | 4:05 PM ET | CBS</title>
-      <description>Jacksonville Jaguars at Denver Broncos. Kickoff 4:05 PM ET. TV: CBS.</description>
-      <link>https://www.espn.com/nfl/game/_/gameId/401872940/jaguars-broncos</link>
+      <title>LIVE | Jacksonville Jaguars 0 - Denver Broncos 0 | 15:00 - 1st | CBS</title>
+      <description>Jacksonville Jaguars 0, Denver Broncos 0. 15:00 - 1st.</description>
+      <link>https://www.espn.com/nfl/game?gameId=401872940</link>
       <guid isPermaLink="false">espn-nfl-401872940</guid>
     </item>
     <item>
-      <title>SUN SEP 20 | Las Vegas Raiders at Los Angeles Chargers | 4:05 PM ET | CBS</title>
-      <description>Las Vegas Raiders at Los Angeles Chargers. Kickoff 4:05 PM ET. TV: CBS.</description>
-      <link>https://www.espn.com/nfl/game/_/gameId/401872941/raiders-chargers</link>
+      <title>LIVE | Las Vegas Raiders 0 - Los Angeles Chargers 0 | 14:54 - 1st | CBS</title>
+      <description>Las Vegas Raiders 0, Los Angeles Chargers 0. 14:54 - 1st.</description>
+      <link>https://www.espn.com/nfl/game?gameId=401872941</link>
       <guid isPermaLink="false">espn-nfl-401872941</guid>
     </item>
     <item>
