@@ -5,7 +5,7 @@
     <link>https://www.nfl.com/schedules/</link>
     <description>Automatic NFL schedule, live scores and final results for EVMux.</description>
     <language>en-us</language>
-    <lastBuildDate>Mon, 21 Sep 2026 00:19:43 +0000</lastBuildDate>
+    <lastBuildDate>Mon, 21 Sep 2026 00:40:51 +0000</lastBuildDate>
     <ttl>5</ttl>
     <item>
       <title>FINAL | Detroit Lions 31 - Buffalo Bills 41</title>
@@ -92,9 +92,9 @@
       <guid isPermaLink="false">espn-nfl-401872942</guid>
     </item>
     <item>
-      <title>SUN SEP 20 | Indianapolis Colts at Kansas City Chiefs | 8:20 PM ET | NBC</title>
-      <description>Indianapolis Colts at Kansas City Chiefs. Kickoff 8:20 PM ET. TV: NBC.</description>
-      <link>https://www.espn.com/nfl/game/_/gameId/401872945/colts-chiefs</link>
+      <title>LIVE | Indianapolis Colts 7 - Kansas City Chiefs 3 | 6:09 - 1st | NBC</title>
+      <description>Indianapolis Colts 7, Kansas City Chiefs 3. 6:09 - 1st.</description>
+      <link>https://www.espn.com/nfl/game?gameId=401872945</link>
       <guid isPermaLink="false">espn-nfl-401872945</guid>
     </item>
     <item>
