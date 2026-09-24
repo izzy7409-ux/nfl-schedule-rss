@@ -5,6 +5,7 @@ const CONFIDENCE_HTML = fs.readFileSync(path.join(__dirname, 'confidence.html'),
 const CONTROL_HTML = fs.readFileSync(path.join(__dirname, 'confidence-control.html'), 'utf8');
 const YT_BASE = 'https://www.googleapis.com/youtube/v3';
 const ESPN_SCHEDULE = 'https://site.api.espn.com/apis/site/v2/sports/football/nfl/teams/33/schedule';
+const ESPN_SUMMARY = 'https://site.api.espn.com/apis/site/v2/sports/football/nfl/summary';
 const CONTROL_SECRET = process.env.CONFIDENCE_CONTROL_SECRET || '';
 
 const clients = new Set();
@@ -40,7 +41,38 @@ async function refreshRavensData(force=false){
   if(!upcoming) upcoming=events.slice().sort((a,b)=>b.date-a.date)[0];
   if(upcoming) state.matchup={ravens:{name:'Ravens',fullName:upcoming.rav.fullName||'Baltimore Ravens',abbr:'BAL',logo:upcoming.rav.logo||logoFor('BAL')},opponent:{name:upcoming.opp.name,fullName:upcoming.opp.fullName,abbr:upcoming.opp.abbr,logo:upcoming.opp.logo||logoFor(upcoming.opp.abbr)},date:new Date(upcoming.date).toISOString(),week:upcoming.week};
   const completed=events.filter(x=>x.state==='post'&&x.date<=now+60*60*1000).sort((a,b)=>b.date-a.date)[0];
-  if(completed){ const result=completed.ravensScore>completed.opponentScore?'W':completed.ravensScore<completed.opponentScore?'L':'T'; state.performance={ravens:{name:'Ravens',fullName:'Baltimore Ravens',abbr:'BAL',logo:logoFor('BAL')},opponent:{name:completed.opp.name,fullName:completed.opp.fullName,abbr:completed.opp.abbr,logo:completed.opp.logo||logoFor(completed.opp.abbr)},date:new Date(completed.date).toISOString(),week:completed.week,ravensScore:completed.ravensScore,opponentScore:completed.opponentScore,result,resultText:`${result} ${completed.ravensScore}-${completed.opponentScore}`}; }
+  if(completed){
+    let ravensScore=completed.ravensScore, opponentScore=completed.opponentScore;
+    let result='';
+    let opponent=completed.opp;
+    try {
+      const eventId=String(completed.e?.id||completed.comp?.id||'');
+      if(eventId){
+        const summary=await fetchJson(`${ESPN_SUMMARY}?event=${encodeURIComponent(eventId)}`);
+        const finalComp=summary?.header?.competitions?.[0]||{};
+        const finalTeams=finalComp.competitors||[];
+        const ravComp=finalTeams.find(c=>String(c.team?.abbreviation||c.abbreviation||'').toUpperCase()==='BAL')||{};
+        const oppComp=finalTeams.find(c=>String(c.team?.abbreviation||c.abbreviation||'').toUpperCase()!=='BAL')||{};
+        const rs=Number(ravComp.score);
+        const os=Number(oppComp.score);
+        if(Number.isFinite(rs)&&Number.isFinite(os)){ravensScore=rs;opponentScore=os;}
+        if(ravComp.team||ravComp.abbreviation) opponent=normalizeTeam(oppComp);
+        if(ravComp.winner===true) result='W';
+        else if(oppComp.winner===true) result='L';
+      }
+    } catch {}
+    if(!result) result=ravensScore>opponentScore?'W':ravensScore<opponentScore?'L':'T';
+    const location=opponent.homeAway==='home'?'at':'vs';
+    const oppLabel=opponent.name||opponent.abbr||'Opponent';
+    state.performance={
+      ravens:{name:'Ravens',fullName:'Baltimore Ravens',abbr:'BAL',logo:logoFor('BAL')},
+      opponent:{name:oppLabel,fullName:opponent.fullName,abbr:opponent.abbr,logo:opponent.logo||logoFor(opponent.abbr)},
+      date:new Date(completed.date).toISOString(),week:completed.week,
+      ravensScore,opponentScore,result,
+      resultText:`${result} ${ravensScore}-${opponentScore} ${location} ${oppLabel}`,
+      finalScore:`${ravensScore}-${opponentScore}`
+    };
+  }
   state.ravensDataUpdatedAt=Date.now(); broadcast();
 }
 
