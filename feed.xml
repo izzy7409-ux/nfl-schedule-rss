@@ -5,12 +5,12 @@
     <link>https://www.nfl.com/schedules/</link>
     <description>Automatic NFL schedule, live scores and final results for EVMux.</description>
     <language>en-us</language>
-    <lastBuildDate>Fri, 25 Sep 2026 03:06:30 +0000</lastBuildDate>
+    <lastBuildDate>Fri, 25 Sep 2026 03:23:47 +0000</lastBuildDate>
     <ttl>5</ttl>
     <item>
-      <title>LIVE | Atlanta Falcons 35 - Green Bay Packers 14 | 3:33 - 4th | Prime Video</title>
-      <description>Atlanta Falcons 35, Green Bay Packers 14. 3:33 - 4th.</description>
-      <link>https://www.espn.com/nfl/game?gameId=401872948</link>
+      <title>FINAL | Atlanta Falcons 35 - Green Bay Packers 14</title>
+      <description>Final: Atlanta Falcons 35, Green Bay Packers 14.</description>
+      <link>https://www.espn.com/nfl/game/_/gameId/401872948/falcons-packers</link>
       <guid isPermaLink="false">espn-nfl-401872948</guid>
     </item>
     <item>
