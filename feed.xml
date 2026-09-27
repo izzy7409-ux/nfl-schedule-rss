@@ -5,7 +5,7 @@
     <link>https://www.nfl.com/schedules/</link>
     <description>Automatic NFL schedule, live scores and final results for EVMux.</description>
     <language>en-us</language>
-    <lastBuildDate>Sun, 27 Sep 2026 19:56:31 +0000</lastBuildDate>
+    <lastBuildDate>Sun, 27 Sep 2026 20:16:02 +0000</lastBuildDate>
     <ttl>5</ttl>
     <item>
       <title>FINAL | Atlanta Falcons 35 - Green Bay Packers 14</title>
@@ -14,69 +14,69 @@
       <guid isPermaLink="false">espn-nfl-401872948</guid>
     </item>
     <item>
-      <title>LIVE | Los Angeles Chargers 13 - Buffalo Bills 24 | 3:13 - 4th | FOX</title>
-      <description>Los Angeles Chargers 13, Buffalo Bills 24. 3:13 - 4th.</description>
-      <link>https://www.espn.com/nfl/game?gameId=401872953</link>
+      <title>FINAL | Los Angeles Chargers 16 - Buffalo Bills 24</title>
+      <description>Final: Los Angeles Chargers 16, Buffalo Bills 24.</description>
+      <link>https://www.espn.com/nfl/game/_/gameId/401872953/chargers-bills</link>
       <guid isPermaLink="false">espn-nfl-401872953</guid>
     </item>
     <item>
-      <title>LIVE | Carolina Panthers 18 - Cleveland Browns 13 | 4:25 - 4th | FOX</title>
-      <description>Carolina Panthers 18, Cleveland Browns 13. 4:25 - 4th.</description>
+      <title>LIVE | Carolina Panthers 18 - Cleveland Browns 21 | 1:27 - 4th | FOX</title>
+      <description>Carolina Panthers 18, Cleveland Browns 21. 1:27 - 4th.</description>
       <link>https://www.espn.com/nfl/game?gameId=401872949</link>
       <guid isPermaLink="false">espn-nfl-401872949</guid>
     </item>
     <item>
-      <title>LIVE | New York Jets 24 - Detroit Lions 31 | 0:50 - 4th | FOX</title>
-      <description>New York Jets 24, Detroit Lions 31. 0:50 - 4th.</description>
-      <link>https://www.espn.com/nfl/game?gameId=401872954</link>
-      <guid isPermaLink="false">espn-nfl-401872954</guid>
-    </item>
-    <item>
-      <title>LIVE | Houston Texans 17 - Indianapolis Colts 16 | 1:48 - 4th | CBS</title>
-      <description>Houston Texans 17, Indianapolis Colts 16. 1:48 - 4th.</description>
-      <link>https://www.espn.com/nfl/game?gameId=401872951</link>
+      <title>FINAL | Houston Texans 17 - Indianapolis Colts 19</title>
+      <description>Final: Houston Texans 17, Indianapolis Colts 19.</description>
+      <link>https://www.espn.com/nfl/game/_/gameId/401872951/texans-colts</link>
       <guid isPermaLink="false">espn-nfl-401872951</guid>
     </item>
     <item>
-      <title>LIVE | Kansas City Chiefs 24 - Miami Dolphins 10 | 0:57 - 4th | CBS</title>
-      <description>Kansas City Chiefs 24, Miami Dolphins 10. 0:57 - 4th.</description>
-      <link>https://www.espn.com/nfl/game?gameId=401872952</link>
-      <guid isPermaLink="false">espn-nfl-401872952</guid>
-    </item>
-    <item>
-      <title>LIVE | Tennessee Titans 7 - New York Giants 12 | 0:55 - 4th | CBS</title>
-      <description>Tennessee Titans 7, New York Giants 12. 0:55 - 4th.</description>
-      <link>https://www.espn.com/nfl/game?gameId=401872956</link>
-      <guid isPermaLink="false">espn-nfl-401872956</guid>
-    </item>
-    <item>
-      <title>LIVE | Cincinnati Bengals 27 - Pittsburgh Steelers 27 | 4:35 - 4th | CBS</title>
-      <description>Cincinnati Bengals 27, Pittsburgh Steelers 27. 4:35 - 4th.</description>
-      <link>https://www.espn.com/nfl/game?gameId=401872950</link>
+      <title>FINAL | Cincinnati Bengals 27 - Pittsburgh Steelers 30</title>
+      <description>Final: Cincinnati Bengals 27, Pittsburgh Steelers 30.</description>
+      <link>https://www.espn.com/nfl/game/_/gameId/401872950/bengals-steelers</link>
       <guid isPermaLink="false">espn-nfl-401872950</guid>
     </item>
     <item>
-      <title>LIVE | Seattle Seahawks 24 - Washington Commanders 24 | 10:35 - 4th | FOX</title>
-      <description>Seattle Seahawks 24, Washington Commanders 24. 10:35 - 4th.</description>
+      <title>LIVE | Seattle Seahawks 31 - Washington Commanders 33 | 2:51 - 4th | FOX</title>
+      <description>Seattle Seahawks 31, Washington Commanders 33. 2:51 - 4th.</description>
       <link>https://www.espn.com/nfl/game?gameId=401872955</link>
       <guid isPermaLink="false">espn-nfl-401872955</guid>
     </item>
     <item>
-      <title>LIVE | New England Patriots 6 - Jacksonville Jaguars 35 | 2:33 - 4th | CBS</title>
-      <description>New England Patriots 6, Jacksonville Jaguars 35. 2:33 - 4th.</description>
-      <link>https://www.espn.com/nfl/game?gameId=401872957</link>
+      <title>FINAL | New York Jets 24 - Detroit Lions 31</title>
+      <description>Final: New York Jets 24, Detroit Lions 31.</description>
+      <link>https://www.espn.com/nfl/game/_/gameId/401872954/jets-lions</link>
+      <guid isPermaLink="false">espn-nfl-401872954</guid>
+    </item>
+    <item>
+      <title>FINAL | Kansas City Chiefs 24 - Miami Dolphins 10</title>
+      <description>Final: Kansas City Chiefs 24, Miami Dolphins 10.</description>
+      <link>https://www.espn.com/nfl/game/_/gameId/401872952/chiefs-dolphins</link>
+      <guid isPermaLink="false">espn-nfl-401872952</guid>
+    </item>
+    <item>
+      <title>FINAL | Tennessee Titans 7 - New York Giants 12</title>
+      <description>Final: Tennessee Titans 7, New York Giants 12.</description>
+      <link>https://www.espn.com/nfl/game/_/gameId/401872956/titans-giants</link>
+      <guid isPermaLink="false">espn-nfl-401872956</guid>
+    </item>
+    <item>
+      <title>FINAL | New England Patriots 6 - Jacksonville Jaguars 35</title>
+      <description>Final: New England Patriots 6, Jacksonville Jaguars 35.</description>
+      <link>https://www.espn.com/nfl/game/_/gameId/401872957/patriots-jaguars</link>
       <guid isPermaLink="false">espn-nfl-401872957</guid>
     </item>
     <item>
-      <title>SUN SEP 27 | Arizona Cardinals at San Francisco 49ers | 4:05 PM ET | FOX</title>
-      <description>Arizona Cardinals at San Francisco 49ers. Kickoff 4:05 PM ET. TV: FOX.</description>
-      <link>https://www.espn.com/nfl/game/_/gameId/401872958/cardinals-49ers</link>
+      <title>LIVE | Arizona Cardinals 0 - San Francisco 49ers 0 | 9:31 - 1st | FOX</title>
+      <description>Arizona Cardinals 0, San Francisco 49ers 0. 9:31 - 1st.</description>
+      <link>https://www.espn.com/nfl/game?gameId=401872958</link>
       <guid isPermaLink="false">espn-nfl-401872958</guid>
     </item>
     <item>
-      <title>SUN SEP 27 | Minnesota Vikings at Tampa Bay Buccaneers | 4:05 PM ET | FOX</title>
-      <description>Minnesota Vikings at Tampa Bay Buccaneers. Kickoff 4:05 PM ET. TV: FOX.</description>
-      <link>https://www.espn.com/nfl/game/_/gameId/401872959/vikings-buccaneers</link>
+      <title>LIVE | Minnesota Vikings 3 - Tampa Bay Buccaneers 0 | 10:20 - 1st | FOX</title>
+      <description>Minnesota Vikings 3, Tampa Bay Buccaneers 0. 10:20 - 1st.</description>
+      <link>https://www.espn.com/nfl/game?gameId=401872959</link>
       <guid isPermaLink="false">espn-nfl-401872959</guid>
     </item>
     <item>
