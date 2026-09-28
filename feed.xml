@@ -5,7 +5,7 @@
     <link>https://www.nfl.com/schedules/</link>
     <description>Automatic NFL schedule, live scores and final results for EVMux.</description>
     <language>en-us</language>
-    <lastBuildDate>Sun, 27 Sep 2026 23:58:14 +0000</lastBuildDate>
+    <lastBuildDate>Mon, 28 Sep 2026 00:27:53 +0000</lastBuildDate>
     <ttl>5</ttl>
     <item>
       <title>FINAL | Atlanta Falcons 35 - Green Bay Packers 14</title>
@@ -92,9 +92,9 @@
       <guid isPermaLink="false">espn-nfl-401872961</guid>
     </item>
     <item>
-      <title>SUN SEP 27 | Los Angeles Rams at Denver Broncos | 8:20 PM ET | NBC</title>
-      <description>Los Angeles Rams at Denver Broncos. Kickoff 8:20 PM ET. TV: NBC.</description>
-      <link>https://www.espn.com/nfl/game/_/gameId/401872962/rams-broncos</link>
+      <title>LIVE | Los Angeles Rams 0 - Denver Broncos 0 | 11:44 - 1st | NBC</title>
+      <description>Los Angeles Rams 0, Denver Broncos 0. 11:44 - 1st.</description>
+      <link>https://www.espn.com/nfl/game?gameId=401872962</link>
       <guid isPermaLink="false">espn-nfl-401872962</guid>
     </item>
     <item>
