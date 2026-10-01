@@ -1,0 +1,58 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>PRP Live Lower Third</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--purple:#9271d6;--purple2:#b88cff;--purple3:#6f49be;--ink:rgba(7,7,12,.86);--glass:rgba(17,15,26,.78);--stroke:rgba(207,190,255,.30);--soft:rgba(255,255,255,.70);--white:#fbfaff}
+*{box-sizing:border-box}html,body{width:100%;height:100%;margin:0;background:transparent;overflow:hidden;color:var(--white);font-family:Inter,Arial,sans-serif}body{position:relative}.stage{position:absolute;inset:0;pointer-events:none}.lower{position:absolute;left:2.35vw;right:2.35vw;bottom:1.8vh;display:flex;flex-direction:column;gap:1.05vh;opacity:1;transform:translateY(0);transition:opacity .28s ease,transform .32s cubic-bezier(.2,.8,.2,1)}.lower.hidden{opacity:0;transform:translateY(24px)}
+.main{position:relative;min-height:15.5vh;max-height:18.5vh;border-radius:2.25vh;overflow:hidden;display:grid;grid-template-columns:minmax(150px,14.5vw) minmax(0,1fr);align-items:stretch;background:linear-gradient(180deg,rgba(22,19,34,.90),rgba(8,8,14,.92));border:1px solid rgba(186,155,255,.34);box-shadow:0 1.3vh 4.2vh rgba(0,0,0,.38),inset 0 1px 0 rgba(255,255,255,.06),0 0 2.2vh rgba(132,79,227,.20);backdrop-filter:blur(22px) saturate(135%);-webkit-backdrop-filter:blur(22px) saturate(135%)}
+.main::before{content:"";position:absolute;inset:0;background:linear-gradient(110deg,transparent 0%,rgba(146,113,214,.04) 32%,rgba(186,143,255,.15) 46%,rgba(146,113,214,.04) 60%,transparent 78%);background-size:220% 100%;animation:glassSweep 14s ease-in-out infinite;opacity:.55;pointer-events:none}.main::after{content:"";position:absolute;inset:0;border-radius:inherit;padding:1px;background:linear-gradient(90deg,rgba(146,113,214,.18),rgba(208,188,255,.55),rgba(146,113,214,.16),rgba(184,140,255,.55));background-size:220% 100%;animation:borderDrift 18s linear infinite;mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);mask-composite:exclude;-webkit-mask-composite:xor;pointer-events:none;opacity:.65}
+.brand{position:relative;z-index:2;padding:1.5vh 1.15vw;display:flex}.brandCard{width:100%;border-radius:1.8vh;border:1px solid rgba(255,255,255,.12);background:linear-gradient(180deg,rgba(255,255,255,.055),rgba(255,255,255,.02));box-shadow:inset 0 1px 0 rgba(255,255,255,.06);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.45vh;overflow:hidden}.brandCard::before{content:"";position:absolute;inset:1.5vh 1.15vw;background:radial-gradient(circle at 50% 20%,rgba(180,146,255,.13),transparent 54%);border-radius:1.8vh;pointer-events:none}.brand img{width:min(8.5vw,13vh);height:min(8.5vw,13vh);object-fit:contain;filter:drop-shadow(0 .65vh 1.4vh rgba(141,90,240,.22))}.brandText{font-family:'Bebas Neue',Impact,sans-serif;font-size:clamp(16px,1.35vw,29px);letter-spacing:.055em;line-height:.9;white-space:nowrap;text-align:center;color:#fff}
+.content{position:relative;z-index:2;padding:2.05vh 2vw 1.8vh 1.4vw;display:flex;flex-direction:column;justify-content:center;min-width:0}.labelRow{display:flex;align-items:center;gap:1vw;margin-bottom:.65vh}.chip{height:3.85vh;min-height:34px;padding:0 1.25vw;border-radius:999px;display:flex;align-items:center;gap:.55vw;background:linear-gradient(180deg,rgba(121,77,221,.84),rgba(87,52,170,.82));border:1px solid rgba(214,196,255,.32);box-shadow:0 0 1.5vh rgba(146,113,214,.18),inset 0 1px 0 rgba(255,255,255,.10);font-family:'Bebas Neue',Impact,sans-serif;font-size:clamp(18px,1.55vw,32px);letter-spacing:.20em;white-space:nowrap;transition:background .35s ease,box-shadow .35s ease}.chipDot{width:.72vw;min-width:9px;height:.72vw;min-height:9px;border-radius:50%;background:#eee7ff;box-shadow:0 0 .85vh rgba(255,255,255,.35);animation:dotBreath 6s ease-in-out infinite}.accentLine{height:2px;flex:1;border-radius:999px;background:linear-gradient(90deg,rgba(162,108,255,.96),rgba(210,191,255,.44),transparent);box-shadow:0 0 1vh rgba(146,113,214,.24);background-size:180% 100%;animation:lineDrift 12s ease-in-out infinite}.titleViewport{overflow:hidden;min-width:0}.title{font-family:'Bebas Neue',Impact,sans-serif;font-size:clamp(42px,4.55vw,88px);line-height:.94;letter-spacing:.022em;text-transform:uppercase;white-space:nowrap;overflow:hidden;text-overflow:clip;color:#fff;text-shadow:0 .1vh 0 rgba(255,255,255,.05);transform:translateY(0);opacity:1;transition:opacity .20s ease,transform .26s cubic-bezier(.2,.8,.2,1)}.title.out{opacity:0;transform:translateY(10px)}.title.in{animation:titleIn .32s cubic-bezier(.2,.8,.2,1)}
+.breaking .chip{background:linear-gradient(180deg,rgba(144,92,245,.94),rgba(96,54,185,.90));box-shadow:0 0 2vh rgba(160,102,255,.28),inset 0 1px 0 rgba(255,255,255,.12)}.breaking .chipDot{animation:breakingDot 2.8s ease-in-out infinite}.breaking .main::before{animation-duration:9s;opacity:.68}.breaking .accentLine{background:linear-gradient(90deg,#b889ff,#f0e9ff,transparent);animation-duration:7s}.breaking .title{text-shadow:0 0 1.2vh rgba(159,112,255,.10)}
+.ticker{height:4.6vh;min-height:38px;border-radius:1.25vh;border:1px solid rgba(186,155,255,.30);background:linear-gradient(180deg,rgba(15,12,24,.90),rgba(7,7,12,.94));box-shadow:0 .7vh 2vh rgba(0,0,0,.30),0 0 1.6vh rgba(132,79,227,.14);backdrop-filter:blur(16px) saturate(130%);-webkit-backdrop-filter:blur(16px) saturate(130%);display:flex;align-items:center;overflow:hidden;position:relative}.ticker::before{content:"";width:3px;height:58%;margin-left:1.15vw;border-radius:999px;background:linear-gradient(180deg,#e9ddff,#9f70ff);box-shadow:0 0 .8vh rgba(159,112,255,.38);flex:0 0 auto}.tickerViewport{overflow:hidden;flex:1;margin-left:.9vw;mask-image:linear-gradient(90deg,transparent,#000 2%,#000 98%,transparent);-webkit-mask-image:linear-gradient(90deg,transparent,#000 2%,#000 98%,transparent)}.tickerTrack{display:flex;width:max-content;animation:tickerScroll 42s linear infinite}.tickerText{font-family:'Bebas Neue',Impact,sans-serif;font-size:clamp(17px,1.35vw,28px);letter-spacing:.035em;text-transform:uppercase;white-space:nowrap;padding-right:5vw;color:rgba(255,255,255,.94)}
+@keyframes glassSweep{0%,100%{background-position:110% 0}50%{background-position:-10% 0}}@keyframes borderDrift{from{background-position:0 0}to{background-position:220% 0}}@keyframes lineDrift{0%,100%{background-position:0 0}50%{background-position:85% 0}}@keyframes dotBreath{0%,100%{opacity:.78;transform:scale(.94)}50%{opacity:1;transform:scale(1.04)}}@keyframes breakingDot{0%,100%{opacity:.70;box-shadow:0 0 .7vh rgba(255,255,255,.28)}50%{opacity:1;box-shadow:0 0 1.15vh rgba(190,149,255,.62)}}@keyframes titleIn{from{opacity:0;transform:translateY(-8px)}to{opacity:1;transform:translateY(0)}}@keyframes tickerScroll{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+@media(max-width:900px){.main{grid-template-columns:155px minmax(0,1fr)}.brand img{width:92px;height:92px}.brandText{font-size:17px}.title{font-size:46px}.chip{font-size:18px;letter-spacing:.13em}}
+@media(prefers-reduced-motion:reduce){.main::before,.main::after,.chipDot,.accentLine,.tickerTrack{animation:none}.title{transition:none}}
+</style>
+</head>
+<body>
+<div class="stage">
+  <div id="lower" class="lower">
+    <div class="main">
+      <section class="brand">
+        <div class="brandCard">
+          <img src="/prp-logo.svg" alt="Purple Reign Podcast">
+          <div id="logoText" class="brandText">PURPLE REIGN PODCAST</div>
+        </div>
+      </section>
+      <section class="content">
+        <div class="labelRow">
+          <div class="chip"><span class="chipDot"></span><span id="label">LIVE DISCUSSION</span></div>
+          <div class="accentLine"></div>
+        </div>
+        <div class="titleViewport"><div id="title" class="title">RAVENS VS COWBOYS KEYS TO VICTORY</div></div>
+      </section>
+    </div>
+    <div class="ticker">
+      <div class="tickerViewport"><div id="tickerTrack" class="tickerTrack"><span id="ticker1" class="tickerText"></span><span id="ticker2" class="tickerText"></span></div></div>
+    </div>
+  </div>
+</div>
+<script>
+const $=id=>document.getElementById(id);
+let lastTitle='',transitionTimer=null;
+function fitTitle(){const el=$('title');let size=parseFloat(getComputedStyle(el).fontSize);const max=size;while(el.scrollWidth>el.clientWidth&&size>34){size-=1;el.style.fontSize=size+'px'}if(el.scrollWidth<=el.clientWidth&&size<max-3){el.style.fontSize=''} }
+function setTicker(text){const value=(text||'').trim();$('ticker1').textContent=value;$('ticker2').textContent=value;const track=$('tickerTrack');track.style.animation='none';void track.offsetWidth;track.style.animation=''}
+function updateTitle(next){next=next||'';if(next===lastTitle)return;clearTimeout(transitionTimer);const el=$('title');if(!lastTitle){el.textContent=next;lastTitle=next;requestAnimationFrame(fitTitle);return}el.classList.add('out');transitionTimer=setTimeout(()=>{el.textContent=next;el.style.fontSize='';el.classList.remove('out');el.classList.remove('in');void el.offsetWidth;el.classList.add('in');lastTitle=next;requestAnimationFrame(fitTitle)},190)}
+function render(s){const lower=$('lower');lower.classList.toggle('hidden',s.visible===false);lower.classList.toggle('breaking',s.mode==='breaking');$('label').textContent=s.displayLabel||'LIVE DISCUSSION';$('logoText').textContent=s.logoText||'PURPLE REIGN PODCAST';updateTitle(s.displayTitle||'');setTicker(s.ticker||'')}
+async function load(){try{const r=await fetch('/api/lower-third-state?ts='+Date.now(),{cache:'no-store'});const d=await r.json();if(d.ok)render(d.state)}catch{}}
+load();window.addEventListener('resize',fitTitle);try{const es=new EventSource('/api/lower-third-stream');es.onmessage=e=>{try{const d=JSON.parse(e.data);if(d.ok)render(d.state)}catch{}}}catch{}setInterval(load,30000);
+</script>
+</body>
+</html>
