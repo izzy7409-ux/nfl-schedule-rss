@@ -3,6 +3,7 @@ const { URL } = require('url');
 const confidence = require('./confidence-v2');
 const pickem = require('./pickem');
 const pickTracker = require('./pick-tracker');
+const lowerThird = require('./lower-third');
 
 const originalCreateServer = http.createServer;
 
@@ -10,6 +11,7 @@ function wrapListener(listener) {
   return async function liveToolsAwareListener(req, res) {
     try {
       const url = new URL(req.url, `http://${req.headers.host || 'localhost'}`);
+      if (await lowerThird.handle(req, res, url)) return;
       if (await pickTracker.handle(req, res, url)) return;
       if (await pickem.handle(req, res, url)) return;
       if (await confidence.handle(req, res, url)) return;
