@@ -46,9 +46,9 @@
 </div>
 <script>
 const $=id=>document.getElementById(id);
-let lastTitle='',transitionTimer=null;
+let lastTitle='',lastTicker='',transitionTimer=null;
 function fitTitle(){const el=$('title');let size=parseFloat(getComputedStyle(el).fontSize);const max=size;while(el.scrollWidth>el.clientWidth&&size>34){size-=1;el.style.fontSize=size+'px'}if(el.scrollWidth<=el.clientWidth&&size<max-3){el.style.fontSize=''} }
-function setTicker(text){const value=(text||'').trim();$('ticker1').textContent=value;$('ticker2').textContent=value;const track=$('tickerTrack');track.style.animation='none';void track.offsetWidth;track.style.animation=''}
+function setTicker(text){const value=(text||'').trim();if(value===lastTicker)return;lastTicker=value;$('ticker1').textContent=value;$('ticker2').textContent=value;const track=$('tickerTrack');track.style.animation='none';void track.offsetWidth;track.style.animation=''}
 function updateTitle(next){next=next||'';if(next===lastTitle)return;clearTimeout(transitionTimer);const el=$('title');if(!lastTitle){el.textContent=next;lastTitle=next;requestAnimationFrame(fitTitle);return}el.classList.add('out');transitionTimer=setTimeout(()=>{el.textContent=next;el.style.fontSize='';el.classList.remove('out');el.classList.remove('in');void el.offsetWidth;el.classList.add('in');lastTitle=next;requestAnimationFrame(fitTitle)},190)}
 function render(s){const lower=$('lower');lower.classList.toggle('hidden',s.visible===false);lower.classList.toggle('breaking',s.mode==='breaking');$('label').textContent=s.displayLabel||'LIVE DISCUSSION';$('logoText').textContent=s.logoText||'PURPLE REIGN PODCAST';updateTitle(s.displayTitle||'');setTicker(s.ticker||'')}
 async function load(){try{const r=await fetch('/api/lower-third-state?ts='+Date.now(),{cache:'no-store'});const d=await r.json();if(d.ok)render(d.state)}catch{}}
