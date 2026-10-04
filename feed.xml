@@ -5,7 +5,7 @@
     <link>https://www.nfl.com/schedules/</link>
     <description>Automatic NFL schedule, live scores and final results for EVMux.</description>
     <language>en-us</language>
-    <lastBuildDate>Sun, 04 Oct 2026 22:43:10 +0000</lastBuildDate>
+    <lastBuildDate>Sun, 04 Oct 2026 22:57:17 +0000</lastBuildDate>
     <ttl>5</ttl>
     <item>
       <title>FINAL | Pittsburgh Steelers 24 - Cleveland Browns 27</title>
@@ -68,26 +68,26 @@
       <guid isPermaLink="false">espn-nfl-401872967</guid>
     </item>
     <item>
-      <title>LIVE | Miami Dolphins 10 - Minnesota Vikings 15 | 5:54 - 4th | FOX</title>
-      <description>Miami Dolphins 10, Minnesota Vikings 15. 5:54 - 4th.</description>
+      <title>LIVE | Miami Dolphins 10 - Minnesota Vikings 15 | 2:07 - 4th | FOX</title>
+      <description>Miami Dolphins 10, Minnesota Vikings 15. 2:07 - 4th.</description>
       <link>https://www.espn.com/nfl/game?gameId=401872974</link>
       <guid isPermaLink="false">espn-nfl-401872974</guid>
     </item>
     <item>
-      <title>LIVE | Kansas City Chiefs 17 - Las Vegas Raiders 13 | 14:50 - 4th | CBS</title>
-      <description>Kansas City Chiefs 17, Las Vegas Raiders 13. 14:50 - 4th.</description>
+      <title>LIVE | Kansas City Chiefs 17 - Las Vegas Raiders 16 | 9:36 - 4th | CBS</title>
+      <description>Kansas City Chiefs 17, Las Vegas Raiders 16. 9:36 - 4th.</description>
       <link>https://www.espn.com/nfl/game?gameId=401872976</link>
       <guid isPermaLink="false">espn-nfl-401872976</guid>
     </item>
     <item>
-      <title>LIVE | Denver Broncos 3 - San Francisco 49ers 10 | 2:28 - 3rd | CBS</title>
-      <description>Denver Broncos 3, San Francisco 49ers 10. 2:28 - 3rd.</description>
+      <title>LIVE | Denver Broncos 6 - San Francisco 49ers 10 | 13:41 - 4th | CBS</title>
+      <description>Denver Broncos 6, San Francisco 49ers 10. 13:41 - 4th.</description>
       <link>https://www.espn.com/nfl/game?gameId=401872975</link>
       <guid isPermaLink="false">espn-nfl-401872975</guid>
     </item>
     <item>
-      <title>LIVE | Los Angeles Chargers 13 - Seattle Seahawks 27 | 4:05 - 3rd | CBS</title>
-      <description>Los Angeles Chargers 13, Seattle Seahawks 27. 4:05 - 3rd.</description>
+      <title>LIVE | Los Angeles Chargers 13 - Seattle Seahawks 30 | 15:00 - 4th | CBS</title>
+      <description>Los Angeles Chargers 13, Seattle Seahawks 30. 15:00 - 4th.</description>
       <link>https://www.espn.com/nfl/game?gameId=401872977</link>
       <guid isPermaLink="false">espn-nfl-401872977</guid>
     </item>
