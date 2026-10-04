@@ -5,7 +5,7 @@
     <link>https://www.nfl.com/schedules/</link>
     <description>Automatic NFL schedule, live scores and final results for EVMux.</description>
     <language>en-us</language>
-    <lastBuildDate>Sun, 04 Oct 2026 15:02:52 +0000</lastBuildDate>
+    <lastBuildDate>Sun, 04 Oct 2026 20:41:10 +0000</lastBuildDate>
     <ttl>5</ttl>
     <item>
       <title>FINAL | Pittsburgh Steelers 24 - Cleveland Browns 27</title>
@@ -14,81 +14,81 @@
       <guid isPermaLink="false">espn-nfl-401872964</guid>
     </item>
     <item>
-      <title>LIVE | Indianapolis Colts 10 - Washington Commanders 6 | HALFTIME | NFL Net</title>
-      <description>Indianapolis Colts 10, Washington Commanders 6. HALFTIME.</description>
-      <link>https://www.espn.com/nfl/game?gameId=401872965</link>
+      <title>FINAL | Indianapolis Colts 30 - Washington Commanders 13</title>
+      <description>Final: Indianapolis Colts 30, Washington Commanders 13.</description>
+      <link>https://www.espn.com/nfl/game/_/gameId/401872965/colts-commanders</link>
       <guid isPermaLink="false">espn-nfl-401872965</guid>
     </item>
     <item>
-      <title>SUN OCT 4 | New England Patriots at Buffalo Bills | 1:00 PM ET | CBS</title>
-      <description>New England Patriots at Buffalo Bills. Kickoff 1:00 PM ET. TV: CBS.</description>
+      <title>FINAL | New England Patriots 29 - Buffalo Bills 26</title>
+      <description>Final: New England Patriots 29, Buffalo Bills 26.</description>
       <link>https://www.espn.com/nfl/game/_/gameId/401872971/patriots-bills</link>
       <guid isPermaLink="false">espn-nfl-401872971</guid>
     </item>
     <item>
-      <title>SUN OCT 4 | New York Jets at Chicago Bears | 1:00 PM ET | FOX</title>
-      <description>New York Jets at Chicago Bears. Kickoff 1:00 PM ET. TV: FOX.</description>
+      <title>FINAL | New York Jets 12 - Chicago Bears 23</title>
+      <description>Final: New York Jets 12, Chicago Bears 23.</description>
       <link>https://www.espn.com/nfl/game/_/gameId/401872972/jets-bears</link>
       <guid isPermaLink="false">espn-nfl-401872972</guid>
     </item>
     <item>
-      <title>SUN OCT 4 | Jacksonville Jaguars at Cincinnati Bengals | 1:00 PM ET | CBS</title>
-      <description>Jacksonville Jaguars at Cincinnati Bengals. Kickoff 1:00 PM ET. TV: CBS.</description>
+      <title>FINAL | Jacksonville Jaguars 22 - Cincinnati Bengals 17</title>
+      <description>Final: Jacksonville Jaguars 22, Cincinnati Bengals 17.</description>
       <link>https://www.espn.com/nfl/game/_/gameId/401872969/jaguars-bengals</link>
       <guid isPermaLink="false">espn-nfl-401872969</guid>
     </item>
     <item>
-      <title>SUN OCT 4 | Arizona Cardinals at New York Giants | 1:00 PM ET | CBS</title>
-      <description>Arizona Cardinals at New York Giants. Kickoff 1:00 PM ET. TV: CBS.</description>
+      <title>FINAL | Arizona Cardinals 24 - New York Giants 36</title>
+      <description>Final: Arizona Cardinals 24, New York Giants 36.</description>
       <link>https://www.espn.com/nfl/game/_/gameId/401872966/cardinals-giants</link>
       <guid isPermaLink="false">espn-nfl-401872966</guid>
     </item>
     <item>
-      <title>SUN OCT 4 | Los Angeles Rams at Philadelphia Eagles | 1:00 PM ET | FOX</title>
-      <description>Los Angeles Rams at Philadelphia Eagles. Kickoff 1:00 PM ET. TV: FOX.</description>
+      <title>FINAL | Los Angeles Rams 24 - Philadelphia Eagles 20</title>
+      <description>Final: Los Angeles Rams 24, Philadelphia Eagles 20.</description>
       <link>https://www.espn.com/nfl/game/_/gameId/401872970/rams-eagles</link>
       <guid isPermaLink="false">espn-nfl-401872970</guid>
     </item>
     <item>
-      <title>SUN OCT 4 | Green Bay Packers at Tampa Bay Buccaneers | 1:00 PM ET | FOX</title>
-      <description>Green Bay Packers at Tampa Bay Buccaneers. Kickoff 1:00 PM ET. TV: FOX.</description>
+      <title>FINAL | Green Bay Packers 17 - Tampa Bay Buccaneers 14</title>
+      <description>Final: Green Bay Packers 17, Tampa Bay Buccaneers 14.</description>
       <link>https://www.espn.com/nfl/game/_/gameId/401872968/packers-buccaneers</link>
       <guid isPermaLink="false">espn-nfl-401872968</guid>
     </item>
     <item>
-      <title>SUN OCT 4 | Tennessee Titans at Baltimore Ravens | 1:00 PM ET | CBS</title>
-      <description>Tennessee Titans at Baltimore Ravens. Kickoff 1:00 PM ET. TV: CBS.</description>
+      <title>FINAL | Tennessee Titans 18 - Baltimore Ravens 24</title>
+      <description>Final: Tennessee Titans 18, Baltimore Ravens 24.</description>
       <link>https://www.espn.com/nfl/game/_/gameId/401872973/titans-ravens</link>
       <guid isPermaLink="false">espn-nfl-401872973</guid>
     </item>
     <item>
-      <title>SUN OCT 4 | Dallas Cowboys at Houston Texans | 1:00 PM ET | FOX</title>
-      <description>Dallas Cowboys at Houston Texans. Kickoff 1:00 PM ET. TV: FOX.</description>
+      <title>FINAL | Dallas Cowboys 34 - Houston Texans 30</title>
+      <description>Final: Dallas Cowboys 34, Houston Texans 30.</description>
       <link>https://www.espn.com/nfl/game/_/gameId/401872967/cowboys-texans</link>
       <guid isPermaLink="false">espn-nfl-401872967</guid>
     </item>
     <item>
-      <title>SUN OCT 4 | Miami Dolphins at Minnesota Vikings | 4:05 PM ET | FOX</title>
-      <description>Miami Dolphins at Minnesota Vikings. Kickoff 4:05 PM ET. TV: FOX.</description>
-      <link>https://www.espn.com/nfl/game/_/gameId/401872974/dolphins-vikings</link>
+      <title>LIVE | Miami Dolphins 0 - Minnesota Vikings 3 | 15:00 - 2nd | FOX</title>
+      <description>Miami Dolphins 0, Minnesota Vikings 3. 15:00 - 2nd.</description>
+      <link>https://www.espn.com/nfl/game?gameId=401872974</link>
       <guid isPermaLink="false">espn-nfl-401872974</guid>
     </item>
     <item>
-      <title>SUN OCT 4 | Kansas City Chiefs at Las Vegas Raiders | 4:25 PM ET | CBS</title>
-      <description>Kansas City Chiefs at Las Vegas Raiders. Kickoff 4:25 PM ET. TV: CBS.</description>
-      <link>https://www.espn.com/nfl/game/_/gameId/401872976/chiefs-raiders</link>
+      <title>LIVE | Kansas City Chiefs 0 - Las Vegas Raiders 7 | 8:10 - 1st | CBS</title>
+      <description>Kansas City Chiefs 0, Las Vegas Raiders 7. 8:10 - 1st.</description>
+      <link>https://www.espn.com/nfl/game?gameId=401872976</link>
       <guid isPermaLink="false">espn-nfl-401872976</guid>
     </item>
     <item>
-      <title>SUN OCT 4 | Denver Broncos at San Francisco 49ers | 4:25 PM ET | CBS</title>
-      <description>Denver Broncos at San Francisco 49ers. Kickoff 4:25 PM ET. TV: CBS.</description>
-      <link>https://www.espn.com/nfl/game/_/gameId/401872975/broncos-49ers</link>
+      <title>LIVE | Denver Broncos 0 - San Francisco 49ers 0 | 8:25 - 1st | CBS</title>
+      <description>Denver Broncos 0, San Francisco 49ers 0. 8:25 - 1st.</description>
+      <link>https://www.espn.com/nfl/game?gameId=401872975</link>
       <guid isPermaLink="false">espn-nfl-401872975</guid>
     </item>
     <item>
-      <title>SUN OCT 4 | Los Angeles Chargers at Seattle Seahawks | 4:25 PM ET | CBS</title>
-      <description>Los Angeles Chargers at Seattle Seahawks. Kickoff 4:25 PM ET. TV: CBS.</description>
-      <link>https://www.espn.com/nfl/game/_/gameId/401872977/chargers-seahawks</link>
+      <title>LIVE | Los Angeles Chargers 3 - Seattle Seahawks 0 | 11:34 - 1st | CBS</title>
+      <description>Los Angeles Chargers 3, Seattle Seahawks 0. 11:34 - 1st.</description>
+      <link>https://www.espn.com/nfl/game?gameId=401872977</link>
       <guid isPermaLink="false">espn-nfl-401872977</guid>
     </item>
     <item>
