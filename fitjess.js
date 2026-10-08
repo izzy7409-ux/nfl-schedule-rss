@@ -8,6 +8,7 @@ const ADMIN_PASSWORD=process.env.FITJESS_ADMIN_PASSWORD||'';
 const SESSION_SECRET=process.env.FITJESS_SESSION_SECRET||'';
 const ENC_KEY_RAW=process.env.FITJESS_DATA_ENCRYPTION_KEY||'';
 const DATA_FILE=process.env.FITJESS_DATA_FILE||'/data/fitjess-inquiries.json';
+const SELF_TEST_SECRET=process.env.FITJESS_SELF_TEST_SECRET||'';
 const submissionRate=new Map(),loginRate=new Map();
 
 function encKey(){try{const b=Buffer.from(ENC_KEY_RAW,'base64');if(b.length===32)return b;}catch{}return crypto.createHash('sha256').update(ENC_KEY_RAW).digest();}
@@ -33,7 +34,21 @@ function validate(d){const e=[];if(!d.name)e.push('Name is required');if(!d.emai
 
 async function handle(req,res,url){
   const p=url.pathname;
-  if(!['/fitjess-inquiry','/fitjess-admin','/api/fitjess/inquiries','/api/fitjess/admin/login','/api/fitjess/admin/logout','/api/fitjess/admin/me','/api/fitjess/admin/inquiries','/api/fitjess/admin/export.csv'].includes(p)&&!/^\/api\/fitjess\/admin\/inquiries\/[\w-]+$/.test(p))return false;
+  if(!['/fitjess-inquiry','/fitjess-admin','/api/fitjess/self-test','/api/fitjess/inquiries','/api/fitjess/admin/login','/api/fitjess/admin/logout','/api/fitjess/admin/me','/api/fitjess/admin/inquiries','/api/fitjess/admin/export.csv'].includes(p)&&!/^\/api\/fitjess\/admin\/inquiries\/[\w-]+$/.test(p))return false;
+  if(p==='/api/fitjess/self-test'){
+    if(req.method!=='POST'||!SELF_TEST_SECRET||url.searchParams.get('key')!==SELF_TEST_SECRET){json(res,404,{ok:false});return true;}
+    try{
+      const store=readStore(),before=store.records.length,now=new Date().toISOString(),id='selftest-'+crypto.randomUUID();
+      const sample={id,createdAt:now,updatedAt:now,status:'new',adminNotes:'',name:'FitJess Self Test',age:30,email:'selftest@example.invalid',phone:'000-000-0000',goals:['Self test'],services:[],trainingFormat:[],availability:'Self test',consultationDate:'2099-01-01',consultationTime:'12:00 PM',consent:true};
+      store.records.unshift({id,createdAt:now,...encrypt(sample)});writeStore(store);
+      const roundtrip=decrypt(readStore().records.find(r=>r.id===id));
+      const cleanup=readStore();cleanup.records=cleanup.records.filter(r=>r.id!==id);writeStore(cleanup);
+      const after=readStore().records.length;
+      const ok=roundtrip.id===id&&roundtrip.name===sample.name&&before===after&&!!ADMIN_PASSWORD&&!!SESSION_SECRET&&!!ENC_KEY_RAW;
+      json(res,ok?200:500,{ok,checks:{encryptedRoundTrip:roundtrip.id===id,cleanup:before===after,adminConfigured:!!ADMIN_PASSWORD,sessionConfigured:!!SESSION_SECRET,encryptionConfigured:!!ENC_KEY_RAW,persistentFile:DATA_FILE}});
+    }catch(e){console.error(e);json(res,500,{ok:false,error:'Self-test failed'});}
+    return true;
+  }
   if(p==='/fitjess-inquiry'){html(res,200,FORM_HTML);return true;}
   if(p==='/fitjess-admin'){html(res,200,ADMIN_HTML);return true;}
   if(p==='/api/fitjess/inquiries'&&req.method==='POST'){
