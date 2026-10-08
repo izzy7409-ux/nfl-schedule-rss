@@ -1,0 +1,57 @@
+const fs=require('fs');
+const path=require('path');
+const crypto=require('crypto');
+
+const FORM_HTML=fs.readFileSync(path.join(__dirname,'fitjess-inquiry.html'),'utf8');
+const ADMIN_HTML=fs.readFileSync(path.join(__dirname,'fitjess-admin.html'),'utf8');
+const ADMIN_PASSWORD=process.env.FITJESS_ADMIN_PASSWORD||'';
+const SESSION_SECRET=process.env.FITJESS_SESSION_SECRET||'';
+const ENC_KEY_RAW=process.env.FITJESS_DATA_ENCRYPTION_KEY||'';
+const DATA_FILE=process.env.FITJESS_DATA_FILE||'/data/fitjess-inquiries.json';
+const submissionRate=new Map(),loginRate=new Map();
+
+function encKey(){try{const b=Buffer.from(ENC_KEY_RAW,'base64');if(b.length===32)return b;}catch{}return crypto.createHash('sha256').update(ENC_KEY_RAW).digest();}
+function ensureStore(){fs.mkdirSync(path.dirname(DATA_FILE),{recursive:true});if(!fs.existsSync(DATA_FILE))fs.writeFileSync(DATA_FILE,JSON.stringify({version:1,records:[]},null,2));}
+function readStore(){ensureStore();return JSON.parse(fs.readFileSync(DATA_FILE,'utf8'));}
+function writeStore(s){ensureStore();const t=DATA_FILE+'.tmp';fs.writeFileSync(t,JSON.stringify(s,null,2));fs.renameSync(t,DATA_FILE);}
+function encrypt(o){const iv=crypto.randomBytes(12),c=crypto.createCipheriv('aes-256-gcm',encKey(),iv),data=Buffer.concat([c.update(JSON.stringify(o),'utf8'),c.final()]);return{iv:iv.toString('base64'),tag:c.getAuthTag().toString('base64'),data:data.toString('base64')}}
+function decrypt(r){const d=crypto.createDecipheriv('aes-256-gcm',encKey(),Buffer.from(r.iv,'base64'));d.setAuthTag(Buffer.from(r.tag,'base64'));return JSON.parse(Buffer.concat([d.update(Buffer.from(r.data,'base64')),d.final()]).toString('utf8'));}
+function json(res,code,o,h={}){res.writeHead(code,{'Content-Type':'application/json; charset=utf-8','Cache-Control':'no-store',...h});res.end(JSON.stringify(o));}
+function html(res,code,b){res.writeHead(code,{'Content-Type':'text/html; charset=utf-8','Cache-Control':'no-store'});res.end(b);}
+function readBody(req){return new Promise((resolve,reject)=>{let s='';req.on('data',c=>{s+=c;if(s.length>160000)reject(new Error('Request too large'));});req.on('end',()=>{try{resolve(s?JSON.parse(s):{});}catch{reject(new Error('Invalid request'));}});req.on('error',reject);});}
+function ip(req){return String(req.headers['x-forwarded-for']||req.socket.remoteAddress||'').split(',')[0].trim();}
+function limit(map,key,max,ms){const now=Date.now(),a=(map.get(key)||[]).filter(t=>now-t<ms);if(a.length>=max){map.set(key,a);return false;}a.push(now);map.set(key,a);return true;}
+function clean(v,max=500){return String(v??'').trim().slice(0,max)}
+function list(v,n=20){return Array.isArray(v)?v.map(x=>clean(x,120)).filter(Boolean).slice(0,n):[]}
+function cookies(req){return Object.fromEntries(String(req.headers.cookie||'').split(';').map(x=>x.trim()).filter(Boolean).map(x=>{const i=x.indexOf('=');return[x.slice(0,i),decodeURIComponent(x.slice(i+1))]}));}
+function signSession(){const p=Buffer.from(JSON.stringify({exp:Date.now()+7*864e5,n:crypto.randomBytes(8).toString('hex')})).toString('base64url'),s=crypto.createHmac('sha256',SESSION_SECRET).update(p).digest('base64url');return p+'.'+s;}
+function validSession(req){try{const [p,s]=(cookies(req).fitjess_session||'').split('.');if(!p||!s)return false;const e=crypto.createHmac('sha256',SESSION_SECRET).update(p).digest('base64url');if(s.length!==e.length||!crypto.timingSafeEqual(Buffer.from(s),Buffer.from(e)))return false;return JSON.parse(Buffer.from(p,'base64url').toString()).exp>Date.now();}catch{return false;}}
+function requireAdmin(req,res){if(!validSession(req)){json(res,401,{ok:false,error:'Unauthorized'});return false;}return true;}
+function csv(v){const s=Array.isArray(v)?v.join('; '):String(v??'');return /[",\n]/.test(s)?'"'+s.replace(/"/g,'""')+'"':s;}
+function normalize(x){const age=Number(x.age)||0;return{name:clean(x.name,100),age,email:clean(x.email,160),phone:clean(x.phone,40),preferredContact:clean(x.preferredContact,40),height:clean(x.height,50),weight:clean(x.weight,50),goalWeight:clean(x.goalWeight,50),services:list(x.services),trainingFormat:list(x.trainingFormat),currentActivity:clean(x.currentActivity,1200),trainingExperience:clean(x.trainingExperience,1200),goals:list(x.goals),goalsOther:clean(x.goalsOther,1200),motivation:clean(x.motivation,1200),barriers:clean(x.barriers,1200),weeklyFrequency:clean(x.weeklyFrequency,80),availability:clean(x.availability,1500),equipment:clean(x.equipment,700),startTimeline:clean(x.startTimeline,80),currentDiet:clean(x.currentDiet,1800),mealPrepInterest:clean(x.mealPrepInterest,30),dietaryRestrictions:clean(x.dietaryRestrictions,1200),foodDislikes:clean(x.foodDislikes,900),mealPrepDetails:clean(x.mealPrepDetails,900),healthConditions:clean(x.healthConditions,1800),injuriesLimitations:clean(x.injuriesLimitations,1800),surgeries:clean(x.surgeries,1200),medications:clean(x.medications,1200),physicianRestrictions:clean(x.physicianRestrictions,1200),pregnantPostpartum:clean(x.pregnantPostpartum,80),painSymptoms:clean(x.painSymptoms,1200),aboutMe:clean(x.aboutMe,1800),occupationSchedule:clean(x.occupationSchedule,1200),sleepStress:clean(x.sleepStress,1200),kidsCaregiving:clean(x.kidsCaregiving,1000),consultationType:clean(x.consultationType,60),consultationDate:clean(x.consultationDate,30),consultationTime:clean(x.consultationTime,60),consultationAlt:clean(x.consultationAlt,120),timezone:clean(x.timezone,80),referral:clean(x.referral,100),additionalNotes:clean(x.additionalNotes,1400),guardianName:age<18?clean(x.guardianName,100):'',guardianPhone:age<18?clean(x.guardianPhone,40):'',consent:!!x.consent};}
+function validate(d){const e=[];if(!d.name)e.push('Name is required');if(!d.email||!/^\S+@\S+\.\S+$/.test(d.email))e.push('Valid email is required');if(!d.phone)e.push('Phone is required');if(!d.age||d.age<14||d.age>100)e.push('Age must be between 14 and 100');if(d.age<18&&(!d.guardianName||!d.guardianPhone))e.push('Guardian information is required for clients under 18');if(!d.goals.length&&!d.goalsOther)e.push('Please tell us at least one fitness goal');if(!d.availability)e.push('Training availability is required');if(!d.consultationDate||!d.consultationTime)e.push('Please request a consultation date and time');if(!d.consent)e.push('Consent is required');return e;}
+
+async function handle(req,res,url){
+  const p=url.pathname;
+  if(!['/fitjess-inquiry','/fitjess-admin','/api/fitjess/inquiries','/api/fitjess/admin/login','/api/fitjess/admin/logout','/api/fitjess/admin/me','/api/fitjess/admin/inquiries','/api/fitjess/admin/export.csv'].includes(p)&&!/^\/api\/fitjess\/admin\/inquiries\/[\w-]+$/.test(p))return false;
+  if(p==='/fitjess-inquiry'){html(res,200,FORM_HTML);return true;}
+  if(p==='/fitjess-admin'){html(res,200,ADMIN_HTML);return true;}
+  if(p==='/api/fitjess/inquiries'&&req.method==='POST'){
+    if(!limit(submissionRate,ip(req),5,3600e3)){json(res,429,{ok:false,error:'Too many submissions. Please try again later.'});return true;}
+    try{const raw=await readBody(req);if(clean(raw.website,200)){json(res,200,{ok:true});return true;}const d=normalize(raw),errors=validate(d);if(errors.length){json(res,400,{ok:false,errors});return true;}const now=new Date().toISOString(),id=crypto.randomUUID(),full={id,createdAt:now,updatedAt:now,status:'new',adminNotes:'',...d},store=readStore();store.records.unshift({id,createdAt:now,...encrypt(full)});writeStore(store);json(res,201,{ok:true,id,message:'Inquiry received. We’ll follow up soon to confirm your consultation request.'});}catch(e){console.error(e);json(res,500,{ok:false,error:'Unable to submit right now. Please try again.'});}return true;
+  }
+  if(p==='/api/fitjess/admin/login'&&req.method==='POST'){
+    if(!limit(loginRate,ip(req),8,15*60e3)){json(res,429,{ok:false,error:'Too many login attempts. Try again later.'});return true;}
+    try{const b=await readBody(req),a=Buffer.from(String(b.password||'')),c=Buffer.from(ADMIN_PASSWORD),ok=a.length===c.length&&crypto.timingSafeEqual(a,c);if(!ok){json(res,401,{ok:false,error:'Incorrect password'});return true;}const token=signSession();json(res,200,{ok:true},{'Set-Cookie':`fitjess_session=${encodeURIComponent(token)}; Path=/; HttpOnly; Secure; SameSite=Lax; Max-Age=604800`});}catch{json(res,400,{ok:false,error:'Login failed'});}return true;
+  }
+  if(p==='/api/fitjess/admin/logout'&&req.method==='POST'){json(res,200,{ok:true},{'Set-Cookie':'fitjess_session=; Path=/; HttpOnly; Secure; SameSite=Lax; Max-Age=0'});return true;}
+  if(p==='/api/fitjess/admin/me'&&req.method==='GET'){json(res,validSession(req)?200:401,{ok:validSession(req)});return true;}
+  if(p.startsWith('/api/fitjess/admin/')&&!requireAdmin(req,res))return true;
+  if(p==='/api/fitjess/admin/inquiries'&&req.method==='GET'){try{const records=readStore().records.map(r=>{const d=decrypt(r);return{id:d.id,createdAt:d.createdAt,updatedAt:d.updatedAt,status:d.status,name:d.name,email:d.email,phone:d.phone,goals:d.goals,services:d.services,consultationDate:d.consultationDate,consultationTime:d.consultationTime,adminNotes:d.adminNotes};});json(res,200,{ok:true,records});}catch(e){console.error(e);json(res,500,{ok:false,error:'Could not load inquiries'});}return true;}
+  const m=p.match(/^\/api\/fitjess\/admin\/inquiries\/([\w-]+)$/);
+  if(m&&req.method==='GET'){try{const rec=readStore().records.find(r=>r.id===m[1]);if(!rec){json(res,404,{ok:false,error:'Not found'});return true;}json(res,200,{ok:true,record:decrypt(rec)});}catch{json(res,500,{ok:false,error:'Could not load inquiry'});}return true;}
+  if(m&&req.method==='PATCH'){try{const b=await readBody(req),store=readStore(),i=store.records.findIndex(r=>r.id===m[1]);if(i<0){json(res,404,{ok:false,error:'Not found'});return true;}const d=decrypt(store.records[i]);d.status=['new','contacted','consultation-booked','client','closed'].includes(b.status)?b.status:d.status;d.adminNotes=clean(b.adminNotes??d.adminNotes,3000);d.updatedAt=new Date().toISOString();store.records[i]={id:d.id,createdAt:d.createdAt,...encrypt(d)};writeStore(store);json(res,200,{ok:true,record:d});}catch{json(res,500,{ok:false,error:'Could not update inquiry'});}return true;}
+  if(p==='/api/fitjess/admin/export.csv'&&req.method==='GET'){try{const rows=readStore().records.map(r=>decrypt(r)),cols=['createdAt','status','name','age','email','phone','preferredContact','height','weight','goalWeight','services','trainingFormat','goals','goalsOther','motivation','barriers','weeklyFrequency','availability','currentActivity','trainingExperience','currentDiet','mealPrepInterest','dietaryRestrictions','foodDislikes','healthConditions','injuriesLimitations','surgeries','medications','physicianRestrictions','painSymptoms','pregnantPostpartum','aboutMe','occupationSchedule','sleepStress','kidsCaregiving','consultationType','consultationDate','consultationTime','consultationAlt','timezone','referral','additionalNotes','adminNotes'],out=[cols.join(','),...rows.map(r=>cols.map(k=>csv(r[k])).join(','))].join('\n');res.writeHead(200,{'Content-Type':'text/csv; charset=utf-8','Content-Disposition':'attachment; filename="fitjess4u-inquiries.csv"','Cache-Control':'no-store'});res.end(out);}catch{json(res,500,{ok:false,error:'Export failed'});}return true;}
+  json(res,405,{ok:false,error:'Method not allowed'});return true;
+}
+module.exports={handle};
