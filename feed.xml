@@ -5,7 +5,7 @@
     <link>https://www.nfl.com/schedules/</link>
     <description>Automatic NFL schedule, live scores and final results for EVMux.</description>
     <language>en-us</language>
-    <lastBuildDate>Sun, 11 Oct 2026 20:34:34 +0000</lastBuildDate>
+    <lastBuildDate>Sun, 11 Oct 2026 23:58:35 +0000</lastBuildDate>
     <ttl>5</ttl>
     <item>
       <title>FINAL | Tampa Bay Buccaneers 24 - Dallas Cowboys 16</title>
@@ -18,12 +18,6 @@
       <description>Final: Philadelphia Eagles 17, Jacksonville Jaguars 19.</description>
       <link>https://www.espn.com/nfl/game/_/gameId/401872981/eagles-jaguars</link>
       <guid isPermaLink="false">espn-nfl-401872981</guid>
-    </item>
-    <item>
-      <title>LIVE | New York Giants 27 - Washington Commanders 27 | 5:29 - OT | Fox</title>
-      <description>New York Giants 27, Washington Commanders 27. 5:29 - OT.</description>
-      <link>https://www.espn.com/nfl/game?gameId=401872988</link>
-      <guid isPermaLink="false">espn-nfl-401872988</guid>
     </item>
     <item>
       <title>FINAL | Chicago Bears 7 - Green Bay Packers 31</title>
@@ -68,21 +62,27 @@
       <guid isPermaLink="false">espn-nfl-401872985</guid>
     </item>
     <item>
-      <title>LIVE | Denver Broncos 7 - Los Angeles Chargers 0 | 3:23 - 1st | CBS</title>
-      <description>Denver Broncos 7, Los Angeles Chargers 0. 3:23 - 1st.</description>
-      <link>https://www.espn.com/nfl/game?gameId=401872989</link>
+      <title>FINAL/OT | New York Giants 27 - Washington Commanders 27</title>
+      <description>Final: New York Giants 27, Washington Commanders 27.</description>
+      <link>https://www.espn.com/nfl/game/_/gameId/401872988/giants-commanders</link>
+      <guid isPermaLink="false">espn-nfl-401872988</guid>
+    </item>
+    <item>
+      <title>FINAL | Denver Broncos 23 - Los Angeles Chargers 17</title>
+      <description>Final: Denver Broncos 23, Los Angeles Chargers 17.</description>
+      <link>https://www.espn.com/nfl/game/_/gameId/401872989/broncos-chargers</link>
       <guid isPermaLink="false">espn-nfl-401872989</guid>
     </item>
     <item>
-      <title>LIVE | Detroit Lions 0 - Arizona Cardinals 0 | 9:35 - 1st | Fox</title>
-      <description>Detroit Lions 0, Arizona Cardinals 0. 9:35 - 1st.</description>
-      <link>https://www.espn.com/nfl/game?gameId=401872991</link>
+      <title>FINAL | Detroit Lions 45 - Arizona Cardinals 21</title>
+      <description>Final: Detroit Lions 45, Arizona Cardinals 21.</description>
+      <link>https://www.espn.com/nfl/game/_/gameId/401872991/lions-cardinals</link>
       <guid isPermaLink="false">espn-nfl-401872991</guid>
     </item>
     <item>
-      <title>LIVE | San Francisco 49ers 7 - Seattle Seahawks 0 | 11:12 - 1st | Fox</title>
-      <description>San Francisco 49ers 7, Seattle Seahawks 0. 11:12 - 1st.</description>
-      <link>https://www.espn.com/nfl/game?gameId=401872992</link>
+      <title>FINAL | San Francisco 49ers 32 - Seattle Seahawks 29</title>
+      <description>Final: San Francisco 49ers 32, Seattle Seahawks 29.</description>
+      <link>https://www.espn.com/nfl/game/_/gameId/401872992/49ers-seahawks</link>
       <guid isPermaLink="false">espn-nfl-401872992</guid>
     </item>
     <item>
