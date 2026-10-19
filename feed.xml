@@ -5,7 +5,7 @@
     <link>https://www.nfl.com/schedules/</link>
     <description>Automatic NFL schedule, live scores and final results for EVMux.</description>
     <language>en-us</language>
-    <lastBuildDate>Sun, 18 Oct 2026 23:54:56 +0000</lastBuildDate>
+    <lastBuildDate>Mon, 19 Oct 2026 03:52:22 +0000</lastBuildDate>
     <ttl>5</ttl>
     <item>
       <title>FINAL/OT | Seattle Seahawks 14 - Denver Broncos 17</title>
@@ -80,8 +80,8 @@
       <guid isPermaLink="false">espn-nfl-401873005</guid>
     </item>
     <item>
-      <title>SUN OCT 18 | Dallas Cowboys at Green Bay Packers | 8:20 PM ET | NBC</title>
-      <description>Dallas Cowboys at Green Bay Packers. Kickoff 8:20 PM ET. TV: NBC.</description>
+      <title>FINAL | Dallas Cowboys 13 - Green Bay Packers 23</title>
+      <description>Final: Dallas Cowboys 13, Green Bay Packers 23.</description>
       <link>https://www.espn.com/nfl/game/_/gameId/401873007/cowboys-packers</link>
       <guid isPermaLink="false">espn-nfl-401873007</guid>
     </item>
