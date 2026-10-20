@@ -57,7 +57,7 @@
   </div>
 </div>
 <script>
-const key=new URLSearchParams(location.search).get('key')||'';const $=id=>document.getElementById(id);let state=null;
+const key=new URLSearchParams(location.search).get('key')||'';const $=id=>document.getElementById(id);let state=null;let dirtyTopics=false;let dirtyTicker=false;
 $('sourceUrl').textContent=location.origin+'/qss-overlay';
 function esc(s){return String(s??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]))}
 async function api(body){const r=await fetch('/api/qss-control?key='+encodeURIComponent(key),{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(body)});const d=await r.json();if(!r.ok)throw new Error(d.error||'Request failed');state=d.state;render();return d}
@@ -65,8 +65,14 @@ async function load(){const r=await fetch('/api/qss-state');const d=await r.json
 function setStatus(t){$('status').textContent=t}
 function render(){
  if(!state)return;
- $('topicLabel').value=state.topicLabel||'';$('topic').value=state.topic||'';$('subsCurrent').value=state.subsCurrent||0;$('subsTarget').value=state.subsTarget||10000;$('accent').value=state.accent||'#a566ff';
- $('showSupporters').checked=!!state.showSupporters;$('showGoal').checked=!!state.showGoal;$('showTicker').checked=!!state.showTicker;$('topics').value=(state.topics||[]).join('\n');$('tickerItems').value=(state.tickerItems||[]).join('\n');
+ if(document.activeElement!==$('topicLabel'))$('topicLabel').value=state.topicLabel||'';
+ if(document.activeElement!==$('topic'))$('topic').value=state.topic||'';
+ if(document.activeElement!==$('subsCurrent'))$('subsCurrent').value=state.subsCurrent||0;
+ if(document.activeElement!==$('subsTarget'))$('subsTarget').value=state.subsTarget||10000;
+ $('accent').value=state.accent||'#a566ff';
+ $('showSupporters').checked=!!state.showSupporters;$('showGoal').checked=!!state.showGoal;$('showTicker').checked=!!state.showTicker;
+ if(!dirtyTopics&&document.activeElement!==$('topics'))$('topics').value=(state.topics||[]).join('\n');
+ if(!dirtyTicker&&document.activeElement!==$('tickerItems'))$('tickerItems').value=(state.tickerItems||[]).join('\n');
  $('topicList').innerHTML=(state.topics||[]).map((t,i)=>'<div class="item '+(i===state.currentTopicIndex?'active':'')+'"><div><b>'+esc(t)+'</b><div class="sub">'+(i===state.currentTopicIndex?'ON AIR':'TOPIC '+(i+1))+'</div></div><button class="btn secondary small" data-topic="'+i+'">Show</button><span></span></div>').join('');
  document.querySelectorAll('[data-topic]').forEach(b=>b.onclick=()=>api({action:'setCurrent',index:Number(b.dataset.topic)}).catch(e=>setStatus(e.message)));
  $('supportList').innerHTML=(state.supporters||[]).map(s=>'<div class="item"><div><b>'+esc(s.name)+'</b><div class="sub">'+esc(s.type||'SUPPORT')+' '+esc(s.value||'')+'</div></div><button class="btn secondary small" data-remove="'+s.id+'">Remove</button><span></span></div>').join('')||'<div class="sub">No recent supporter events.</div>';
@@ -75,12 +81,13 @@ function render(){
  $('pvTicker').innerHTML=(state.tickerItems||[]).map(x=>'<span class="pill">'+esc(x)+'</span>').join('');
 }
 $('saveGeneral').onclick=()=>api({action:'saveGeneral',topicLabel:$('topicLabel').value,topic:$('topic').value,subsCurrent:Number($('subsCurrent').value),subsTarget:Number($('subsTarget').value),accent:$('accent').value,showSupporters:$('showSupporters').checked,showGoal:$('showGoal').checked,showTicker:$('showTicker').checked}).then(()=>setStatus('Overlay updated live.')).catch(e=>setStatus(e.message));
-$('saveTopics').onclick=()=>api({action:'setTopics',topics:$('topics').value.split(/\n+/).map(x=>x.trim()).filter(Boolean)}).then(()=>setStatus('Topic presets saved.')).catch(e=>setStatus(e.message));
+$('saveTopics').onclick=()=>{const topics=$('topics').value.split(/\n+/).map(x=>x.trim()).filter(Boolean);api({action:'setTopics',topics}).then(()=>{dirtyTopics=false;$('topics').value=(state.topics||[]).join('\n');setStatus('Topic presets saved.');}).catch(e=>setStatus(e.message));};
 $('prevTopic').onclick=()=>api({action:'prevTopic'}).catch(e=>setStatus(e.message));$('nextTopic').onclick=()=>api({action:'nextTopic'}).catch(e=>setStatus(e.message));
-$('saveTicker').onclick=()=>api({action:'saveTicker',tickerItems:$('tickerItems').value.split(/\n+/).map(x=>x.trim()).filter(Boolean)}).then(()=>setStatus('Ticker updated live.')).catch(e=>setStatus(e.message));
+$('saveTicker').onclick=()=>{const tickerItems=$('tickerItems').value.split(/\n+/).map(x=>x.trim()).filter(Boolean);api({action:'saveTicker',tickerItems}).then(()=>{dirtyTicker=false;$('tickerItems').value=(state.tickerItems||[]).join('\n');setStatus('Ticker updated live.');}).catch(e=>setStatus(e.message));};
 $('plusSub').onclick=()=>api({action:'subscriberDelta',delta:1}).catch(e=>setStatus(e.message));$('minusSub').onclick=()=>api({action:'subscriberDelta',delta:-1}).catch(e=>setStatus(e.message));$('plusTen').onclick=()=>api({action:'subscriberDelta',delta:10}).catch(e=>setStatus(e.message));
 $('addSupport').onclick=()=>api({action:'addSupporter',name:$('supportName').value,type:$('supportType').value,value:$('supportValue').value}).then(()=>{$('supportName').value='';$('supportValue').value='';setStatus('Supporter added live.');}).catch(e=>setStatus(e.message));
 $('clearSupport').onclick=()=>api({action:'clearSupporters'}).then(()=>setStatus('Supporter list cleared.')).catch(e=>setStatus(e.message));
+$('topics').addEventListener('input',()=>dirtyTopics=true);$('tickerItems').addEventListener('input',()=>dirtyTicker=true);
 load();const ev=new EventSource('/api/qss-events');ev.onmessage=e=>{try{const d=JSON.parse(e.data);if(d.ok){state=d.state;render()}}catch{}};
 </script>
 </body></html>
