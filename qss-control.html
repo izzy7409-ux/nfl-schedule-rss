@@ -1,0 +1,86 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>QSS Overlay Remote</title>
+<style>
+:root{--bg:#0a0b12;--panel:#131623;--panel2:#181b2b;--text:#f3f4f7;--muted:#9fa4b7;--purple:#a566ff;--stroke:rgba(255,255,255,.08)}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(circle at top right,rgba(165,102,255,.12),transparent 25%),linear-gradient(180deg,#090a10,#121522);color:var(--text);font-family:Arial,Helvetica,sans-serif;min-height:100vh}
+.wrap{max-width:1380px;margin:auto;padding:26px 20px 48px}.header{display:flex;justify-content:space-between;gap:20px;align-items:flex-end;margin-bottom:18px}.header h1{margin:0 0 7px;font-size:31px}.header p{margin:0;color:var(--muted);line-height:1.45}.source{font-size:12px;padding:10px 12px;border-radius:12px;background:rgba(165,102,255,.11);border:1px solid rgba(165,102,255,.28);color:#d9c3ff;max-width:460px;overflow-wrap:anywhere}
+.grid{display:grid;grid-template-columns:1.1fr .9fr;gap:18px}.panel{background:linear-gradient(180deg,var(--panel),var(--panel2));border:1px solid var(--stroke);border-radius:20px;padding:18px;box-shadow:0 18px 55px rgba(0,0,0,.22)}.panel+.panel{margin-top:18px}.panel h2{font-size:15px;text-transform:uppercase;letter-spacing:.16em;margin:0 0 16px;color:#e7e8ef}
+.field{display:flex;flex-direction:column;gap:7px;margin-bottom:12px}.field label{font-size:11px;letter-spacing:.13em;text-transform:uppercase;color:#bcc0d0}.field input,.field textarea,.field select{width:100%;border:1px solid rgba(255,255,255,.09);background:#0c0f19;color:#fff;border-radius:13px;padding:11px 13px;font-size:14px;outline:none}.field textarea{min-height:105px;resize:vertical}.row{display:grid;grid-template-columns:1fr 1fr;gap:12px}.row3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px}.checks{display:flex;flex-wrap:wrap;gap:16px;margin:10px 0 4px}.checks label{font-size:13px;color:#d9dbea}.btns{display:flex;gap:9px;flex-wrap:wrap}.btn{border:0;border-radius:12px;padding:11px 14px;font-weight:700;background:linear-gradient(180deg,#b177ff,#8f51ef);color:#fff;cursor:pointer}.btn.secondary{background:#20243a;border:1px solid rgba(255,255,255,.08)}.btn.danger{background:#572832}.btn.small{padding:8px 10px;font-size:12px}.status{font-size:12px;color:#98a0b5;margin-top:10px}
+.topic-list,.support-list{display:flex;flex-direction:column;gap:8px}.item{display:grid;grid-template-columns:1fr auto auto;gap:8px;align-items:center;background:#0d101a;border:1px solid rgba(255,255,255,.07);border-radius:12px;padding:10px 11px}.item.active{outline:1px solid rgba(165,102,255,.55);background:rgba(165,102,255,.07)}.item b{font-size:13px}.sub{font-size:10px;letter-spacing:.12em;color:#858ca1;margin-top:3px}.support-add{display:grid;grid-template-columns:1.4fr .8fr .7fr auto;gap:9px;align-items:end}.preview{background:#0d1019;border:1px solid rgba(255,255,255,.07);border-radius:15px;padding:14px}.preview .big{font-weight:900;font-size:23px;line-height:1;text-transform:uppercase;margin-bottom:12px}.pill{display:inline-block;margin:4px 4px 0 0;padding:5px 8px;border-radius:99px;background:rgba(165,102,255,.11);border:1px solid rgba(165,102,255,.25);color:#d8c2ff;font-size:10px;letter-spacing:.08em}.meter{height:12px;background:#1f2230;border-radius:99px;overflow:hidden;margin:8px 0}.meter div{height:100%;background:linear-gradient(90deg,#8d51ee,#bd7cff);border-radius:99px}.kv{display:flex;justify-content:space-between;color:#c8cbd7;font-size:13px;margin-top:7px}
+@media(max-width:980px){.grid{grid-template-columns:1fr}.row,.row3,.support-add{grid-template-columns:1fr}.header{align-items:flex-start;flex-direction:column}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="header"><div><h1>Quiet Storm Sports Remote</h1><p>Everything here updates the live EVMux overlay instantly.</p></div><div class="source" id="sourceUrl"></div></div>
+  <div class="grid">
+    <div>
+      <section class="panel">
+        <h2>Current Topic + Subscriber Goal</h2>
+        <div class="row"><div class="field"><label>Topic label</label><input id="topicLabel"></div><div class="field"><label>Accent</label><input id="accent" type="color"></div></div>
+        <div class="field"><label>Current topic</label><textarea id="topic"></textarea></div>
+        <div class="row3"><div class="field"><label>Subscribers</label><input id="subsCurrent" type="number"></div><div class="field"><label>Goal</label><input id="subsTarget" type="number"></div><div class="field"><label>Quick adjust</label><div class="btns"><button class="btn secondary small" id="minusSub">-1</button><button class="btn secondary small" id="plusSub">+1</button><button class="btn secondary small" id="plusTen">+10</button></div></div></div>
+        <div class="checks"><label><input id="showSupporters" type="checkbox"> Supporters</label><label><input id="showGoal" type="checkbox"> Road to 10K</label><label><input id="showTicker" type="checkbox"> Ticker</label></div>
+        <div class="btns"><button class="btn" id="saveGeneral">Update Overlay</button></div><div id="status" class="status">Ready.</div>
+      </section>
+      <section class="panel">
+        <h2>Topic Presets</h2>
+        <div class="field"><label>One topic per line</label><textarea id="topics"></textarea></div>
+        <div class="btns"><button class="btn" id="saveTopics">Save Topics</button><button class="btn secondary" id="prevTopic">Previous</button><button class="btn secondary" id="nextTopic">Next</button></div>
+        <div id="topicList" class="topic-list" style="margin-top:13px"></div>
+      </section>
+      <section class="panel">
+        <h2>Ticker</h2>
+        <div class="field"><label>One item per line</label><textarea id="tickerItems"></textarea></div><div class="btns"><button class="btn" id="saveTicker">Update Ticker</button></div>
+      </section>
+    </div>
+    <div>
+      <section class="panel">
+        <h2>Recent Supporters</h2>
+        <div class="support-add">
+          <div class="field"><label>Name</label><input id="supportName" placeholder="DWASS6721"></div>
+          <div class="field"><label>Type</label><select id="supportType"><option>SUPERCHAT</option><option>NEW SUB</option><option>NEW MEMBER</option><option>DONATION</option><option>GIFTED</option><option>SUPPORT</option></select></div>
+          <div class="field"><label>Value</label><input id="supportValue" placeholder="$1.99"></div>
+          <button class="btn" id="addSupport">Add</button>
+        </div>
+        <div class="btns" style="margin:4px 0 12px"><button class="btn danger small" id="clearSupport">Clear all</button></div>
+        <div id="supportList" class="support-list"></div>
+      </section>
+      <section class="panel">
+        <h2>Live Preview Data</h2>
+        <div class="preview"><div id="pvTopic" class="big"></div><div class="sub" id="pvLabel"></div><div class="meter"><div id="pvFill"></div></div><div class="kv"><span id="pvCurrent"></span><span id="pvTarget"></span></div><div style="margin-top:12px" id="pvTicker"></div></div>
+      </section>
+    </div>
+  </div>
+</div>
+<script>
+const key=new URLSearchParams(location.search).get('key')||'';const $=id=>document.getElementById(id);let state=null;
+$('sourceUrl').textContent=location.origin+'/qss-overlay';
+function esc(s){return String(s??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]))}
+async function api(body){const r=await fetch('/api/qss-control?key='+encodeURIComponent(key),{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(body)});const d=await r.json();if(!r.ok)throw new Error(d.error||'Request failed');state=d.state;render();return d}
+async function load(){const r=await fetch('/api/qss-state');const d=await r.json();state=d.state;render()}
+function setStatus(t){$('status').textContent=t}
+function render(){
+ if(!state)return;
+ $('topicLabel').value=state.topicLabel||'';$('topic').value=state.topic||'';$('subsCurrent').value=state.subsCurrent||0;$('subsTarget').value=state.subsTarget||10000;$('accent').value=state.accent||'#a566ff';
+ $('showSupporters').checked=!!state.showSupporters;$('showGoal').checked=!!state.showGoal;$('showTicker').checked=!!state.showTicker;$('topics').value=(state.topics||[]).join('\n');$('tickerItems').value=(state.tickerItems||[]).join('\n');
+ $('topicList').innerHTML=(state.topics||[]).map((t,i)=>'<div class="item '+(i===state.currentTopicIndex?'active':'')+'"><div><b>'+esc(t)+'</b><div class="sub">'+(i===state.currentTopicIndex?'ON AIR':'TOPIC '+(i+1))+'</div></div><button class="btn secondary small" data-topic="'+i+'">Show</button><span></span></div>').join('');
+ document.querySelectorAll('[data-topic]').forEach(b=>b.onclick=()=>api({action:'setCurrent',index:Number(b.dataset.topic)}).catch(e=>setStatus(e.message)));
+ $('supportList').innerHTML=(state.supporters||[]).map(s=>'<div class="item"><div><b>'+esc(s.name)+'</b><div class="sub">'+esc(s.type||'SUPPORT')+' '+esc(s.value||'')+'</div></div><button class="btn secondary small" data-remove="'+s.id+'">Remove</button><span></span></div>').join('')||'<div class="sub">No recent supporter events.</div>';
+ document.querySelectorAll('[data-remove]').forEach(b=>b.onclick=()=>api({action:'removeSupporter',id:Number(b.dataset.remove)}).catch(e=>setStatus(e.message)));
+ $('pvTopic').textContent=state.topic||'';$('pvLabel').textContent=state.topicLabel||'';$('pvCurrent').textContent=Number(state.subsCurrent||0).toLocaleString();$('pvTarget').textContent='of '+Number(state.subsTarget||10000).toLocaleString();$('pvFill').style.width=(state.percent||0)+'%';
+ $('pvTicker').innerHTML=(state.tickerItems||[]).map(x=>'<span class="pill">'+esc(x)+'</span>').join('');
+}
+$('saveGeneral').onclick=()=>api({action:'saveGeneral',topicLabel:$('topicLabel').value,topic:$('topic').value,subsCurrent:Number($('subsCurrent').value),subsTarget:Number($('subsTarget').value),accent:$('accent').value,showSupporters:$('showSupporters').checked,showGoal:$('showGoal').checked,showTicker:$('showTicker').checked}).then(()=>setStatus('Overlay updated live.')).catch(e=>setStatus(e.message));
+$('saveTopics').onclick=()=>api({action:'setTopics',topics:$('topics').value.split(/\n+/).map(x=>x.trim()).filter(Boolean)}).then(()=>setStatus('Topic presets saved.')).catch(e=>setStatus(e.message));
+$('prevTopic').onclick=()=>api({action:'prevTopic'}).catch(e=>setStatus(e.message));$('nextTopic').onclick=()=>api({action:'nextTopic'}).catch(e=>setStatus(e.message));
+$('saveTicker').onclick=()=>api({action:'saveTicker',tickerItems:$('tickerItems').value.split(/\n+/).map(x=>x.trim()).filter(Boolean)}).then(()=>setStatus('Ticker updated live.')).catch(e=>setStatus(e.message));
+$('plusSub').onclick=()=>api({action:'subscriberDelta',delta:1}).catch(e=>setStatus(e.message));$('minusSub').onclick=()=>api({action:'subscriberDelta',delta:-1}).catch(e=>setStatus(e.message));$('plusTen').onclick=()=>api({action:'subscriberDelta',delta:10}).catch(e=>setStatus(e.message));
+$('addSupport').onclick=()=>api({action:'addSupporter',name:$('supportName').value,type:$('supportType').value,value:$('supportValue').value}).then(()=>{$('supportName').value='';$('supportValue').value='';setStatus('Supporter added live.');}).catch(e=>setStatus(e.message));
+$('clearSupport').onclick=()=>api({action:'clearSupporters'}).then(()=>setStatus('Supporter list cleared.')).catch(e=>setStatus(e.message));
+load();const ev=new EventSource('/api/qss-events');ev.onmessage=e=>{try{const d=JSON.parse(e.data);if(d.ok){state=d.state;render()}}catch{}};
+</script>
+</body></html>
