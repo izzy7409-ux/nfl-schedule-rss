@@ -5,7 +5,7 @@
     <link>https://www.nfl.com/schedules/</link>
     <description>Automatic NFL schedule, live scores and final results for EVMux.</description>
     <language>en-us</language>
-    <lastBuildDate>Sun, 25 Oct 2026 09:44:49 +0000</lastBuildDate>
+    <lastBuildDate>Sun, 25 Oct 2026 13:57:48 +0000</lastBuildDate>
     <ttl>5</ttl>
     <item>
       <title>FINAL | New England Patriots 24 - Chicago Bears 30</title>
@@ -14,9 +14,9 @@
       <guid isPermaLink="false">espn-nfl-401873010</guid>
     </item>
     <item>
-      <title>SUN OCT 25 | Pittsburgh Steelers at New Orleans Saints | 9:30 AM ET | NFL Net</title>
-      <description>Pittsburgh Steelers at New Orleans Saints. Kickoff 9:30 AM ET. TV: NFL Net.</description>
-      <link>https://www.espn.com/nfl/game/_/gameId/401873011/steelers-saints</link>
+      <title>LIVE | Pittsburgh Steelers 3 - New Orleans Saints 0 | 3:39 - 1st | NFL Net</title>
+      <description>Pittsburgh Steelers 3, New Orleans Saints 0. 3:39 - 1st.</description>
+      <link>https://www.espn.com/nfl/game?gameId=401873011</link>
       <guid isPermaLink="false">espn-nfl-401873011</guid>
     </item>
     <item>
