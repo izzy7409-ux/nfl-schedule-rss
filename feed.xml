@@ -5,7 +5,7 @@
     <link>https://www.nfl.com/schedules/</link>
     <description>Automatic NFL schedule, live scores and final results for EVMux.</description>
     <language>en-us</language>
-    <lastBuildDate>Sun, 25 Oct 2026 19:55:55 +0000</lastBuildDate>
+    <lastBuildDate>Sun, 25 Oct 2026 22:24:06 +0000</lastBuildDate>
     <ttl>5</ttl>
     <item>
       <title>FINAL | New England Patriots 24 - Chicago Bears 30</title>
@@ -20,21 +20,27 @@
       <guid isPermaLink="false">espn-nfl-401873011</guid>
     </item>
     <item>
-      <title>LIVE | San Francisco 49ers 20 - Atlanta Falcons 26 | 2:42 - 4th | Fox</title>
-      <description>San Francisco 49ers 20, Atlanta Falcons 26. 2:42 - 4th.</description>
-      <link>https://www.espn.com/nfl/game?gameId=401873017</link>
+      <title>FINAL | San Francisco 49ers 20 - Atlanta Falcons 29</title>
+      <description>Final: San Francisco 49ers 20, Atlanta Falcons 29.</description>
+      <link>https://www.espn.com/nfl/game/_/gameId/401873017/49ers-falcons</link>
       <guid isPermaLink="false">espn-nfl-401873017</guid>
     </item>
     <item>
-      <title>LIVE | Cleveland Browns 24 - Tennessee Titans 17 | 2:00 - 4th | CBS</title>
-      <description>Cleveland Browns 24, Tennessee Titans 17. 2:00 - 4th.</description>
-      <link>https://www.espn.com/nfl/game?gameId=401873013</link>
+      <title>FINAL | Cleveland Browns 27 - Tennessee Titans 24</title>
+      <description>Final: Cleveland Browns 27, Tennessee Titans 24.</description>
+      <link>https://www.espn.com/nfl/game/_/gameId/401873013/browns-titans</link>
       <guid isPermaLink="false">espn-nfl-401873013</guid>
     </item>
     <item>
-      <title>LIVE | Miami Dolphins 28 - New York Jets 25 | 2:00 - 4th | CBS</title>
-      <description>Miami Dolphins 28, New York Jets 25. 2:00 - 4th.</description>
-      <link>https://www.espn.com/nfl/game?gameId=401873015</link>
+      <title>FINAL | Indianapolis Colts 10 - Minnesota Vikings 16</title>
+      <description>Final: Indianapolis Colts 10, Minnesota Vikings 16.</description>
+      <link>https://www.espn.com/nfl/game/_/gameId/401873014/colts-vikings</link>
+      <guid isPermaLink="false">espn-nfl-401873014</guid>
+    </item>
+    <item>
+      <title>FINAL | Miami Dolphins 28 - New York Jets 25</title>
+      <description>Final: Miami Dolphins 28, New York Jets 25.</description>
+      <link>https://www.espn.com/nfl/game/_/gameId/401873015/dolphins-jets</link>
       <guid isPermaLink="false">espn-nfl-401873015</guid>
     </item>
     <item>
@@ -44,39 +50,33 @@
       <guid isPermaLink="false">espn-nfl-401873018</guid>
     </item>
     <item>
-      <title>LIVE | Cincinnati Bengals 35 - Baltimore Ravens 13 | 2:00 - 4th | CBS</title>
-      <description>Cincinnati Bengals 35, Baltimore Ravens 13. 2:00 - 4th.</description>
-      <link>https://www.espn.com/nfl/game?gameId=401873012</link>
+      <title>FINAL | Cincinnati Bengals 35 - Baltimore Ravens 13</title>
+      <description>Final: Cincinnati Bengals 35, Baltimore Ravens 13.</description>
+      <link>https://www.espn.com/nfl/game/_/gameId/401873012/bengals-ravens</link>
       <guid isPermaLink="false">espn-nfl-401873012</guid>
     </item>
     <item>
-      <title>LIVE | New York Giants 21 - Houston Texans 14 | 5:06 - 4th | Fox</title>
-      <description>New York Giants 21, Houston Texans 14. 5:06 - 4th.</description>
-      <link>https://www.espn.com/nfl/game?gameId=401873016</link>
+      <title>FINAL/OT | New York Giants 27 - Houston Texans 21</title>
+      <description>Final: New York Giants 27, Houston Texans 21.</description>
+      <link>https://www.espn.com/nfl/game/_/gameId/401873016/giants-texans</link>
       <guid isPermaLink="false">espn-nfl-401873016</guid>
     </item>
     <item>
-      <title>FINAL | Indianapolis Colts 10 - Minnesota Vikings 16</title>
-      <description>Final: Indianapolis Colts 10, Minnesota Vikings 16.</description>
-      <link>https://www.espn.com/nfl/game/_/gameId/401873014/colts-vikings</link>
-      <guid isPermaLink="false">espn-nfl-401873014</guid>
-    </item>
-    <item>
-      <title>SUN OCT 25 | Denver Broncos at Arizona Cardinals | 4:05 PM ET | CBS</title>
-      <description>Denver Broncos at Arizona Cardinals. Kickoff 4:05 PM ET. TV: CBS.</description>
-      <link>https://www.espn.com/nfl/game/_/gameId/401873019/broncos-cardinals</link>
+      <title>LIVE | Denver Broncos 20 - Arizona Cardinals 13 | 3:43 - 3rd | CBS</title>
+      <description>Denver Broncos 20, Arizona Cardinals 13. 3:43 - 3rd.</description>
+      <link>https://www.espn.com/nfl/game?gameId=401873019</link>
       <guid isPermaLink="false">espn-nfl-401873019</guid>
     </item>
     <item>
-      <title>SUN OCT 25 | Green Bay Packers at Detroit Lions | 4:25 PM ET | Fox</title>
-      <description>Green Bay Packers at Detroit Lions. Kickoff 4:25 PM ET. TV: Fox.</description>
-      <link>https://www.espn.com/nfl/game/_/gameId/401873020/packers-lions</link>
+      <title>LIVE | Green Bay Packers 14 - Detroit Lions 17 | 6:33 - 3rd | Fox</title>
+      <description>Green Bay Packers 14, Detroit Lions 17. 6:33 - 3rd.</description>
+      <link>https://www.espn.com/nfl/game?gameId=401873020</link>
       <guid isPermaLink="false">espn-nfl-401873020</guid>
     </item>
     <item>
-      <title>SUN OCT 25 | Los Angeles Rams at Las Vegas Raiders | 4:25 PM ET | Fox</title>
-      <description>Los Angeles Rams at Las Vegas Raiders. Kickoff 4:25 PM ET. TV: Fox.</description>
-      <link>https://www.espn.com/nfl/game/_/gameId/401873021/rams-raiders</link>
+      <title>LIVE | Los Angeles Rams 28 - Las Vegas Raiders 6 | 8:39 - 3rd | Fox</title>
+      <description>Los Angeles Rams 28, Las Vegas Raiders 6. 8:39 - 3rd.</description>
+      <link>https://www.espn.com/nfl/game?gameId=401873021</link>
       <guid isPermaLink="false">espn-nfl-401873021</guid>
     </item>
     <item>
