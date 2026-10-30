@@ -11,6 +11,7 @@ const staticFiles = new Map([
   ['/qss-overlay.html', ['qss-overlay.html', 'text/html']],
   ['/qss-control', ['qss-control.html', 'text/html']],
   ['/qss-control.html', ['qss-control.html', 'text/html']],
+  ['/superchat.js', ['superchat.js', 'text/javascript']],
   ['/streamlabs-events.js', ['streamlabs-events.js', 'text/javascript']],
   ['/streamlabs-result.html', ['streamlabs-result.html', 'text/html']]
 ]);

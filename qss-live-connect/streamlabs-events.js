@@ -7,7 +7,7 @@
   function amount(message, micros) {
     const formatted = message.displayString || message.display_string || message.amountDisplayString || message.formatted_amount || message.formattedAmount;
     if (formatted) return text(formatted, 30);
-    const raw = message.amount;
+    const raw = message.amountMicros ?? message.amount;
     if (raw === undefined || raw === null || raw === '' || !Number.isFinite(Number(raw))) return '';
     const value = Number(raw) / (micros ? 1000000 : 1), currency = text(message.currency || 'USD', 3).toUpperCase();
     try { return new Intl.NumberFormat('en-US', { style: 'currency', currency }).format(value); }
@@ -57,7 +57,8 @@
       } else return;
       const stamp = message.createdAt || message.publishedAt || message.created_at || '';
       const unique = message._id || (event.event_id ? event.event_id + ':' + index : [scope, type, message.id || name, stamp, value, index].join(':'));
-      result.push({ kind, label, name, value, eventId: text(unique, 220), createdAt: stamp || (clock ? clock() : Date.now()) });
+      const details = kind === 'superchat' ? { message: text(message.message || message.userComment || message.comment, 1000), tier: Number(message.tier || message.superChatDetails?.tier) || null, color: text(message.backgroundColor || message.background_color || message.color, 20), amount: Number(message.amountMicros ?? message.amount) / 1000000, currency: text(message.currency || 'USD', 3).toUpperCase() } : {};
+      result.push({ ...details, kind, label, name, value, eventId: text(unique, 220), createdAt: stamp || (clock ? clock() : Date.now()) });
     });
     return result;
   }
