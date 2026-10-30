@@ -19,10 +19,10 @@
 .rail:before{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(165,102,255,.075),transparent 25%,transparent 75%,rgba(165,102,255,.055));pointer-events:none}
 .logo-zone,.topic-zone,.goal-zone{position:relative;z-index:1;min-width:0}
 .logo-zone{display:flex;align-items:center;padding:12px 18px;border-right:1px solid rgba(255,255,255,.065)}
-.logo-wrap{display:grid;grid-template-columns:1fr 64px;align-items:center;gap:12px;width:100%;padding:13px 15px;border-radius:16px;background:linear-gradient(180deg,rgba(255,255,255,.035),rgba(255,255,255,.012));border:1px solid rgba(255,255,255,.075);box-shadow:inset 0 1px 0 rgba(255,255,255,.035)}
+.logo-wrap{display:grid;position:relative;isolation:isolate;overflow:hidden;grid-template-columns:max-content 58px;justify-content:center;align-items:center;gap:7px;width:100%;padding:13px 12px;border-radius:16px;background:linear-gradient(180deg,rgba(255,255,255,.035),rgba(255,255,255,.012));border:1px solid rgba(255,255,255,.075);box-shadow:inset 0 1px 0 rgba(255,255,255,.035)}
 .wordmark{font-family:"Arial Black",Impact,sans-serif;font-style:italic;font-weight:900;line-height:.74;letter-spacing:-.065em;text-transform:lowercase;color:#f2f2f5;text-shadow:0 2px 8px rgba(0,0,0,.25)}
 .wordmark div{font-size:31px;margin-left:0!important}
-.cloud svg{width:60px;height:60px;display:block}
+.cloud svg{width:56px;height:56px;display:block}.logo-wrap>.wordmark,.logo-wrap>.cloud{position:relative;z-index:1}.ravens-watermark{position:absolute;inset:-6px -3px;z-index:0;width:calc(100% + 6px);height:calc(100% + 12px);opacity:.13;filter:grayscale(1);mix-blend-mode:screen;pointer-events:none}
 .vline{position:absolute;right:-1px;top:18%;bottom:18%;width:2px;background:linear-gradient(180deg,transparent,var(--accent),transparent);box-shadow:0 0 18px var(--accentSoft)}
 .topic-zone{display:flex;flex-direction:column;justify-content:center;padding:15px 20px 13px}
 .topic-meta{display:flex;align-items:center;gap:14px;margin-bottom:10px}.topic-label{font-size:13px;letter-spacing:.46em;color:#d8dae4;text-transform:uppercase;white-space:nowrap}.topic-rule{height:2px;width:44px;background:var(--accent);box-shadow:0 0 12px var(--accentSoft)}
@@ -43,7 +43,7 @@
   </section>
   <section class="rail glass">
     <div class="logo-zone">
-      <div class="logo-wrap">
+      <div class="logo-wrap"><svg class="ravens-watermark" viewBox="90 205 1010 490" aria-hidden="true" focusable="false"><image href="/ravens-mark.png" width="1200" height="861"/></svg>
         <div class="wordmark"><div>quiet</div><div>storm</div><div>sports</div></div>
         <div class="cloud"><svg viewBox="0 0 120 120" aria-hidden="true"><path fill="#ededf1" d="M29 70c-12 0-21-8-21-19 0-10 8-18 18-19 3-14 15-24 30-24 12 0 23 7 28 18 3-1 7-2 10-2 13 0 23 10 23 23 0 13-10 23-23 23H29z"/><g fill="#9e63fb"><path d="M34 81c6 10 1 21-7 21s-11-8-6-15l8-10 5 4z"/><path d="M61 78c6 10 1 21-7 21s-11-8-6-15l8-10 5 4z"/><path d="M88 81c6 10 1 21-7 21s-11-8-6-15l8-10 5 4z"/></g></svg></div>
       </div><div class="vline"></div>
