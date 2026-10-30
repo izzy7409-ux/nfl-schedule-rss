@@ -1,6 +1,7 @@
 'use strict';
 const { items } = require('../streamlabs-events');
 const state = require('./qss-state');
+const { safePhoto, resolvePhoto } = require('./supporter-photos');
 
 function startAutomation({ connect, interval = setInterval, cancel = clearInterval } = {}) {
   const io = connect || require('socket.io-client');
@@ -21,7 +22,13 @@ function startAutomation({ connect, interval = setInterval, cancel = clearInterv
       socket.on('disconnect', () => connection('disconnected'));
       socket.on('connect_error', () => connection('error'));
       socket.on('event', event => {
-        for (const item of items(event)) state.ingestEvent(item).catch(() => {});
+        for (const item of items(event)) state.ingestEvent(item).then(async () => {
+          if (!safePhoto(item.avatarUrl) && item.channelId) {
+            const config = await state.readConfig();
+            const avatarUrl = await resolvePhoto(item.channelId, config.youtubeApiKey);
+            if (avatarUrl) await state.applyAction({ action: 'supporterPhoto', channelId: item.channelId, avatarUrl });
+          }
+        }).catch(() => {});
       });
     } catch { await connection('error'); }
     finally { refreshing = false; }

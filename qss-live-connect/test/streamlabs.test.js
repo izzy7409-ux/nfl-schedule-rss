@@ -209,7 +209,7 @@ test('bursts persist all real events with the newest supporter first and no dupl
     put: async (path, body) => { await Promise.resolve(); saved.set(path, body); }
   };
   vm.runInNewContext(fs.readFileSync(require.resolve('../lib/qss-state'), 'utf8'), {
-    module: stateModule, require: name => name === './storage' ? blob : require(name), Response, Buffer, process
+    module: stateModule, require: name => name === './storage' ? blob : name === './supporter-photos' ? require('../lib/supporter-photos') : require(name), Response, Buffer, process
   });
   const state = stateModule.exports, initial = await state.readState();
   let inFlight = 0, highestConcurrency = 0;
