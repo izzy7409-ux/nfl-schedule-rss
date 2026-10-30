@@ -30,3 +30,16 @@ test('background sync uses MessageSender.url when Chrome omits the sensitive tab
  const response=await new Promise(resolve=>listener({type:'sample',channelId:id,count:8752,observedAt:Date.now()},sender,resolve));assert.equal(response.ok,true);assert.equal(calls,1);assert.equal(saved.status,'Studio exact sync');
  const blocked=await new Promise(resolve=>listener({type:'sample',channelId:id,count:8752},{...sender,url:'https://example.com/'},resolve));assert.equal(blocked.ok,false);assert.equal(calls,1);
 });
+
+test('Studio counter reader uses visible text and rendered size rather than hidden digit tracks or inherited font size',()=>{
+ const {read,value}=require('../studio-extension/reader');
+ const el={innerText:'8,\n752',textContent:'012345678901234567890123456789',getClientRects:()=>[{}],getBoundingClientRect:()=>({height:128}),contains:()=>false,getAttribute:()=>null};
+ const doc={body:{innerText:'Live subscriber count'},querySelectorAll:()=>[el],defaultView:{getComputedStyle:()=>({visibility:'visible',display:'block',fontSize:'16px'})}};
+ const url='https://studio.youtube.com/channel/'+id+'/analytics/tab-overview/period-default/explore';
+ assert.equal(read(doc,url).count,8752);el.innerText='8,753';assert.equal(read(doc,url).count,8753);
+ assert.equal(value({getAttribute:name=>name==='aria-label'?'8,754 subscribers':null}),8754);
+});
+test('selected counter is followed by its saved selector as the count changes',()=>{
+ const {resolve,value}=require('../studio-extension/reader');const el={innerText:'8,752'};const doc={querySelector:s=>s==='div:nth-of-type(1)'?el:null};
+ const path=['div:nth-of-type(1)'];assert.equal(value(resolve(doc,path)),8752);el.innerText='8,751';assert.equal(value(resolve(doc,path)),8751);assert.equal(resolve(doc,['missing']),null);
+});

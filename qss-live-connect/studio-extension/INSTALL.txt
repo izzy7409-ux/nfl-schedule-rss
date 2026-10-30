@@ -1,3 +1,7 @@
+VERSION 1.0.2: IF THE READER CANNOT FIND THE NUMBER
+
+After reloading the extension and refreshing Studio, keep the Studio live-count tab selected. Open the extension and click Select subscriber count. The popup closes. Click directly on the large subscriber number in Studio. The selection is remembered for this channel and follows future changes. Press Escape to cancel selection. You do not need to regenerate your existing connection code.
+
 UPDATE FROM VERSION 1.0.0
 
 Replace the files in your existing QSS-Studio-Sync folder with this version, then click Reload for this extension in chrome://extensions. Refresh the YouTube Studio live-count page. Your existing pairing code is kept if you replace the same folder. If you removed the old extension, paste your existing code again or generate a new one in the remote. The popup now shows a Studio reader status to identify what is waiting.
