@@ -12,7 +12,7 @@
 .supporters.off{opacity:0;transform:translateY(8px);pointer-events:none}
 .support-title{font-size:15px;letter-spacing:.45em;color:#eeeef4;text-transform:uppercase;margin-bottom:10px}
 .accent-line{height:2px;width:38px;background:var(--accent);box-shadow:0 0 14px var(--accentSoft);margin-bottom:8px}
-.support-row{display:grid;grid-template-columns:38px 1fr auto;gap:13px;align-items:center;padding:12px 0;border-top:1px solid rgba(255,255,255,.08)}
+.support-row{display:grid;grid-template-columns:38px minmax(0,1fr) auto;gap:13px;align-items:center;padding:12px 0;border-top:1px solid rgba(255,255,255,.08)}
 .support-row:first-child{border-top:0}.avatar{width:38px;height:38px;border:1.5px solid var(--accent);border-radius:50%;display:grid;place-items:center;color:#cba7ff;background:rgba(165,102,255,.08)}
 .avatar svg{width:18px;height:18px}.sname{font-size:20px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.stype{font-size:9px;letter-spacing:.18em;color:#9a91aa;margin-top:3px}.svalue{font-size:20px;color:#c087ff;white-space:nowrap}
 .rail{position:absolute;left:1.45vw;right:1.45vw;bottom:7.8vh;height:16.2vh;min-height:152px;border-radius:24px;display:grid;grid-template-columns:minmax(280px,20vw) 1fr minmax(330px,23.5vw);gap:10px;overflow:hidden}
@@ -66,7 +66,7 @@ function render(s){
  E('topicLabel').textContent=s.topicLabel||"TODAY'S TOPIC";E('topic').textContent=s.topic||'';
  E('subCurrent').textContent=Number(s.subsCurrent||0).toLocaleString();E('subTarget').textContent=Number(s.subsTarget||10000).toLocaleString();E('fill').style.width=(s.percent||0).toFixed(2)+'%';
  E('supporters').classList.toggle('off',!s.showSupporters);E('goal').classList.toggle('off',!s.showGoal);E('ticker').classList.toggle('off',!s.showTicker);
- const rows=(s.supporters||[]).slice(0,3);E('supportList').innerHTML=rows.length?rows.map((x,i)=>'<div class="support-row"><div class="avatar">'+personIcon()+'</div><div><div class="sname">'+esc(x.name)+'</div><div class="stype">'+esc(x.type||'SUPPORT')+'</div></div><div class="svalue">'+esc(x.value||'')+'</div></div>').join(''):'<div class="support-row"><div class="avatar">'+personIcon()+'</div><div><div class="sname">Waiting for support</div><div class="stype">QUIET STORM SPORTS</div></div><div class="svalue">—</div></div>';
+ const rows=(s.supporters||[]).slice(0,3);E('supportList').innerHTML=rows.length?rows.map((x,i)=>'<div class="support-row"><div class="avatar">'+personIcon()+'</div><div><div class="sname">'+esc(x.name)+'</div><div class="stype">'+esc(x.type||'SUPPORT')+'</div></div><div class="svalue">'+esc(x.type==='NEW SUB'&&x.value==='SUBSCRIBED'?'FREE':x.value||'')+'</div></div>').join(''):'<div class="support-row"><div class="avatar">'+personIcon()+'</div><div><div class="sname">Waiting for support</div><div class="stype">QUIET STORM SPORTS</div></div><div class="svalue">—</div></div>';
  const items=(s.tickerItems||[]).filter(Boolean);const one=items.map(x=>'<span>'+esc(x)+'</span><span class="sep">|</span>').join('');E('tickerTrack').innerHTML=one+one;
 }
 async function load(){try{const r=await fetch('/api/state',{cache:'no-store'});const d=await r.json();if(d.ok)render(d.state)}catch{}}
