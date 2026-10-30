@@ -51,7 +51,9 @@ async function main() {
     responseHelpers(res);
     res.setHeader('Cache-Control', 'no-store');
     res.setHeader('X-Content-Type-Options', 'nosniff');
-    res.setHeader('Referrer-Policy', 'no-referrer');
+    // Keep private URL paths and keys out of referrers while preserving the
+    // browser's Origin header for same-origin form submissions.
+    res.setHeader('Referrer-Policy', 'strict-origin');
     try {
       const url = new URL(req.url, 'http://localhost');
       req.query = Object.fromEntries(url.searchParams);

@@ -68,6 +68,16 @@ test('login removes the private link from the browser URL and sessions expire', 
   assert.ok(!expired.output.includes('qss-remote-frame'));
 });
 
+test('login refuses cross-origin and opaque-origin form submissions', async () => {
+  const f = fixture();
+  for (const origin of ['https://other.example', 'null']) {
+    const denied = await f.request('/lower-third-control/login', { method: 'POST', headers: { origin }, body: { remoteLink: 'private-qss-test-key' } });
+    assert.equal(denied.statusCode, 403);
+    assert.equal(denied.headers['Set-Cookie'], undefined);
+  }
+  assert.equal(f.requests.length, 0);
+});
+
 test('PRP actions keep using the existing backend and require the authenticated remote', async () => {
   const f = fixture(), cookie = await unlock(f);
   const denied = await f.request('/api/lower-third-control', { method: 'POST', body: { action: 'next' } });
