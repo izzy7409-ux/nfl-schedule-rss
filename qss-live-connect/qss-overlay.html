@@ -72,10 +72,26 @@ function updateSuperChat(){
  const box=E('superMessage');box.scrollTop=Math.max(0,box.scrollHeight-box.clientHeight)*Math.min(1,Math.max(0,(Date.now()-chat.startsAt-1000)/7500));
 }
 setInterval(updateSuperChat,100);
+let topicKey=null,topicGeneration=0,topicAnimation=null;
+async function updateTopic(label,topic){
+ const key=JSON.stringify([label,topic]);if(key===topicKey)return;
+ const first=topicKey===null;topicKey=key;const generation=++topicGeneration;
+ const zone=E('topic').parentElement;
+ const opacity=getComputedStyle(zone).opacity;topicAnimation?.cancel();
+ const replace=()=>{E('topicLabel').textContent=label;E('topic').textContent=topic};
+ if(first||matchMedia('(prefers-reduced-motion: reduce)').matches){replace();return}
+ try{
+  topicAnimation=zone.animate([{opacity},{opacity:0}],{duration:180,easing:'ease-out',fill:'forwards'});
+  await topicAnimation.finished;if(generation!==topicGeneration)return;
+  replace();topicAnimation.cancel();
+  topicAnimation=zone.animate([{opacity:0},{opacity:1}],{duration:220,easing:'ease-in',fill:'forwards'});
+  await topicAnimation.finished;if(generation===topicGeneration){topicAnimation.cancel();topicAnimation=null}
+ }catch{}
+}
 function render(s){
  if(preview){if(!previewStarted){previewStarted=true;const now=Date.now();superChats=[{eventId:'preview',name:'QSS Preview',value:'$25.00',message:'Love the show. Keep bringing the Ravens coverage!',currency:'USD',amount:25,startsAt:now,endsAt:now+10000}];E('superChat').querySelector('.super-meta span').textContent='SUPER CHAT PREVIEW'}}else superChats=s.superChats||[];updateSuperChat();
  document.documentElement.style.setProperty('--accent',s.accent||'#a566ff');document.documentElement.style.setProperty('--accentSoft',rgba(s.accent||'#a566ff',.32));
- E('topicLabel').textContent=s.topicLabel||"TODAY'S TOPIC";E('topic').textContent=s.topic||'';
+ updateTopic(s.topicLabel||"TODAY'S TOPIC",s.topic||'');
  E('subCurrent').textContent=Number(s.subsCurrent||0).toLocaleString();E('subTarget').textContent=Number(s.subsTarget||10000).toLocaleString();E('fill').style.width=(s.percent||0).toFixed(2)+'%';
  E('supporters').classList.toggle('off',!s.showSupporters);E('goal').classList.toggle('off',!s.showGoal);E('ticker').classList.toggle('off',!s.showTicker);
  const rows=(s.supporters||[]).slice(0,3);E('supportList').innerHTML=rows.length?rows.map((x,i)=>'<div class="support-row"><div class="avatar">'+personIcon()+'</div><div><div class="sname">'+esc(x.name)+'</div><div class="stype">'+esc(x.type||'SUPPORT')+'</div></div><div class="svalue">'+esc(x.type==='NEW SUB'?'SUB':x.value||'')+'</div></div>').join(''):'<div class="support-row"><div class="avatar">'+personIcon()+'</div><div><div class="sname">Waiting for support</div><div class="stype">QUIET STORM SPORTS</div></div><div class="svalue">—</div></div>';
