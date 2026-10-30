@@ -4,7 +4,11 @@ Adds Streamlabs OAuth to the existing Quiet Storm Sports controller. Scope is `s
 
 The existing browser overlay receives events while its automated EVMux URL is open. It checks for changed connection settings every ten seconds, so authorizing or disconnecting does not require replacing the browser source. Existing YouTube Studio sync, controls, topics, and visual layout are retained.
 
-## One-time account setup
+## Existing account connection
+
+An existing Streamlabs Socket Token also provides live events without OAuth registration. The controller reports that saved connection and its live status, keeps OAuth setup optional, and opens the automated overlay from its main Open Overlay link. Keep that automated URL active in EVMux for incoming events. Existing tokens are retained.
+
+## Optional OAuth account setup
 
 The controller displays Streamlabs registration fields, including the exact callback URL. Save the application client ID and secret in the private controller, then select Connect Streamlabs and authorize the account. Unapproved Streamlabs applications require the owner's account in the whitelist. The provider sign-in and approval must be completed by the account owner.
 
