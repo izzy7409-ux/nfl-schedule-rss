@@ -5,7 +5,7 @@ function createStore() {
   return {
     async read() {
       try {
-        const { get } = require('@vercel/blob');
+        const { get } = require('./storage');
         const result = await get(PATH, { access: 'private', useCache: false });
         if (!result) return {};
         if (result.statusCode !== 200) throw new Error();
@@ -15,7 +15,7 @@ function createStore() {
     },
     async write(value) {
       try {
-        const { put } = require('@vercel/blob');
+        const { put } = require('./storage');
         const body = JSON.stringify(encrypt(value, process.env.QSS_STREAMLABS_ENCRYPTION_KEY));
         await put(PATH, body, { access: 'private', allowOverwrite: true, addRandomSuffix: false, contentType: 'application/json' });
       } catch { throw new Error('Could not save the encrypted Streamlabs connection settings.'); }

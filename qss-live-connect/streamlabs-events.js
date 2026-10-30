@@ -40,7 +40,7 @@
       if (!name) return;
       let kind, label, value;
       if (scope === 'youtube_account' && type === 'follow') {
-        kind = 'subscriber'; label = 'NEW SUB'; value = 'SUBSCRIBED';
+        kind = 'subscriber'; label = 'NEW SUB'; value = 'SUB';
       } else if (gift) {
         kind = 'membership'; label = 'GIFTED MEMBERS';
         const count = type === 'membershipgift' ? giftCount(message) : 1, price = membershipPrice(message);

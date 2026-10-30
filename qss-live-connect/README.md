@@ -1,33 +1,31 @@
-# QSS Streamlabs account connection
+# Quiet Storm Sports on Railway
 
-Adds Streamlabs OAuth to the existing Quiet Storm Sports controller. Scope is `socket.token` only. Includes free YouTube subscription events, memberships, gifted memberships, Super Chats, Super Stickers, and Streamlabs tips.
+QSS runs as one persistent Node.js service on Railway. It receives Streamlabs events on the server and pushes state to the overlay and controller through server-sent events. An overlay tab is not required to collect events.
 
-The existing browser overlay receives events while its automated EVMux URL is open. It checks for changed connection settings every ten seconds, so authorizing or disconnecting does not require replacing the browser source. Existing YouTube Studio sync, controls, topics, and visual layout are retained.
+## Run
 
-## Existing account connection
+Use Node.js 22 or newer. Run `npm ci`, then `npm start`. The service listens on `PORT`, defaulting to 3000. `/health` is the Railway health check. The public overlay is `/qss-overlay`. The private controller is `/qss-control?key=<control key>`.
 
-An existing Streamlabs Socket Token also provides live events without OAuth registration. The controller reports that saved connection and its live status, keeps OAuth setup optional, and opens the automated overlay from its main Open Overlay link. Keep that automated URL active in EVMux for incoming events. Existing tokens are retained.
+## Persistent data
 
-## Optional OAuth account setup
+Mount a Railway volume at `/data` and set `QSS_DATA_DIR=/data`. The service writes state and encrypted connection settings beneath `/data/qss-overlay`. Writes use private file permissions and atomic renames. State mutations are serialized, so overlapping support events and subscriber syncs preserve each other's changes.
 
-The controller displays Streamlabs registration fields, including the exact callback URL. Save the application client ID and secret in the private controller, then select Connect Streamlabs and authorize the account. Unapproved Streamlabs applications require the owner's account in the whitelist. The provider sign-in and approval must be completed by the account owner.
+Required private settings are `QSS_CONTROL_SECRET` and `QSS_STREAMLABS_ENCRYPTION_KEY`, a base64-encoded 32-byte random key. Set `QSS_STREAMLABS_ORIGIN` to the Railway HTTPS origin. `QSS_BRIDGE_SECRET` protects the optional Studio/recent-event bridge. The Streamlabs socket and YouTube API credentials stay encrypted on the volume and are not returned to the browser.
 
-## Credentials
+For a one-time migration, `QSS_INITIAL_STATE_JSON`, `QSS_INITIAL_CONFIG_JSON`, and optional `QSS_INITIAL_OAUTH_JSON` seed missing files only. Existing volume data always wins on subsequent deploys. Preserve the original control key when importing its encrypted configuration. Migration values must be private service variables and must never be checked into Git.
 
-`QSS_STREAMLABS_ENCRYPTION_KEY` is a base64-encoded random 32-byte Vercel Secret. OAuth credentials and short-lived browser-bound state are encrypted with AES-256-GCM in the existing private Blob store at `qss-overlay/streamlabs-oauth.enc.json`. No tokens are returned by the control status endpoint. The existing live overlay receives its socket token through the already protected stream-config endpoint.
+## Streamlabs
 
-`QSS_STREAMLABS_ORIGIN` is the public QSS origin, defaulting to the current alias. `QSS_CONTROL_SECRET` and `BLOB_READ_WRITE_TOKEN` retain their existing values.
+The background listener reconnects when connection settings change. YouTube free subscribers display `NEW SUB` and `SUB`. Super Chats and Super Stickers display their supplied currency amounts. Membership gifts display the giver and gift count. Formatted membership prices appear only when supplied by Streamlabs, otherwise membership duration/status is shown. Test, preview, and replay alerts are ignored. The newest three received support events appear at the top of the overlay.
+
+Socket access can use an existing Streamlabs Socket Token. OAuth is optional, uses only `socket.token`, and stores account credentials encrypted. Register new OAuth applications with the Railway website and callback URL shown in the controller.
 
 ## Deployment
 
-This source targets only the QSS alias. Deploy as a preview in the existing project with its preview secrets, verify the build, then move only `quiet-storm-sports-overlay.vercel.app` to the verified deployment. Other project aliases and the separate Railway Ravens tools are unaffected.
+Repository branch: `qss-railway`. Railway root directory: `/qss-live-connect`. Start command: `npm start`. Mount: `/data`. Use one replica for the local durable data store. Disable service sleep so the event listener stays connected.
 
-The existing `lib/qss-state.js` is included byte-for-byte in source. Its SHA-1 matches the immutable original upload in `deployment-source.json`. Exclude test files, README, this manifest, and local dependencies from the deployment file list. The existing Blob state and configuration implementation is preserved.
+The Railway app has no dependency on Vercel functions, storage, or credentials. Previous hosting source remains in Git history for migration reference.
 
 ## Validation
 
-Run `npm test`. Tests cover encrypted storage, authorization scope, browser binding, expired/replayed state, denied connections, private controls, origin checks, token redaction, disconnect, free subscriber events, monetary values, and batched event identifiers.
-
-## Supporter display
-
-New events received from Streamlabs move to the top of the three-row supporter box. Super Chats display the supplied formatted price or their documented micro-unit amount. YouTube `membershipGift` events display the gift count, such as `5 GIFTS`, and gifted subscription events attribute the giver. Memberships show formatted currency only when Streamlabs supplies it, otherwise their duration or membership status. Gift counts are never converted into an estimated price. Test, preview, and replay alerts are ignored. Event saves are queued so bursts do not overwrite each other.
+Run `npm test`. The suite covers credential encryption, OAuth permissions and browser binding, private control access, gift counts and currency, deduplication, event bursts, server event reception, migration, restart persistence, and live push delivery.

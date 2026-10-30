@@ -26,7 +26,7 @@ function makeAuth() {
   const { createStore } = require('./streamlabs-store');
   const { saveConfig } = require('./qss-state');
   return createAuth({
-    origin: process.env.QSS_STREAMLABS_ORIGIN || 'https://quiet-storm-sports-overlay.vercel.app',
+    origin: process.env.QSS_STREAMLABS_ORIGIN || 'https://quiet-storm-sports-production.up.railway.app',
     store: createStore(),
     activate: async streamlabsToken => {
       try { await saveConfig({ streamlabsToken, automationEnabled: true }); }

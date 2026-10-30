@@ -1,1 +1,0 @@
-{"version":2,"rewrites":[{"source":"/qss-overlay","destination":"/qss-overlay.html"},{"source":"/qss-control","destination":"/qss-control.html"}],"headers":[{"source":"/(.*)","headers":[{"key":"Cache-Control","value":"no-store"}]}]}

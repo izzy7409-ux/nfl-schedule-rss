@@ -209,7 +209,7 @@ test('bursts persist all real events with the newest supporter first and no dupl
     put: async (path, body) => { await Promise.resolve(); saved.set(path, body); }
   };
   vm.runInNewContext(fs.readFileSync(require.resolve('../lib/qss-state'), 'utf8'), {
-    module: stateModule, require: name => name === '@vercel/blob' ? blob : require(name), Response, Buffer, process
+    module: stateModule, require: name => name === './storage' ? blob : require(name), Response, Buffer, process
   });
   const state = stateModule.exports, initial = await state.readState();
   let inFlight = 0, highestConcurrency = 0;
@@ -225,7 +225,7 @@ test('bursts persist all real events with the newest supporter first and no dupl
   await Promise.all(payloads.map(receive));
   let actual = await state.readState();
   assert.deepEqual(Array.from(actual.supporters, item => item.name), ['Free Subscriber', 'Gifter', 'Super Chatter']);
-  assert.deepEqual(Array.from(actual.supporters, item => item.value), ['SUBSCRIBED', '5 GIFTS', '$1.99']);
+  assert.deepEqual(Array.from(actual.supporters, item => item.value), ['SUB', '5 GIFTS', '$1.99']);
   assert.equal(actual.subsCurrent, initial.subsCurrent + 1);
   assert.equal(highestConcurrency, 1);
   await receive(payloads[2]);

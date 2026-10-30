@@ -34,7 +34,7 @@
 .ticker.off{opacity:0}.ticker-brand{display:flex;align-items:center;gap:12px;padding:0 22px;flex:0 0 auto}.mini-cloud{width:38px;height:32px}.brand-text{font-size:12px;letter-spacing:.36em;text-transform:uppercase;white-space:nowrap}.ticker-window{position:relative;height:100%;flex:1;overflow:hidden}.ticker-track{position:absolute;left:0;top:0;height:100%;display:flex;align-items:center;gap:18px;white-space:nowrap;animation:scroll 30s linear infinite;font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:#cfd2dd}.sep{color:var(--accent);font-size:20px}@keyframes scroll{from{transform:translateX(0)}to{transform:translateX(-50%)}}
 @media(max-width:1500px){.supporters{width:340px;bottom:25vh}.rail{grid-template-columns:260px 1fr 320px}.wordmark div{font-size:28px}.topic{font-size:44px}.nums{font-size:27px}}
 </style>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.3/socket.io.js"></script></head>
+</head>
 <body>
 <div class="stage">
   <section id="supporters" class="supporters glass">
@@ -66,40 +66,11 @@ function render(s){
  E('topicLabel').textContent=s.topicLabel||"TODAY'S TOPIC";E('topic').textContent=s.topic||'';
  E('subCurrent').textContent=Number(s.subsCurrent||0).toLocaleString();E('subTarget').textContent=Number(s.subsTarget||10000).toLocaleString();E('fill').style.width=(s.percent||0).toFixed(2)+'%';
  E('supporters').classList.toggle('off',!s.showSupporters);E('goal').classList.toggle('off',!s.showGoal);E('ticker').classList.toggle('off',!s.showTicker);
- const rows=(s.supporters||[]).slice(0,3);E('supportList').innerHTML=rows.length?rows.map((x,i)=>'<div class="support-row"><div class="avatar">'+personIcon()+'</div><div><div class="sname">'+esc(x.name)+'</div><div class="stype">'+esc(x.type||'SUPPORT')+'</div></div><div class="svalue">'+esc(x.type==='NEW SUB'&&x.value==='SUBSCRIBED'?'FREE':x.value||'')+'</div></div>').join(''):'<div class="support-row"><div class="avatar">'+personIcon()+'</div><div><div class="sname">Waiting for support</div><div class="stype">QUIET STORM SPORTS</div></div><div class="svalue">—</div></div>';
+ const rows=(s.supporters||[]).slice(0,3);E('supportList').innerHTML=rows.length?rows.map((x,i)=>'<div class="support-row"><div class="avatar">'+personIcon()+'</div><div><div class="sname">'+esc(x.name)+'</div><div class="stype">'+esc(x.type||'SUPPORT')+'</div></div><div class="svalue">'+esc(x.type==='NEW SUB'?'SUB':x.value||'')+'</div></div>').join(''):'<div class="support-row"><div class="avatar">'+personIcon()+'</div><div><div class="sname">Waiting for support</div><div class="stype">QUIET STORM SPORTS</div></div><div class="svalue">—</div></div>';
  const items=(s.tickerItems||[]).filter(Boolean);const one=items.map(x=>'<span>'+esc(x)+'</span><span class="sep">|</span>').join('');E('tickerTrack').innerHTML=one+one;
 }
 async function load(){try{const r=await fetch('/api/state',{cache:'no-store'});const d=await r.json();if(d.ok)render(d.state)}catch{}}
-const liveKey=new URLSearchParams(location.search).get('liveKey')||'';
-let slSocket=null;
-const queueIngest=QSSStreamlabsEvents.createReceiver(async payload=>{const r=await fetch('/api/ingest?liveKey='+encodeURIComponent(liveKey),{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload)});if(!r.ok)throw Error('Live event could not be saved');});
-async function ingest(payload){if(!liveKey)return;try{await queueIngest(payload);}catch{}}
-function streamlabsItems(ev){return QSSStreamlabsEvents.items(ev);}
-async function syncYoutube(){if(!liveKey)return;try{await fetch('/api/sync-youtube?liveKey='+encodeURIComponent(liveKey),{method:'POST',cache:'no-store'});}catch{}}
-let activeSocketToken='',automationRefreshing=false,youtubeSyncTimer=null;
-async function updateAutomation(){
- if(!liveKey||automationRefreshing)return;
- automationRefreshing=true;
- try{
-  const r=await fetch('/api/stream-config?liveKey='+encodeURIComponent(liveKey),{cache:'no-store'});
-  if(!r.ok)return;
-  const d=await r.json(),token=d.streamlabsToken||'';
-  if(token!==activeSocketToken){
-   activeSocketToken=token;
-   if(slSocket){slSocket.removeAllListeners();slSocket.disconnect();slSocket=null;}
-   if(!token)ingest({kind:'connection',status:'disconnected'});
-  }
-  if(token&&window.io&&!slSocket){
-   slSocket=io('https://sockets.streamlabs.com?token='+encodeURIComponent(token),{transports:['websocket'],reconnection:true,reconnectionDelay:1500,reconnectionDelayMax:10000});
-   slSocket.on('connect',()=>ingest({kind:'connection',status:'connected'}));
-   slSocket.on('disconnect',()=>ingest({kind:'connection',status:'disconnected'}));
-   slSocket.on('connect_error',()=>ingest({kind:'connection',status:'error'}));
-   slSocket.on('event',ev=>streamlabsItems(ev).forEach(item=>ingest(item)));
-  }
-  if(d.youtubeSyncEnabled&&!youtubeSyncTimer){syncYoutube();youtubeSyncTimer=setInterval(syncYoutube,30000);}
-  if(!d.youtubeSyncEnabled&&youtubeSyncTimer){clearInterval(youtubeSyncTimer);youtubeSyncTimer=null;}
- }catch{}finally{automationRefreshing=false;}
-}
-load();setInterval(load,1000);updateAutomation();setInterval(updateAutomation,10000);
+load();
+if(window.EventSource){const updates=new EventSource('/api/events');updates.onmessage=event=>{try{const d=JSON.parse(event.data);if(d.ok)render(d.state)}catch{}};updates.onerror=()=>load();}else setInterval(load,1500);
 </script>
 </body></html>

@@ -1,9 +1,16 @@
 {
+  "name": "quiet-storm-sports",
+  "version": "1.0.0",
   "private": true,
-  "dependencies": {
-    "@vercel/blob": "latest"
+  "type": "commonjs",
+  "engines": {
+    "node": ">=22"
   },
   "scripts": {
-    "test": "node --test test/streamlabs.test.js"
+    "start": "node server.js",
+    "test": "node --test test/*.test.js"
+  },
+  "dependencies": {
+    "socket.io-client": "2.5.0"
   }
 }
