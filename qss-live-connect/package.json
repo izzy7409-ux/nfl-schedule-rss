@@ -1,0 +1,9 @@
+{
+  "private": true,
+  "dependencies": {
+    "@vercel/blob": "latest"
+  },
+  "scripts": {
+    "test": "node --test test/streamlabs.test.js"
+  }
+}

@@ -1,0 +1,104 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Quiet Storm Sports Overlay</title>
+<style>
+:root{--accent:#a566ff;--accentSoft:rgba(165,102,255,.32);--glass:rgba(12,13,22,.72);--line:rgba(255,255,255,.12);--text:#f6f6f8;--muted:#afb3c1}
+*{box-sizing:border-box}html,body{margin:0;width:100%;height:100%;overflow:hidden;background:transparent;font-family:Arial,Helvetica,sans-serif;color:var(--text)}
+.stage{position:relative;width:100vw;height:100vh;background:transparent}
+.glass{background:linear-gradient(180deg,rgba(29,30,43,.73),rgba(7,8,14,.87));border:1px solid var(--line);box-shadow:0 18px 55px rgba(0,0,0,.30);backdrop-filter:blur(18px) saturate(130%);-webkit-backdrop-filter:blur(18px) saturate(130%)}
+.supporters{position:absolute;left:2.0vw;bottom:25.2vh;width:min(390px,25vw);border-radius:20px;padding:18px 22px 14px;transition:opacity .25s ease,transform .25s ease}
+.supporters.off{opacity:0;transform:translateY(8px);pointer-events:none}
+.support-title{font-size:15px;letter-spacing:.45em;color:#eeeef4;text-transform:uppercase;margin-bottom:10px}
+.accent-line{height:2px;width:38px;background:var(--accent);box-shadow:0 0 14px var(--accentSoft);margin-bottom:8px}
+.support-row{display:grid;grid-template-columns:38px 1fr auto;gap:13px;align-items:center;padding:12px 0;border-top:1px solid rgba(255,255,255,.08)}
+.support-row:first-child{border-top:0}.avatar{width:38px;height:38px;border:1.5px solid var(--accent);border-radius:50%;display:grid;place-items:center;color:#cba7ff;background:rgba(165,102,255,.08)}
+.avatar svg{width:18px;height:18px}.sname{font-size:20px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.stype{font-size:9px;letter-spacing:.18em;color:#9a91aa;margin-top:3px}.svalue{font-size:20px;color:#c087ff;white-space:nowrap}
+.rail{position:absolute;left:1.45vw;right:1.45vw;bottom:7.8vh;height:16.2vh;min-height:152px;border-radius:24px;display:grid;grid-template-columns:minmax(280px,20vw) 1fr minmax(330px,23.5vw);gap:10px;overflow:hidden}
+.rail:before{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(165,102,255,.075),transparent 25%,transparent 75%,rgba(165,102,255,.055));pointer-events:none}
+.logo-zone,.topic-zone,.goal-zone{position:relative;z-index:1;min-width:0}
+.logo-zone{display:flex;align-items:center;padding:12px 18px;border-right:1px solid rgba(255,255,255,.065)}
+.logo-wrap{display:grid;grid-template-columns:1fr 64px;align-items:center;gap:12px;width:100%;padding:13px 15px;border-radius:16px;background:linear-gradient(180deg,rgba(255,255,255,.035),rgba(255,255,255,.012));border:1px solid rgba(255,255,255,.075);box-shadow:inset 0 1px 0 rgba(255,255,255,.035)}
+.wordmark{font-family:"Arial Black",Impact,sans-serif;font-style:italic;font-weight:900;line-height:.74;letter-spacing:-.065em;text-transform:lowercase;color:#f2f2f5;text-shadow:0 2px 8px rgba(0,0,0,.25)}
+.wordmark div{font-size:31px;margin-left:0!important}
+.cloud svg{width:60px;height:60px;display:block}
+.vline{position:absolute;right:-1px;top:18%;bottom:18%;width:2px;background:linear-gradient(180deg,transparent,var(--accent),transparent);box-shadow:0 0 18px var(--accentSoft)}
+.topic-zone{display:flex;flex-direction:column;justify-content:center;padding:15px 20px 13px}
+.topic-meta{display:flex;align-items:center;gap:14px;margin-bottom:10px}.topic-label{font-size:13px;letter-spacing:.46em;color:#d8dae4;text-transform:uppercase;white-space:nowrap}.topic-rule{height:2px;width:44px;background:var(--accent);box-shadow:0 0 12px var(--accentSoft)}
+.topic{font-family:"Arial Narrow",Impact,sans-serif;font-weight:900;font-stretch:condensed;font-size:clamp(34px,3.05vw,62px);line-height:.94;letter-spacing:.01em;text-transform:uppercase;color:#fff;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;text-shadow:0 8px 30px rgba(0,0,0,.35);transition:opacity .18s ease,transform .22s ease}
+.goal-zone{padding:10px 10px 10px 4px;display:flex;align-items:center}.goal{width:100%;height:100%;border-radius:18px;border:1px solid rgba(255,255,255,.09);background:rgba(255,255,255,.018);padding:16px 18px;display:flex;flex-direction:column;justify-content:space-between;transition:opacity .25s ease}
+.goal.off{opacity:0}.goal-label{font-size:12px;letter-spacing:.34em;text-transform:uppercase;color:#e5e6ed}.track{height:20px;border:1px solid rgba(255,255,255,.18);background:rgba(255,255,255,.035);border-radius:99px;padding:2px;overflow:hidden}.fill{height:100%;border-radius:99px;background:linear-gradient(90deg,#8e52ee,var(--accent),#c48aff);box-shadow:0 0 18px var(--accentSoft);position:relative;transition:width .5s cubic-bezier(.2,.8,.2,1)}.fill:after{content:"";position:absolute;top:0;bottom:0;width:70px;left:-80px;background:linear-gradient(90deg,transparent,rgba(255,255,255,.33),transparent);animation:sheen 5.2s linear infinite}@keyframes sheen{to{transform:translateX(430px)}}
+.nums{font-size:30px;font-weight:800;color:#bb7fff}.nums span{font-size:20px;font-weight:500;color:#969aac}
+.ticker{position:absolute;left:0;right:0;bottom:0;height:6vh;min-height:52px;background:linear-gradient(180deg,rgba(7,8,13,.94),rgba(2,3,6,.97));border-top:1px solid rgba(255,255,255,.07);display:flex;align-items:center;overflow:hidden;transition:opacity .25s ease}
+.ticker.off{opacity:0}.ticker-brand{display:flex;align-items:center;gap:12px;padding:0 22px;flex:0 0 auto}.mini-cloud{width:38px;height:32px}.brand-text{font-size:12px;letter-spacing:.36em;text-transform:uppercase;white-space:nowrap}.ticker-window{position:relative;height:100%;flex:1;overflow:hidden}.ticker-track{position:absolute;left:0;top:0;height:100%;display:flex;align-items:center;gap:18px;white-space:nowrap;animation:scroll 30s linear infinite;font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:#cfd2dd}.sep{color:var(--accent);font-size:20px}@keyframes scroll{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+@media(max-width:1500px){.supporters{width:340px;bottom:25vh}.rail{grid-template-columns:260px 1fr 320px}.wordmark div{font-size:28px}.topic{font-size:44px}.nums{font-size:27px}}
+</style>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.3/socket.io.js"></script></head>
+<body>
+<div class="stage">
+  <section id="supporters" class="supporters glass">
+    <div class="support-title">Recent Supporters</div><div class="accent-line"></div><div id="supportList"></div>
+  </section>
+  <section class="rail glass">
+    <div class="logo-zone">
+      <div class="logo-wrap">
+        <div class="wordmark"><div>quiet</div><div>storm</div><div>sports</div></div>
+        <div class="cloud"><svg viewBox="0 0 120 120" aria-hidden="true"><path fill="#ededf1" d="M29 70c-12 0-21-8-21-19 0-10 8-18 18-19 3-14 15-24 30-24 12 0 23 7 28 18 3-1 7-2 10-2 13 0 23 10 23 23 0 13-10 23-23 23H29z"/><g fill="#9e63fb"><path d="M34 81c6 10 1 21-7 21s-11-8-6-15l8-10 5 4z"/><path d="M61 78c6 10 1 21-7 21s-11-8-6-15l8-10 5 4z"/><path d="M88 81c6 10 1 21-7 21s-11-8-6-15l8-10 5 4z"/></g></svg></div>
+      </div><div class="vline"></div>
+    </div>
+    <div class="topic-zone"><div class="topic-meta"><div id="topicLabel" class="topic-label">Today's Topic</div><div class="topic-rule"></div></div><div id="topic" class="topic">Ravens offense has a problem</div></div>
+    <div class="goal-zone"><div id="goal" class="goal"><div class="goal-label">Road to 10K Subscribers</div><div class="track"><div id="fill" class="fill"></div></div><div class="nums"><b id="subCurrent">8,742</b> <span>/ <b id="subTarget">10,000</b></span></div></div></div>
+  </section>
+  <section id="ticker" class="ticker">
+    <div class="ticker-brand"><svg class="mini-cloud" viewBox="0 0 120 100"><path fill="#dedfe5" d="M27 61c-12 0-21-8-21-18 0-10 8-18 18-19C27 11 39 2 54 2c12 0 23 6 28 17 4-1 7-2 11-2 13 0 23 10 23 23S106 63 93 63H27z"/><g fill="#a566ff"><path d="M32 72c5 8 1 18-6 18s-9-7-5-13l7-9 4 4z"/><path d="M59 69c5 8 1 18-6 18s-9-7-5-13l7-9 4 4z"/><path d="M86 72c5 8 1 18-6 18s-9-7-5-13l7-9 4 4z"/></g></svg><div class="brand-text">Quiet Storm Sports</div></div>
+    <div class="ticker-window"><div id="tickerTrack" class="ticker-track"></div></div>
+  </section>
+</div>
+<script src="/streamlabs-events.js"></script>
+<script>
+const E=id=>document.getElementById(id);
+const esc=s=>String(s??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+function personIcon(){return '<svg viewBox="0 0 24 24"><path fill="currentColor" d="M12 12a4 4 0 1 0 0-8 4 4 0 0 0 0 8Zm0 2c-4.1 0-7 2.1-7 5v1h14v-1c0-2.9-2.9-5-7-5Z"/></svg>'}
+function rgba(hex,a){const h=hex.replace('#','');const n=parseInt(h,16);return 'rgba('+((n>>16)&255)+','+((n>>8)&255)+','+(n&255)+','+a+')'}
+function render(s){
+ document.documentElement.style.setProperty('--accent',s.accent||'#a566ff');document.documentElement.style.setProperty('--accentSoft',rgba(s.accent||'#a566ff',.32));
+ E('topicLabel').textContent=s.topicLabel||"TODAY'S TOPIC";E('topic').textContent=s.topic||'';
+ E('subCurrent').textContent=Number(s.subsCurrent||0).toLocaleString();E('subTarget').textContent=Number(s.subsTarget||10000).toLocaleString();E('fill').style.width=(s.percent||0).toFixed(2)+'%';
+ E('supporters').classList.toggle('off',!s.showSupporters);E('goal').classList.toggle('off',!s.showGoal);E('ticker').classList.toggle('off',!s.showTicker);
+ const rows=(s.supporters||[]).slice(0,3);E('supportList').innerHTML=rows.length?rows.map((x,i)=>'<div class="support-row"><div class="avatar">'+personIcon()+'</div><div><div class="sname">'+esc(x.name)+'</div><div class="stype">'+esc(x.type||'SUPPORT')+'</div></div><div class="svalue">'+esc(x.value||'')+'</div></div>').join(''):'<div class="support-row"><div class="avatar">'+personIcon()+'</div><div><div class="sname">Waiting for support</div><div class="stype">QUIET STORM SPORTS</div></div><div class="svalue">—</div></div>';
+ const items=(s.tickerItems||[]).filter(Boolean);const one=items.map(x=>'<span>'+esc(x)+'</span><span class="sep">|</span>').join('');E('tickerTrack').innerHTML=one+one;
+}
+async function load(){try{const r=await fetch('/api/state',{cache:'no-store'});const d=await r.json();if(d.ok)render(d.state)}catch{}}
+const liveKey=new URLSearchParams(location.search).get('liveKey')||'';
+let slSocket=null;
+async function ingest(payload){if(!liveKey)return;try{await fetch('/api/ingest?liveKey='+encodeURIComponent(liveKey),{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload)});}catch{}}
+function streamlabsItems(ev){return QSSStreamlabsEvents.items(ev);}
+async function syncYoutube(){if(!liveKey)return;try{await fetch('/api/sync-youtube?liveKey='+encodeURIComponent(liveKey),{method:'POST',cache:'no-store'});}catch{}}
+let activeSocketToken='',automationRefreshing=false,youtubeSyncTimer=null;
+async function updateAutomation(){
+ if(!liveKey||automationRefreshing)return;
+ automationRefreshing=true;
+ try{
+  const r=await fetch('/api/stream-config?liveKey='+encodeURIComponent(liveKey),{cache:'no-store'});
+  if(!r.ok)return;
+  const d=await r.json(),token=d.streamlabsToken||'';
+  if(token!==activeSocketToken){
+   activeSocketToken=token;
+   if(slSocket){slSocket.removeAllListeners();slSocket.disconnect();slSocket=null;}
+   if(!token)ingest({kind:'connection',status:'disconnected'});
+  }
+  if(token&&window.io&&!slSocket){
+   slSocket=io('https://sockets.streamlabs.com?token='+encodeURIComponent(token),{transports:['websocket'],reconnection:true,reconnectionDelay:1500,reconnectionDelayMax:10000});
+   slSocket.on('connect',()=>ingest({kind:'connection',status:'connected'}));
+   slSocket.on('disconnect',()=>ingest({kind:'connection',status:'disconnected'}));
+   slSocket.on('connect_error',()=>ingest({kind:'connection',status:'error'}));
+   slSocket.on('event',ev=>streamlabsItems(ev).forEach(item=>ingest(item)));
+  }
+  if(d.youtubeSyncEnabled&&!youtubeSyncTimer){syncYoutube();youtubeSyncTimer=setInterval(syncYoutube,30000);}
+  if(!d.youtubeSyncEnabled&&youtubeSyncTimer){clearInterval(youtubeSyncTimer);youtubeSyncTimer=null;}
+ }catch{}finally{automationRefreshing=false;}
+}
+load();setInterval(load,1000);updateAutomation();setInterval(updateAutomation,10000);
+</script>
+</body></html>

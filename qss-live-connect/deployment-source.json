@@ -1,0 +1,12 @@
+{
+  "projectId": "prj_kmR0OPTBlbuLIWEOEWeVHLfTbLTp",
+  "teamId": "team_QEE7VRl5tqkelVOkvWVL4IrI",
+  "originalDeployment": "dpl_2eePDdt6xPXEo4TQxdg95DtDagf3",
+  "alias": "quiet-storm-sports-overlay.vercel.app",
+  "unchangedFiles": [
+    {
+      "file": "lib/qss-state.js",
+      "sha": "96bb0984eb5a6fc556e4fb2bc86487d378ec8e3e"
+    }
+  ]
+}
