@@ -4,7 +4,9 @@ const assert = require('node:assert/strict');
 const crypto = require('node:crypto');
 const { createAuth, encrypt, decrypt } = require('../lib/streamlabs-auth');
 const { makeControlHandler, makeCallbackHandler } = require('../lib/streamlabs-http');
-const { items } = require('../streamlabs-events');
+const { items, createReceiver } = require('../streamlabs-events');
+const fs = require('node:fs');
+const vm = require('node:vm');
 
 function fixture(overrides = {}) {
   let saved = {}, clock = 1800000000000, randomCount = 0;
@@ -166,4 +168,77 @@ test('batched event IDs are distinct and repeated deliveries stay stable', () =>
   assert.deepEqual(first.map(x => x.eventId), second.map(x => x.eventId));
   assert.deepEqual(items({ for: 'twitch_account', type: 'follow', message: [{ name: 'Twitch Viewer' }] }), []);
   assert.deepEqual(items({ for: 'youtube_account', type: 'follow', message: [{}] }), []);
+});
+
+test('YouTube membershipGift events show the giver and number of gifts', () => {
+  const [gift] = items({ for: 'youtube_account', type: 'membershipGift', message: [{ name: 'Rain Gang Gifter', amount: '5', _id: 'gift-bundle' }] });
+  assert.equal(gift.name, 'Rain Gang Gifter');
+  assert.equal(gift.label, 'GIFTED MEMBERS');
+  assert.equal(gift.value, '5 GIFTS');
+  assert.equal(gift.kind, 'membership');
+  const [single] = items({ for: 'youtube_account', type: 'subscription', message: [{ name: 'Recipient', gifter: 'Gift Giver', _id: 'single-gift' }] });
+  assert.equal(single.name, 'Gift Giver');
+  assert.equal(single.value, '1 GIFT');
+});
+
+test('membership prices are displayed only when supplied as formatted currency', () => {
+  const [member] = items({ for: 'youtube_account', type: 'subscription', message: [{ name: 'Member', formatted_amount: '$4.99', months: 1 }] });
+  assert.equal(member.value, '$4.99');
+  const [gift] = items({ for: 'youtube_account', type: 'membershipGift', message: [{ name: 'Gifter', amount: 5, formatted_amount: '$24.95' }] });
+  assert.equal(gift.value, '$24.95');
+  assert.equal(gift.label, 'GIFTED ×5');
+  const [unknownPrice] = items({ for: 'youtube_account', type: 'subscription', message: [{ name: 'Member', amount: 5, currency: 'USD', months: 3 }] });
+  assert.equal(unknownPrice.value, '3 MONTHS');
+});
+
+test('a missing gift count does not invent a price or a quantity', () => {
+  const [gift] = items({ for: 'youtube_account', type: 'membershipGift', message: [{ name: 'Gifter' }] });
+  assert.equal(gift.value, 'GIFTED');
+});
+
+test('test, preview, and replay alerts do not replace real supporters or add subscribers', () => {
+  for (const flag of ['isTest', 'isPreview', 'repeat']) {
+    assert.deepEqual(items({ for: 'youtube_account', type: 'follow', message: [{ name: 'Test Subscriber', [flag]: true }] }), []);
+  }
+});
+
+test('bursts persist all real events with the newest supporter first and no duplicate subscriber increment', async () => {
+  const saved = new Map(), stateModule = { exports: {} };
+  const blob = {
+    get: async path => saved.has(path) ? { statusCode: 200, stream: saved.get(path) } : null,
+    put: async (path, body) => { await Promise.resolve(); saved.set(path, body); }
+  };
+  vm.runInNewContext(fs.readFileSync(require.resolve('../lib/qss-state'), 'utf8'), {
+    module: stateModule, require: name => name === '@vercel/blob' ? blob : require(name), Response, Buffer, process
+  });
+  const state = stateModule.exports, initial = await state.readState();
+  let inFlight = 0, highestConcurrency = 0;
+  const receive = createReceiver(async event => {
+    inFlight++; highestConcurrency = Math.max(highestConcurrency, inFlight);
+    try { return await state.ingestEvent(event); } finally { inFlight--; }
+  });
+  const payloads = [
+    { for: 'youtube_account', type: 'superchat', message: [{ name: 'Super Chatter', amount: '1990000', currency: 'USD', _id: 'superchat-1' }] },
+    { for: 'youtube_account', type: 'membershipGift', message: [{ name: 'Gifter', amount: 5, _id: 'gifts-1' }] },
+    { for: 'youtube_account', type: 'follow', message: [{ name: 'Free Subscriber', _id: 'free-1' }] }
+  ].flatMap(event => items(event));
+  await Promise.all(payloads.map(receive));
+  let actual = await state.readState();
+  assert.deepEqual(Array.from(actual.supporters, item => item.name), ['Free Subscriber', 'Gifter', 'Super Chatter']);
+  assert.deepEqual(Array.from(actual.supporters, item => item.value), ['SUBSCRIBED', '5 GIFTS', '$1.99']);
+  assert.equal(actual.subsCurrent, initial.subsCurrent + 1);
+  assert.equal(highestConcurrency, 1);
+  await receive(payloads[2]);
+  actual = await state.readState();
+  assert.equal(actual.supporters.length, 3);
+  assert.equal(actual.subsCurrent, initial.subsCurrent + 1);
+});
+
+test('a failed event save does not block later events', async () => {
+  const saved = [];
+  const receive = createReceiver(async value => { if (value === 'failed') throw Error('Temporary failure'); saved.push(value); });
+  const outcome = await Promise.allSettled([receive('failed'), receive('next')]);
+  assert.equal(outcome[0].status, 'rejected');
+  assert.equal(outcome[1].status, 'fulfilled');
+  assert.deepEqual(saved, ['next']);
 });

@@ -72,7 +72,8 @@ function render(s){
 async function load(){try{const r=await fetch('/api/state',{cache:'no-store'});const d=await r.json();if(d.ok)render(d.state)}catch{}}
 const liveKey=new URLSearchParams(location.search).get('liveKey')||'';
 let slSocket=null;
-async function ingest(payload){if(!liveKey)return;try{await fetch('/api/ingest?liveKey='+encodeURIComponent(liveKey),{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload)});}catch{}}
+const queueIngest=QSSStreamlabsEvents.createReceiver(async payload=>{const r=await fetch('/api/ingest?liveKey='+encodeURIComponent(liveKey),{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload)});if(!r.ok)throw Error('Live event could not be saved');});
+async function ingest(payload){if(!liveKey)return;try{await queueIngest(payload);}catch{}}
 function streamlabsItems(ev){return QSSStreamlabsEvents.items(ev);}
 async function syncYoutube(){if(!liveKey)return;try{await fetch('/api/sync-youtube?liveKey='+encodeURIComponent(liveKey),{method:'POST',cache:'no-store'});}catch{}}
 let activeSocketToken='',automationRefreshing=false,youtubeSyncTimer=null;

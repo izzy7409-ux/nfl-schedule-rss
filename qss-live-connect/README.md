@@ -1,6 +1,6 @@
 # QSS Streamlabs account connection
 
-Adds Streamlabs OAuth to the existing Quiet Storm Sports controller. Scope is `socket.token` only. Includes free YouTube subscription events, memberships, Super Chats, Super Stickers, and Streamlabs tips.
+Adds Streamlabs OAuth to the existing Quiet Storm Sports controller. Scope is `socket.token` only. Includes free YouTube subscription events, memberships, gifted memberships, Super Chats, Super Stickers, and Streamlabs tips.
 
 The existing browser overlay receives events while its automated EVMux URL is open. It checks for changed connection settings every ten seconds, so authorizing or disconnecting does not require replacing the browser source. Existing YouTube Studio sync, controls, topics, and visual layout are retained.
 
@@ -22,8 +22,12 @@ The controller displays Streamlabs registration fields, including the exact call
 
 This source targets only the QSS alias. Deploy as a preview in the existing project with its preview secrets, verify the build, then move only `quiet-storm-sports-overlay.vercel.app` to the verified deployment. Other project aliases and the separate Railway Ravens tools are unaffected.
 
-The large existing `lib/qss-state.js` file is preserved byte-for-byte using its immutable uploaded file SHA in `deployment-source.json`. The deployment file list includes that reference along with the files in this directory, excluding test files, README, this manifest, and local dependencies. This preserves the current Blob state/configuration implementation instead of rewriting it.
+The existing `lib/qss-state.js` is included byte-for-byte in source. Its SHA-1 matches the immutable original upload in `deployment-source.json`. Exclude test files, README, this manifest, and local dependencies from the deployment file list. The existing Blob state and configuration implementation is preserved.
 
 ## Validation
 
 Run `npm test`. Tests cover encrypted storage, authorization scope, browser binding, expired/replayed state, denied connections, private controls, origin checks, token redaction, disconnect, free subscriber events, monetary values, and batched event identifiers.
+
+## Supporter display
+
+New events received from Streamlabs move to the top of the three-row supporter box. Super Chats display the supplied formatted price or their documented micro-unit amount. YouTube `membershipGift` events display the gift count, such as `5 GIFTS`, and gifted subscription events attribute the giver. Memberships show formatted currency only when Streamlabs supplies it, otherwise their duration or membership status. Gift counts are never converted into an estimated price. Test, preview, and replay alerts are ignored. Event saves are queued so bursts do not overwrite each other.
