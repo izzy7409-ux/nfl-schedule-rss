@@ -1,4 +1,5 @@
 'use strict';
+importScripts('reader.js');
 const ORIGIN='https://quiet-storm-sports-production.up.railway.app';
 chrome.storage.local.setAccessLevel({accessLevel:'TRUSTED_CONTEXTS'});
 chrome.runtime.onMessage.addListener((message,sender,reply)=>{
@@ -13,11 +14,12 @@ chrome.runtime.onMessage.addListener((message,sender,reply)=>{
   if(message.type==='disconnect'){
    if(sender.tab)return{ok:false};await chrome.storage.local.remove('code');await chrome.storage.local.set({status:'Disconnected',lastSync:0});return{ok:true};
   }
-  if(message.type!=='sample'||!sender.tab?.url)return{ok:false};
-  const u=new URL(sender.tab.url);const id=(u.pathname.match(/^\/channel\/(UC[\w-]{22})\/analytics\//)||[])[1];
-  if(u.origin!=='https://studio.youtube.com'||u.searchParams.get('explore_type')!=='SUBSCRIBERS'||id!==message.channelId||!Number.isSafeInteger(message.count)||message.count<0)return{ok:false};
-  const {code}=await chrome.storage.local.get('code');if(!code)return{ok:false};
-  try{const response=await fetch(ORIGIN+'/api/studio-count',{method:'POST',headers:{'Content-Type':'application/json',Authorization:'Bearer '+code},body:JSON.stringify({channelId:id,count:message.count,observedAt:message.observedAt}),credentials:'omit',signal:AbortSignal.timeout(8000)});const data=await response.json();if(!response.ok)throw Error(data.error||'Connection failed');await chrome.storage.local.set({status:'Studio exact sync',lastCount:message.count,lastSync:Date.now()});return{ok:true}}
+  if(!sender.tab)return{ok:false};
+  const id=QSSStudioReader.channel(sender.url||sender.tab.url||'');if(!id)return{ok:false,error:'Open the Studio live subscriber-count page.'};
+  if(message.type==='reader-status'){await chrome.storage.local.set({readerStatus:String(message.status||'').slice(0,160),readerSeenAt:Date.now()});return{ok:true}}
+  if(message.type!=='sample'||id!==message.channelId||!Number.isSafeInteger(message.count)||message.count<0)return{ok:false,error:'Could not read a valid count from this Studio channel.'};
+  const {code}=await chrome.storage.local.get('code');if(!code){await chrome.storage.local.set({status:'Not paired. Paste your Studio connection code and click Connect.'});return{ok:false}};
+  try{const response=await fetch(ORIGIN+'/api/studio-count',{method:'POST',headers:{'Content-Type':'application/json',Authorization:'Bearer '+code},body:JSON.stringify({channelId:id,count:message.count,observedAt:message.observedAt}),credentials:'omit',signal:AbortSignal.timeout(8000)});const data=await response.json();if(!response.ok)throw Error(data.error||'Connection failed');await chrome.storage.local.set({status:'Studio exact sync',readerStatus:'Exact count detected',readerSeenAt:Date.now(),lastCount:message.count,lastSync:Date.now()});return{ok:true}}
   catch(error){await chrome.storage.local.set({status:error.message});return{ok:false,error:error.message}}
  })().then(reply).catch(()=>reply({ok:false,error:'Could not connect. Open your QSS remote to generate a new code.'}));return true;
 });

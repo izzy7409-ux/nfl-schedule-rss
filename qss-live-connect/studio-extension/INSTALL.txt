@@ -1,3 +1,7 @@
+UPDATE FROM VERSION 1.0.0
+
+Replace the files in your existing QSS-Studio-Sync folder with this version, then click Reload for this extension in chrome://extensions. Refresh the YouTube Studio live-count page. Your existing pairing code is kept if you replace the same folder. If you removed the old extension, paste your existing code again or generate a new one in the remote. The popup now shows a Studio reader status to identify what is waiting.
+
 QSS STUDIO SUBSCRIBER SYNC, MAC INSTALLATION
 
 1. Unzip qss-studio-sync.zip. Keep the extracted QSS-Studio-Sync folder somewhere permanent, such as Documents.
