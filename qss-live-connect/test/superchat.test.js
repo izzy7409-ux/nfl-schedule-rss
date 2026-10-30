@@ -27,3 +27,18 @@ await state.ingestEvent(e);await state.ingestEvent(e);await state.ingestEvent({.
 const s=await state.readState();assert.equal(s.superChats.length,2);assert.equal(s.superChats[0].message,'Go Ravens!');assert.equal(s.superChats[1].startsAt,s.superChats[0].endsAt);assert.equal(s.superChats[0].endsAt-s.superChats[0].startsAt,10000);
 }finally{await fs.rm(process.env.QSS_DATA_DIR,{recursive:true,force:true})}
 });
+
+test('gift recipients retain their own welcome identity rather than the gifter',()=>{
+ const [e]=items({for:'youtube_account',type:'subscription',message:[{name:'New Member',gifter:'Generous Fan',channelId:'UC1234567890123456789012',profileImageUrl:'https://yt3.ggpht.com/member',_id:'gift-recipient'}]});
+ assert.equal(e.name,'Generous Fan');assert.equal(e.memberName,'New Member');assert.equal(e.memberChannelId,'UC1234567890123456789012');assert.equal(e.memberAvatarUrl,'https://yt3.ggpht.com/member');assert.equal(e.giftBatch,false);
+});
+test('new and gifted memberships share the ten-second queue with Super Chats without duplicate alerts',async()=>{
+ const fs=require('node:fs/promises'),os=require('node:os'),path=require('node:path');
+ process.env.QSS_DATA_DIR=await fs.mkdtemp(path.join(os.tmpdir(),'qss-member-test-'));const state=require('../lib/qss-state');
+ try{
+  const e={kind:'membership',label:'NEW MEMBER',name:'Member',memberName:'Member',memberAvatarUrl:'https://yt3.ggpht.com/member',value:'MEMBER',eventId:'member-1'};
+  await state.ingestEvent(e);await state.ingestEvent(e);await state.ingestEvent({...e,eventId:'gift-1',label:'GIFTED MEMBERS',giftBatch:true,value:'5 GIFTS'});await state.ingestEvent({kind:'superchat',label:'SUPERCHAT',name:'Donor',value:'$5.00',eventId:'chat-1'});
+  const s=await state.readState();assert.equal(s.superChats.length,3);assert.equal(s.superChats[0].kind,'membership');assert.equal(s.superChats[0].avatarUrl,'https://yt3.ggpht.com/member');assert.equal(s.superChats[1].giftBatch,true);assert.equal(s.superChats[2].kind,'superchat');
+  s.superChats.forEach((card,i)=>{assert.equal(card.endsAt-card.startsAt,10000);if(i)assert.equal(card.startsAt,s.superChats[i-1].endsAt)});
+ }finally{await fs.rm(process.env.QSS_DATA_DIR,{recursive:true,force:true})}
+});

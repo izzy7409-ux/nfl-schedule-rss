@@ -23,10 +23,13 @@ function startAutomation({ connect, interval = setInterval, cancel = clearInterv
       socket.on('connect_error', () => connection('error'));
       socket.on('event', event => {
         for (const item of items(event)) state.ingestEvent(item).then(async () => {
-          if (!safePhoto(item.avatarUrl) && item.channelId) {
-            const config = await state.readConfig();
-            const avatarUrl = await resolvePhoto(item.channelId, config.youtubeApiKey);
-            if (avatarUrl) await state.applyAction({ action: 'supporterPhoto', channelId: item.channelId, avatarUrl });
+          const targets=[{id:item.channelId,photo:item.avatarUrl},{id:item.memberChannelId,photo:item.memberAvatarUrl}];
+          const config=await state.readConfig();
+          for(const target of targets){
+            if(!safePhoto(target.photo)&&target.id){
+              const avatarUrl=await resolvePhoto(target.id,config.youtubeApiKey);
+              if(avatarUrl)await state.applyAction({action:'supporterPhoto',channelId:target.id,avatarUrl});
+            }
           }
         }).catch(() => {});
       });

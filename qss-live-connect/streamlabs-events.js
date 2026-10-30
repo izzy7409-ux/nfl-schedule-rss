@@ -61,7 +61,8 @@
       const profile = gift && type !== 'membershipgift' ? { profileImageUrl: message.gifter_profile_image_url || message.gifterProfileImageUrl, channelId: message.gifter_channel_id || message.gifterChannelId } : message;
       const avatarUrl = text(profile.profileImageUrl || profile.profile_image_url || profile.avatarUrl || profile.avatar || profile.picture || profile.authorDetails?.profileImageUrl, 1200);
       const channelId = text(profile.channelId || profile.channel_id || (/^UC[\w-]{22}$/.test(profile.id || '') ? profile.id : '') || (String(profile.channelUrl || '').match(/channel\/(UC[\w-]{22})/) || [])[1], 40);
-      result.push({ avatarUrl, channelId, ...details, kind, label, name, value, eventId: text(unique, 220), createdAt: stamp || (clock ? clock() : Date.now()) });
+      const member = kind === 'membership' ? { memberName: text(message.display_name || message.displayName || message.name || name,40), memberAvatarUrl: text(message.profileImageUrl || message.profile_image_url || message.avatarUrl,1200), memberChannelId: text(message.channelId || message.channel_id || (/^UC[\w-]{22}$/.test(message.id||'')?message.id:''),40), giftBatch: type === 'membershipgift' } : {};
+      result.push({ ...member, avatarUrl, channelId, ...details, kind, label, name, value, eventId: text(unique, 220), createdAt: stamp || (clock ? clock() : Date.now()) });
     });
     return result;
   }
