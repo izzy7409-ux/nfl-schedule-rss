@@ -1,0 +1,8 @@
+(function(root,factory){if(typeof module==='object'&&module.exports)module.exports=factory();else root.QSSStudioReader=factory()})(typeof globalThis!=='undefined'?globalThis:this,function(){
+ 'use strict';
+ function exactNumber(text){const s=String(text||'').trim();if(!/^(?:\d+|\d{1,3}(?:[,\s\u00a0\u202f]\d{3})+)$/.test(s))return null;const n=Number(s.replace(/[,\s\u00a0\u202f]/g,''));return Number.isSafeInteger(n)&&n>=0&&n<=2000000000?n:null}
+ function channel(url){try{const u=new URL(url);if(u.origin!=='https://studio.youtube.com'||u.searchParams.get('explore_type')!=='SUBSCRIBERS')return '';return(u.pathname.match(/^\/channel\/(UC[\w-]{22})\/analytics\//)||[])[1]||''}catch{return ''}}
+ function choose(candidates){const sorted=candidates.filter(x=>x.count!==null&&x.size>=48).sort((a,b)=>b.size-a.size);if(!sorted.length)return null;const top=sorted.filter(x=>x.size===sorted[0].size);return new Set(top.map(x=>x.count)).size===1?top[0].count:null}
+ function read(doc,url){const channelId=channel(url);if(!channelId)return null;const candidates=[],roots=[doc];for(let i=0;i<roots.length;i++)for(const el of roots[i].querySelectorAll('*')){if(el.shadowRoot)roots.push(el.shadowRoot);if(!el.getClientRects().length)continue;const style=doc.defaultView.getComputedStyle(el);if(style.visibility==='hidden'||style.display==='none')continue;const count=exactNumber(el.textContent);if(count!==null)candidates.push({el,count,size:parseFloat(style.fontSize)})}const count=choose(candidates.filter(x=>!candidates.some(parent=>parent!==x&&parent.size>=48&&parent.el.contains(x.el))));return count===null?null:{channelId,count}}
+ return{exactNumber,channel,choose,read};
+});

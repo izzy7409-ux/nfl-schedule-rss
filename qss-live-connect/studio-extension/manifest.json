@@ -1,0 +1,9 @@
+{
+ "manifest_version":3,"name":"QSS Studio Subscriber Sync","version":"1.0.0",
+ "description":"Sync the exact subscriber count visible in your YouTube Studio live-count page to your QSS overlay.",
+ "permissions":["storage"],
+ "host_permissions":["https://quiet-storm-sports-production.up.railway.app/*"],
+ "background":{"service_worker":"background.js"},
+ "content_scripts":[{"matches":["https://studio.youtube.com/channel/*"],"js":["reader.js","content.js"],"run_at":"document_idle"}],
+ "action":{"default_popup":"popup.html","default_title":"QSS subscriber sync"}
+}

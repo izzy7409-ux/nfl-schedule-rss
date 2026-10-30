@@ -7,6 +7,7 @@ const storage = require('./lib/storage');
 const { startAutomation } = require('./lib/automation');
 const { createRemote } = require('./lib/prp-remote');
 const staticFiles = new Map([
+  ['/qss-studio-sync.zip', ['qss-studio-sync.zip', 'application/zip']],
   ['/ravens-mark.png', ['ravens-mark.png', 'image/png']],
   ['/qss-overlay', ['qss-overlay.html', 'text/html']],
   ['/qss-overlay.html', ['qss-overlay.html', 'text/html']],
@@ -16,7 +17,7 @@ const staticFiles = new Map([
   ['/streamlabs-events.js', ['streamlabs-events.js', 'text/javascript']],
   ['/streamlabs-result.html', ['streamlabs-result.html', 'text/html']]
 ]);
-const handlers = new Map(['automation-config', 'automation-sync', 'bridge', 'control', 'ingest', 'state', 'stream-config', 'streamlabs', 'streamlabs-callback', 'sync-youtube'].map(name => ['/api/' + name, require('./api/' + name)]));
+const handlers = new Map(['studio-pair', 'studio-count', 'automation-config', 'automation-sync', 'bridge', 'control', 'ingest', 'state', 'stream-config', 'streamlabs', 'streamlabs-callback', 'sync-youtube'].map(name => ['/api/' + name, require('./api/' + name)]));
 
 function responseHelpers(res) {
   res.status = code => { res.statusCode = code; return res; };
@@ -71,7 +72,7 @@ async function main() {
       }
       if (staticFiles.has(url.pathname) && ['GET', 'HEAD'].includes(req.method)) {
         const [file, type] = staticFiles.get(url.pathname);
-        res.setHeader('Content-Type', type.startsWith('image/') ? type : type + '; charset=utf-8');
+        res.setHeader('Content-Type', (type.startsWith('image/') || type === 'application/zip') ? type : type + '; charset=utf-8');
         return res.end(req.method === 'HEAD' ? '' : await fs.readFile(path.join(__dirname, file)));
       }
       const handler = handlers.get(url.pathname);

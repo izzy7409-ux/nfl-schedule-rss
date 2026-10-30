@@ -1,0 +1,19 @@
+QSS STUDIO SUBSCRIBER SYNC, MAC INSTALLATION
+
+1. Unzip qss-studio-sync.zip. Keep the extracted QSS-Studio-Sync folder somewhere permanent, such as Documents.
+2. In Chrome, open chrome://extensions.
+3. Turn on Developer mode, top right.
+4. Click Load unpacked. Select the extracted QSS-Studio-Sync folder, the folder containing manifest.json.
+5. Open your QSS remote and find YouTube Studio Exact Count.
+6. Click Generate Studio Connection Code, then Copy Code.
+7. Click Chrome's puzzle icon and open QSS Studio Subscriber Sync. Paste the code and click Connect.
+8. In YouTube Studio, open Analytics, then click See live count beneath Subscribers in the Realtime card. Refresh that Studio tab once after installation.
+9. Keep this live-count tab open and your Mac awake during the show. You can put it behind another window. Check the extension popup for Studio exact sync and the last count/time. Your QSS remote should say Studio exact sync.
+
+The extension reads the large exact count on this page about every 2 seconds. It sends changed counts immediately and a heartbeat every 15 seconds. Chrome may slow background tabs or suspend them. Disable Memory Saver for studio.youtube.com in Chrome's Performance settings if the tab is being discarded. Studio itself can update with a delay.
+
+Only the subscriber count, channel ID and observation time are sent to your existing QSS Railway service. The extension does not read your Google password, cookies, revenue, chat or other analytics. The code can only update the exact subscriber count. Generate a new code in the remote to revoke the old one. Disconnect in the extension to remove its saved code.
+
+No Chrome Web Store payment or Vercel account is required. An unpacked extension can trigger Chrome's normal developer-extension notice. Keep its folder in place. When installing a future update, replace the files and click Reload on chrome://extensions, then refresh Studio.
+
+If it does not sync, confirm you are on the full See live count page, that this is the correct YouTube channel, and that the page displays a full numeric count rather than a shortened number. The reader deliberately ignores rounded counts, other analytics numbers and ambiguous layouts. YouTube page changes may require an extension update.

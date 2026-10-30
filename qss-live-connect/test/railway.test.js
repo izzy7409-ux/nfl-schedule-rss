@@ -86,3 +86,17 @@ test('the server listens for Streamlabs events without a browser and reconnects 
   assert.equal(sockets[1].options.query.token, 'test-second-token');
   automation.stop(); assert.equal(sockets[1].socket.closed, true); assert.deepEqual(cancelled, [1, 2]);
 });
+
+test('Studio pairing updates exact counts including losses, rejects stale/wrong-channel samples and revokes old codes',async()=>{
+ const directory=await fs.mkdtemp(path.join(os.tmpdir(),'qss-studio-'));let app;
+ try{app=await start(directory);const post=(route,body,headers={})=>fetch(app.address+route,{method:'POST',headers:{'Content-Type':'application/json',...headers},body:JSON.stringify(body)});
+ assert.equal((await post('/api/studio-pair',{})).status,403);
+ const paired=await(await post('/api/studio-pair',{}, {'x-control-key':'test-control'})).json();assert.ok(paired.code);const headers={Authorization:'Bearer '+paired.code};
+ assert.equal((await post('/api/studio-count',{channelId:'wrong',count:8752,observedAt:Date.now()},headers)).status,400);
+ assert.equal((await post('/api/studio-count',{channelId:'test-channel',count:8752,observedAt:0},headers)).status,400);
+ for(const count of [8752,8753,8751]){assert.equal((await post('/api/studio-count',{channelId:'test-channel',count,observedAt:Date.now()},headers)).status,200);assert.equal((await(await fetch(app.address+'/api/state')).json()).state.subsCurrent,count)}
+ await post('/api/ingest?liveKey=test-live',{kind:'subscriber',name:'New Fan',eventId:'public-1'});assert.equal((await(await fetch(app.address+'/api/state')).json()).state.subsCurrent,8751);
+ assert.equal((await post('/api/control',{action:'clearSupporters'},headers)).status,403);
+ await post('/api/studio-pair',{}, {'x-control-key':'test-control'});assert.equal((await post('/api/studio-count',{channelId:'test-channel',count:8752,observedAt:Date.now()},headers)).status,403);
+ }finally{await app?.stop();await fs.rm(directory,{recursive:true,force:true})}
+});
