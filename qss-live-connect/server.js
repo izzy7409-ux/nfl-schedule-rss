@@ -5,6 +5,7 @@ const path = require('node:path');
 const state = require('./lib/qss-state');
 const storage = require('./lib/storage');
 const { startAutomation } = require('./lib/automation');
+const { createRemote } = require('./lib/prp-remote');
 const staticFiles = new Map([
   ['/qss-overlay', ['qss-overlay.html', 'text/html']],
   ['/qss-overlay.html', ['qss-overlay.html', 'text/html']],
@@ -35,6 +36,7 @@ async function main() {
   await storage.seed();
   await state.readState();
   const clients = new Set();
+  const prpRemote = createRemote();
   const broadcast = async name => {
     if (name !== 'qss-overlay/state.json') return;
     try {
@@ -53,6 +55,7 @@ async function main() {
     try {
       const url = new URL(req.url, 'http://localhost');
       req.query = Object.fromEntries(url.searchParams);
+      if (await prpRemote.handle(req, res, url, body)) return;
       if (url.pathname === '/health') return res.json({ ok: true, service: 'Quiet Storm Sports', storage: 'railway' });
       if (url.pathname === '/') return res.redirect(302, '/qss-overlay');
       if (url.pathname === '/api/events' && req.method === 'GET') {

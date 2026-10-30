@@ -29,3 +29,9 @@ The Railway app has no dependency on Vercel functions, storage, or credentials. 
 ## Validation
 
 Run `npm test`. The suite covers credential encryption, OAuth permissions and browser binding, private control access, gift counts and currency, deduplication, event bursts, server event reception, migration, restart persistence, and live push delivery.
+
+## Combined PRP and QSS remote
+
+`/lower-third-control` hosts the combined remote, with PRP Lower Third and QSS tabs. The PRP controls continue to use the existing Ravens service and its saved lower-third data. The QSS tab lazily loads the full QSS controller. The Ravens service does not need to restart when this remote is updated.
+
+Set `PRP_REMOTE_ORIGIN` to the Ravens service HTTPS origin. Set `PRP_CONTROL_SECRET` through the Railway reference `${{ravens-live-tracker.CONFIDENCE_CONTROL_SECRET}}`. The private PRP credential stays on the server. Existing PRP or QSS private links can unlock a twelve-hour encrypted session. Successful login removes the key from the page URL. The public sign-in page never contains the QSS control URL or either private key.
