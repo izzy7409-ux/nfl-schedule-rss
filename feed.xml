@@ -5,7 +5,7 @@
     <link>https://www.nfl.com/schedules/</link>
     <description>Automatic NFL schedule, live scores and final results for EVMux.</description>
     <language>en-us</language>
-    <lastBuildDate>Sun, 01 Nov 2026 14:04:44 +0000</lastBuildDate>
+    <lastBuildDate>Sun, 01 Nov 2026 18:53:32 +0000</lastBuildDate>
     <ttl>5</ttl>
     <item>
       <title>FINAL | Carolina Panthers 19 - Green Bay Packers 27</title>
@@ -14,51 +14,51 @@
       <guid isPermaLink="false">espn-nfl-401873023</guid>
     </item>
     <item>
-      <title>SUN NOV 1 | Baltimore Ravens at Buffalo Bills | 1:00 PM ET | CBS</title>
-      <description>Baltimore Ravens at Buffalo Bills. Kickoff 1:00 PM ET. TV: CBS.</description>
-      <link>https://www.espn.com/nfl/game/_/gameId/401873026/ravens-bills</link>
+      <title>LIVE | Baltimore Ravens 7 - Buffalo Bills 10 | 14:14 - 2nd | CBS</title>
+      <description>Baltimore Ravens 7, Buffalo Bills 10. 14:14 - 2nd.</description>
+      <link>https://www.espn.com/nfl/game?gameId=401873026</link>
       <guid isPermaLink="false">espn-nfl-401873026</guid>
     </item>
     <item>
-      <title>SUN NOV 1 | Tennessee Titans at Cincinnati Bengals | 1:00 PM ET | CBS</title>
-      <description>Tennessee Titans at Cincinnati Bengals. Kickoff 1:00 PM ET. TV: CBS.</description>
-      <link>https://www.espn.com/nfl/game/_/gameId/401873031/titans-bengals</link>
+      <title>LIVE | Tennessee Titans 13 - Cincinnati Bengals 7 | 13:20 - 2nd | CBS</title>
+      <description>Tennessee Titans 13, Cincinnati Bengals 7. 13:20 - 2nd.</description>
+      <link>https://www.espn.com/nfl/game?gameId=401873031</link>
       <guid isPermaLink="false">espn-nfl-401873031</guid>
     </item>
     <item>
-      <title>SUN NOV 1 | Arizona Cardinals at Dallas Cowboys | 1:00 PM ET | Fox</title>
-      <description>Arizona Cardinals at Dallas Cowboys. Kickoff 1:00 PM ET. TV: Fox.</description>
-      <link>https://www.espn.com/nfl/game/_/gameId/401873024/cardinals-cowboys</link>
+      <title>LIVE | Arizona Cardinals 0 - Dallas Cowboys 7 | 10:37 - 2nd | Fox</title>
+      <description>Arizona Cardinals 0, Dallas Cowboys 7. 10:37 - 2nd.</description>
+      <link>https://www.espn.com/nfl/game?gameId=401873024</link>
       <guid isPermaLink="false">espn-nfl-401873024</guid>
     </item>
     <item>
-      <title>SUN NOV 1 | Minnesota Vikings at Detroit Lions | 1:00 PM ET | Fox</title>
-      <description>Minnesota Vikings at Detroit Lions. Kickoff 1:00 PM ET. TV: Fox.</description>
-      <link>https://www.espn.com/nfl/game/_/gameId/401873030/vikings-lions</link>
+      <title>LIVE | Minnesota Vikings 7 - Detroit Lions 3 | 12:56 - 2nd | Fox</title>
+      <description>Minnesota Vikings 7, Detroit Lions 3. 12:56 - 2nd.</description>
+      <link>https://www.espn.com/nfl/game?gameId=401873030</link>
       <guid isPermaLink="false">espn-nfl-401873030</guid>
     </item>
     <item>
-      <title>SUN NOV 1 | Las Vegas Raiders at New York Jets | 1:00 PM ET | Fox</title>
-      <description>Las Vegas Raiders at New York Jets. Kickoff 1:00 PM ET. TV: Fox.</description>
-      <link>https://www.espn.com/nfl/game/_/gameId/401873029/raiders-jets</link>
+      <title>LIVE | Las Vegas Raiders 14 - New York Jets 13 | 10:44 - 2nd | Fox</title>
+      <description>Las Vegas Raiders 14, New York Jets 13. 10:44 - 2nd.</description>
+      <link>https://www.espn.com/nfl/game?gameId=401873029</link>
       <guid isPermaLink="false">espn-nfl-401873029</guid>
     </item>
     <item>
-      <title>SUN NOV 1 | Cleveland Browns at Pittsburgh Steelers | 1:00 PM ET | CBS</title>
-      <description>Cleveland Browns at Pittsburgh Steelers. Kickoff 1:00 PM ET. TV: CBS.</description>
-      <link>https://www.espn.com/nfl/game/_/gameId/401873027/browns-steelers</link>
+      <title>LIVE | Cleveland Browns 0 - Pittsburgh Steelers 10 | 12:00 - 2nd | CBS</title>
+      <description>Cleveland Browns 0, Pittsburgh Steelers 10. 12:00 - 2nd.</description>
+      <link>https://www.espn.com/nfl/game?gameId=401873027</link>
       <guid isPermaLink="false">espn-nfl-401873027</guid>
     </item>
     <item>
-      <title>SUN NOV 1 | Atlanta Falcons at Tampa Bay Buccaneers | 1:00 PM ET | Fox</title>
-      <description>Atlanta Falcons at Tampa Bay Buccaneers. Kickoff 1:00 PM ET. TV: Fox.</description>
-      <link>https://www.espn.com/nfl/game/_/gameId/401873025/falcons-buccaneers</link>
+      <title>LIVE | Atlanta Falcons 0 - Tampa Bay Buccaneers 6 | 12:33 - 2nd | Fox</title>
+      <description>Atlanta Falcons 0, Tampa Bay Buccaneers 6. 12:33 - 2nd.</description>
+      <link>https://www.espn.com/nfl/game?gameId=401873025</link>
       <guid isPermaLink="false">espn-nfl-401873025</guid>
     </item>
     <item>
-      <title>SUN NOV 1 | Indianapolis Colts at Jacksonville Jaguars | 1:00 PM ET | CBS</title>
-      <description>Indianapolis Colts at Jacksonville Jaguars. Kickoff 1:00 PM ET. TV: CBS.</description>
-      <link>https://www.espn.com/nfl/game/_/gameId/401873028/colts-jaguars</link>
+      <title>LIVE | Indianapolis Colts 0 - Jacksonville Jaguars 7 | 9:52 - 2nd | CBS</title>
+      <description>Indianapolis Colts 0, Jacksonville Jaguars 7. 9:52 - 2nd.</description>
+      <link>https://www.espn.com/nfl/game?gameId=401873028</link>
       <guid isPermaLink="false">espn-nfl-401873028</guid>
     </item>
     <item>
