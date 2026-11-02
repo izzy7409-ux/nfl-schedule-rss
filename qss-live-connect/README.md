@@ -43,3 +43,11 @@ Supporter photos retain provider image URLs and channel IDs. A missing image is 
 Memberships and gifted memberships share the ten-second goal-card alert queue with Super Chats. Purple welcome cards use the recipient identity for individual gifted-membership events, and credit the gifter/count for aggregate gift bundles without recipient details. The Preview Membership button opens an isolated ten-second demo without writing live state.
 
 Studio Subscriber Sync extension: install the downloadable qss-studio-sync.zip unpacked in Chrome. The remote issues a revocable, channel-scoped encrypted connection code, usable only by /api/studio-count for fresh exact count samples. Reader scans only the full Studio SUBSCRIBERS exploration report and rejects abbreviated/ambiguous numbers. Extension sends count changes every ~2 seconds and a 15-second heartbeat, subject to browser throttling. While Studio is fresh, public subscriber alerts do not also increment the count. See studio-extension/INSTALL.txt. Google credentials never leave Chrome. This is a DOM bridge, so Studio UI changes may require updates.
+
+## PRP lower thirds
+
+`/prp-overlay` shares QSS's live supporter feed, exact subscriber count, and ten-second Super Chat/member/gift queue. It uses the original PRP cloud logo and Purple Reign Podcast branding. PRP topics, ticker, breaking-news state and visibility continue to come from `PRP_REMOTE_ORIGIN`. A durable cached rundown keeps the last title available during a reconnect. While the PRP overlay or remote is open, its rundown is refreshed once per second, and support changes push immediately.
+
+PRP accent, goal target, and visibility toggles for supporters/goal/ticker are separate durable settings under `/data/prp-overlay`. The combined remote's PRP tab controls these settings at `/api/prp-control`, protected by the same private remote session. Count adjustments and supporter edits apply to the shared channel feed. Preview Super Chat, Membership, and Gift Bundle links affect only the preview browser and never write live events.
+
+The Ravens service's existing `/lower-third` page embeds the new `/prp-overlay` so existing EVMux sources keep their URL. The original PRP APIs and rundown remain available to existing controllers.

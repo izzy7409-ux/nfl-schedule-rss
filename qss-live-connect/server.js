@@ -6,7 +6,11 @@ const state = require('./lib/qss-state');
 const storage = require('./lib/storage');
 const { startAutomation } = require('./lib/automation');
 const { createRemote } = require('./lib/prp-remote');
+const { createPrpOverlay } = require('./lib/prp-overlay');
 const staticFiles = new Map([
+  ['/prp-overlay', ['prp-overlay.html', 'text/html']],
+  ['/prp-overlay.html', ['prp-overlay.html', 'text/html']],
+  ['/prp-logo.svg', ['prp-logo.svg', 'image/svg+xml']],
   ['/qss-studio-sync.zip', ['qss-studio-sync.zip', 'application/zip']],
   ['/ravens-mark.png', ['ravens-mark.png', 'image/png']],
   ['/qss-overlay', ['qss-overlay.html', 'text/html']],
@@ -39,8 +43,16 @@ async function main() {
   await storage.seed();
   await state.readState();
   const clients = new Set();
+  const prpClients = new Set();
   const prpRemote = createRemote();
+  const prpOverlay = createPrpOverlay();
   const broadcast = async name => {
+    if (prpClients.size && ['qss-overlay/state.json', 'prp-overlay/display.json', 'prp-overlay/rundown.json'].includes(name)) {
+      try {
+        const data = 'data: ' + JSON.stringify({ ok: true, state: await prpOverlay.readState({ refreshRundown: false }) }) + '\n\n';
+        for (const client of prpClients) client.write(data);
+      } catch {}
+    }
     if (name !== 'qss-overlay/state.json') return;
     try {
       const data = 'data: ' + JSON.stringify({ ok: true, state: state.publicState(await state.readState()) }) + '\n\n';
@@ -49,7 +61,8 @@ async function main() {
   };
   storage.events.on('change', broadcast);
   const automation = process.env.QSS_DISABLE_AUTOMATION === '1' ? null : startAutomation();
-  const heartbeat = setInterval(() => { for (const client of clients) client.write(': heartbeat\n\n'); }, 15000);
+  const heartbeat = setInterval(() => { for (const client of [...clients, ...prpClients]) client.write(': heartbeat\n\n'); }, 15000);
+  const prpUpdates = setInterval(() => { if (prpClients.size) prpOverlay.refresh().catch(() => {}); }, 1000);
   const server = http.createServer(async (req, res) => {
     responseHelpers(res);
     res.setHeader('Cache-Control', 'no-store');
@@ -61,6 +74,20 @@ async function main() {
       const url = new URL(req.url, 'http://localhost');
       req.query = Object.fromEntries(url.searchParams);
       if (await prpRemote.handle(req, res, url, body)) return;
+      if (url.pathname === '/api/prp-state' && req.method === 'GET') return res.json({ ok: true, state: await prpOverlay.readState() });
+      if (url.pathname === '/api/prp-events' && req.method === 'GET') {
+        res.writeHead(200, { 'Content-Type': 'text/event-stream', 'Connection': 'keep-alive', 'X-Accel-Buffering': 'no' });
+        prpClients.add(res);
+        req.on('close', () => prpClients.delete(res));
+        res.write('data: ' + JSON.stringify({ ok: true, state: await prpOverlay.readState() }) + '\n\n');
+        return;
+      }
+      if (url.pathname === '/api/prp-control') {
+        if (!prpRemote.authorized(req, url) || !prpRemote.sameOrigin(req)) return res.status(403).json({ ok: false, error: 'Open your private PRP remote first.' });
+        if (req.method !== 'POST') return res.status(405).json({ ok: false, error: 'POST required' });
+        try { return res.json({ ok: true, state: await prpOverlay.applyAction(await body(req)) }); }
+        catch (error) { return res.status(400).json({ ok: false, error: error.message }); }
+      }
       if (url.pathname === '/health') return res.json({ ok: true, service: 'Quiet Storm Sports', storage: 'railway' });
       if (url.pathname === '/') return res.redirect(302, '/qss-overlay');
       if (url.pathname === '/api/events' && req.method === 'GET') {
@@ -87,8 +114,8 @@ async function main() {
   await new Promise(resolve => server.listen(Number(process.env.PORT || 3000), '0.0.0.0', resolve));
   console.log('Quiet Storm Sports listening on ' + server.address().port);
   async function stop() {
-    automation?.stop(); clearInterval(heartbeat); storage.events.off('change', broadcast);
-    for (const client of clients) client.end();
+    automation?.stop(); clearInterval(heartbeat); clearInterval(prpUpdates); storage.events.off('change', broadcast);
+    for (const client of [...clients, ...prpClients]) client.end();
     server.close();
   }
   process.once('SIGTERM', stop); process.once('SIGINT', stop);

@@ -81,6 +81,6 @@ function createRemote({ fetchImpl = fetch, origin = process.env.QSS_STREAMLABS_O
     const response = await upstream(pathname, options);
     res.status(response.status); res.setHeader('Content-Type', 'application/json; charset=utf-8'); res.end(await response.text()); return true;
   }
-  return { handle };
+  return { handle, authorized, sameOrigin: req => !req.headers.origin || req.headers.origin === new URL(origin).origin };
 }
 module.exports = { createRemote };

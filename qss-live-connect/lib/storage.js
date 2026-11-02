@@ -4,7 +4,7 @@ const path = require('node:path');
 const crypto = require('node:crypto');
 const { EventEmitter } = require('node:events');
 const events = new EventEmitter();
-const allowed = new Set(['qss-overlay/state.json', 'qss-overlay/config.enc.json', 'qss-overlay/streamlabs-oauth.enc.json']);
+const allowed = new Set(['qss-overlay/state.json', 'qss-overlay/config.enc.json', 'qss-overlay/streamlabs-oauth.enc.json', 'prp-overlay/display.json', 'prp-overlay/rundown.json']);
 
 function location(name) {
   if (!allowed.has(name)) throw new Error('Unknown QSS data file.');
