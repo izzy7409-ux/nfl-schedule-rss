@@ -82,7 +82,7 @@ async function control(body={}){
 async function handle(req,res,url){
   const routes=['/lower-third','/lower-third-control','/api/lower-third-state','/api/lower-third-stream','/api/lower-third-control'];
   if(!routes.includes(url.pathname))return false;ensureLoaded();
-  if(url.pathname==='/lower-third'){html(res,200,OVERLAY_HTML);return true;}
+  if(url.pathname==='/lower-third'){res.writeHead(302,{'Location':'https://quiet-storm-sports-production.up.railway.app/prp-overlay','Cache-Control':'no-store'});res.end();return true;}
   if(url.pathname==='/lower-third-control'){if(!authorized(url,req)){html(res,403,'<h1>Forbidden</h1>');return true;}html(res,200,CONTROL_HTML);return true;}
   if(url.pathname==='/api/lower-third-state'){json(res,200,{ok:true,state:publicState()});return true;}
   if(url.pathname==='/api/lower-third-stream'){
