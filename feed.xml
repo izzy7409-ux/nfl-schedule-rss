@@ -1,95 +1,101 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <rss version="2.0">
   <channel>
-    <title>2026 NFL Week 8 Live Schedule &amp; Scores</title>
+    <title>2026 NFL Week 9 Live Schedule &amp; Scores</title>
     <link>https://www.nfl.com/schedules/</link>
     <description>Automatic NFL schedule, live scores and final results for EVMux.</description>
     <language>en-us</language>
-    <lastBuildDate>Wed, 04 Nov 2026 01:45:06 +0000</lastBuildDate>
+    <lastBuildDate>Wed, 04 Nov 2026 08:08:30 +0000</lastBuildDate>
     <ttl>5</ttl>
     <item>
-      <title>FINAL | Carolina Panthers 19 - Green Bay Packers 27</title>
-      <description>Final: Carolina Panthers 19, Green Bay Packers 27.</description>
-      <link>https://www.espn.com/nfl/game/_/gameId/401873023/panthers-packers</link>
-      <guid isPermaLink="false">espn-nfl-401873023</guid>
+      <title>THU NOV 5 | Jacksonville Jaguars at Baltimore Ravens | 8:15 PM ET | Prime Video</title>
+      <description>Jacksonville Jaguars at Baltimore Ravens. Kickoff 8:15 PM ET. TV: Prime Video.</description>
+      <link>https://www.espn.com/nfl/game/_/gameId/401873037/jaguars-ravens</link>
+      <guid isPermaLink="false">espn-nfl-401873037</guid>
     </item>
     <item>
-      <title>FINAL | Baltimore Ravens 10 - Buffalo Bills 36</title>
-      <description>Final: Baltimore Ravens 10, Buffalo Bills 36.</description>
-      <link>https://www.espn.com/nfl/game/_/gameId/401873026/ravens-bills</link>
-      <guid isPermaLink="false">espn-nfl-401873026</guid>
+      <title>SUN NOV 8 | Cincinnati Bengals at Atlanta Falcons | 9:30 AM ET | NFL Net</title>
+      <description>Cincinnati Bengals at Atlanta Falcons. Kickoff 9:30 AM ET. TV: NFL Net.</description>
+      <link>https://www.espn.com/nfl/game/_/gameId/401873038/bengals-falcons</link>
+      <guid isPermaLink="false">espn-nfl-401873038</guid>
     </item>
     <item>
-      <title>FINAL/OT | Tennessee Titans 36 - Cincinnati Bengals 43</title>
-      <description>Final: Tennessee Titans 36, Cincinnati Bengals 43.</description>
-      <link>https://www.espn.com/nfl/game/_/gameId/401873031/titans-bengals</link>
-      <guid isPermaLink="false">espn-nfl-401873031</guid>
+      <title>SUN NOV 8 | Dallas Cowboys at Indianapolis Colts | 1:00 PM ET | Fox</title>
+      <description>Dallas Cowboys at Indianapolis Colts. Kickoff 1:00 PM ET. TV: Fox.</description>
+      <link>https://www.espn.com/nfl/game/_/gameId/401873040/cowboys-colts</link>
+      <guid isPermaLink="false">espn-nfl-401873040</guid>
     </item>
     <item>
-      <title>FINAL/OT | Arizona Cardinals 33 - Dallas Cowboys 30</title>
-      <description>Final: Arizona Cardinals 33, Dallas Cowboys 30.</description>
-      <link>https://www.espn.com/nfl/game/_/gameId/401873024/cardinals-cowboys</link>
-      <guid isPermaLink="false">espn-nfl-401873024</guid>
+      <title>SUN NOV 8 | New York Jets at Kansas City Chiefs | 1:00 PM ET | CBS</title>
+      <description>New York Jets at Kansas City Chiefs. Kickoff 1:00 PM ET. TV: CBS.</description>
+      <link>https://www.espn.com/nfl/game/_/gameId/401873045/jets-chiefs</link>
+      <guid isPermaLink="false">espn-nfl-401873045</guid>
     </item>
     <item>
-      <title>FINAL | Minnesota Vikings 15 - Detroit Lions 19</title>
-      <description>Final: Minnesota Vikings 15, Detroit Lions 19.</description>
-      <link>https://www.espn.com/nfl/game/_/gameId/401873030/vikings-lions</link>
-      <guid isPermaLink="false">espn-nfl-401873030</guid>
+      <title>SUN NOV 8 | Detroit Lions at Miami Dolphins | 1:00 PM ET | Fox</title>
+      <description>Detroit Lions at Miami Dolphins. Kickoff 1:00 PM ET. TV: Fox.</description>
+      <link>https://www.espn.com/nfl/game/_/gameId/401873042/lions-dolphins</link>
+      <guid isPermaLink="false">espn-nfl-401873042</guid>
     </item>
     <item>
-      <title>FINAL | Las Vegas Raiders 38 - New York Jets 33</title>
-      <description>Final: Las Vegas Raiders 38, New York Jets 33.</description>
-      <link>https://www.espn.com/nfl/game/_/gameId/401873029/raiders-jets</link>
-      <guid isPermaLink="false">espn-nfl-401873029</guid>
+      <title>SUN NOV 8 | Cleveland Browns at New Orleans Saints | 1:00 PM ET | CBS</title>
+      <description>Cleveland Browns at New Orleans Saints. Kickoff 1:00 PM ET. TV: CBS.</description>
+      <link>https://www.espn.com/nfl/game/_/gameId/401873039/browns-saints</link>
+      <guid isPermaLink="false">espn-nfl-401873039</guid>
     </item>
     <item>
-      <title>FINAL | Cleveland Browns 6 - Pittsburgh Steelers 27</title>
-      <description>Final: Cleveland Browns 6, Pittsburgh Steelers 27.</description>
-      <link>https://www.espn.com/nfl/game/_/gameId/401873027/browns-steelers</link>
-      <guid isPermaLink="false">espn-nfl-401873027</guid>
+      <title>SUN NOV 8 | New York Giants at Philadelphia Eagles | 1:00 PM ET | Fox</title>
+      <description>New York Giants at Philadelphia Eagles. Kickoff 1:00 PM ET. TV: Fox.</description>
+      <link>https://www.espn.com/nfl/game/_/gameId/401873044/giants-eagles</link>
+      <guid isPermaLink="false">espn-nfl-401873044</guid>
     </item>
     <item>
-      <title>FINAL | Atlanta Falcons 0 - Tampa Bay Buccaneers 16</title>
-      <description>Final: Atlanta Falcons 0, Tampa Bay Buccaneers 16.</description>
-      <link>https://www.espn.com/nfl/game/_/gameId/401873025/falcons-buccaneers</link>
-      <guid isPermaLink="false">espn-nfl-401873025</guid>
+      <title>SUN NOV 8 | Los Angeles Rams at Washington Commanders | 1:00 PM ET | Fox</title>
+      <description>Los Angeles Rams at Washington Commanders. Kickoff 1:00 PM ET. TV: Fox.</description>
+      <link>https://www.espn.com/nfl/game/_/gameId/401873043/rams-commanders</link>
+      <guid isPermaLink="false">espn-nfl-401873043</guid>
     </item>
     <item>
-      <title>FINAL | Indianapolis Colts 7 - Jacksonville Jaguars 42</title>
-      <description>Final: Indianapolis Colts 7, Jacksonville Jaguars 42.</description>
-      <link>https://www.espn.com/nfl/game/_/gameId/401873028/colts-jaguars</link>
-      <guid isPermaLink="false">espn-nfl-401873028</guid>
+      <title>SUN NOV 8 | Denver Broncos at Carolina Panthers | 1:00 PM ET | CBS</title>
+      <description>Denver Broncos at Carolina Panthers. Kickoff 1:00 PM ET. TV: CBS.</description>
+      <link>https://www.espn.com/nfl/game/_/gameId/401873041/broncos-panthers</link>
+      <guid isPermaLink="false">espn-nfl-401873041</guid>
     </item>
     <item>
-      <title>FINAL | Los Angeles Chargers 9 - Los Angeles Rams 24</title>
-      <description>Final: Los Angeles Chargers 9, Los Angeles Rams 24.</description>
-      <link>https://www.espn.com/nfl/game/_/gameId/401873032/chargers-rams</link>
-      <guid isPermaLink="false">espn-nfl-401873032</guid>
+      <title>SUN NOV 8 | Houston Texans at Los Angeles Chargers | 4:05 PM ET | CBS</title>
+      <description>Houston Texans at Los Angeles Chargers. Kickoff 4:05 PM ET. TV: CBS.</description>
+      <link>https://www.espn.com/nfl/game/_/gameId/401873046/texans-chargers</link>
+      <guid isPermaLink="false">espn-nfl-401873046</guid>
     </item>
     <item>
-      <title>FINAL | Kansas City Chiefs 24 - Denver Broncos 28</title>
-      <description>Final: Kansas City Chiefs 24, Denver Broncos 28.</description>
-      <link>https://www.espn.com/nfl/game/_/gameId/401873033/chiefs-broncos</link>
-      <guid isPermaLink="false">espn-nfl-401873033</guid>
+      <title>SUN NOV 8 | Green Bay Packers at New England Patriots | 4:25 PM ET | Fox</title>
+      <description>Green Bay Packers at New England Patriots. Kickoff 4:25 PM ET. TV: Fox.</description>
+      <link>https://www.espn.com/nfl/game/_/gameId/401873049/packers-patriots</link>
+      <guid isPermaLink="false">espn-nfl-401873049</guid>
     </item>
     <item>
-      <title>FINAL | New England Patriots 24 - Miami Dolphins 19</title>
-      <description>Final: New England Patriots 24, Miami Dolphins 19.</description>
-      <link>https://www.espn.com/nfl/game/_/gameId/401873034/patriots-dolphins</link>
-      <guid isPermaLink="false">espn-nfl-401873034</guid>
+      <title>SUN NOV 8 | Las Vegas Raiders at San Francisco 49ers | 4:25 PM ET | Fox</title>
+      <description>Las Vegas Raiders at San Francisco 49ers. Kickoff 4:25 PM ET. TV: Fox.</description>
+      <link>https://www.espn.com/nfl/game/_/gameId/401873047/raiders-49ers</link>
+      <guid isPermaLink="false">espn-nfl-401873047</guid>
     </item>
     <item>
-      <title>FINAL | Philadelphia Eagles 10 - Washington Commanders 27</title>
-      <description>Final: Philadelphia Eagles 10, Washington Commanders 27.</description>
-      <link>https://www.espn.com/nfl/game/_/gameId/401873035/eagles-commanders</link>
-      <guid isPermaLink="false">espn-nfl-401873035</guid>
+      <title>SUN NOV 8 | Arizona Cardinals at Seattle Seahawks | 4:25 PM ET | Fox</title>
+      <description>Arizona Cardinals at Seattle Seahawks. Kickoff 4:25 PM ET. TV: Fox.</description>
+      <link>https://www.espn.com/nfl/game/_/gameId/401873048/cardinals-seahawks</link>
+      <guid isPermaLink="false">espn-nfl-401873048</guid>
     </item>
     <item>
-      <title>FINAL | Chicago Bears 34 - Seattle Seahawks 17</title>
-      <description>Final: Chicago Bears 34, Seattle Seahawks 17.</description>
-      <link>https://www.espn.com/nfl/game/_/gameId/401873036/bears-seahawks</link>
-      <guid isPermaLink="false">espn-nfl-401873036</guid>
+      <title>SUN NOV 8 | Tampa Bay Buccaneers at Chicago Bears | 8:20 PM ET | NBC</title>
+      <description>Tampa Bay Buccaneers at Chicago Bears. Kickoff 8:20 PM ET. TV: NBC.</description>
+      <link>https://www.espn.com/nfl/game/_/gameId/401873050/buccaneers-bears</link>
+      <guid isPermaLink="false">espn-nfl-401873050</guid>
+    </item>
+    <item>
+      <title>MON NOV 9 | Buffalo Bills at Minnesota Vikings | 8:15 PM ET | ESPN / ABC</title>
+      <description>Buffalo Bills at Minnesota Vikings. Kickoff 8:15 PM ET. TV: ESPN / ABC.</description>
+      <link>https://www.espn.com/nfl/game/_/gameId/401873051/bills-vikings</link>
+      <guid isPermaLink="false">espn-nfl-401873051</guid>
     </item>
   </channel>
 </rss>
