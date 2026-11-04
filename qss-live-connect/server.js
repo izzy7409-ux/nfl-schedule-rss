@@ -11,6 +11,7 @@ const staticFiles = new Map([
   ['/prp-overlay', ['prp-overlay.html', 'text/html']],
   ['/prp-overlay.html', ['prp-overlay.html', 'text/html']],
   ['/prp-logo.svg', ['prp-logo.svg', 'image/svg+xml']],
+  ['/baltimore-b-logo.png', ['baltimore-b-logo.png', 'image/png']],
   ['/qss-studio-sync.zip', ['qss-studio-sync.zip', 'application/zip']],
   ['/ravens-mark.png', ['ravens-mark.png', 'image/png']],
   ['/qss-overlay', ['qss-overlay.html', 'text/html']],
