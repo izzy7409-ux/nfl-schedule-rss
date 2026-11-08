@@ -5,7 +5,7 @@
     <link>https://www.nfl.com/schedules/</link>
     <description>Automatic NFL schedule, live scores and final results for EVMux.</description>
     <language>en-us</language>
-    <lastBuildDate>Sun, 08 Nov 2026 20:27:23 +0000</lastBuildDate>
+    <lastBuildDate>Sun, 08 Nov 2026 23:57:06 +0000</lastBuildDate>
     <ttl>5</ttl>
     <item>
       <title>FINAL | Jacksonville Jaguars 33 - Baltimore Ravens 10</title>
@@ -20,69 +20,69 @@
       <guid isPermaLink="false">espn-nfl-401873038</guid>
     </item>
     <item>
-      <title>LIVE | Dallas Cowboys 17 - Indianapolis Colts 10 | 2:18 - 3rd | Fox</title>
-      <description>Dallas Cowboys 17, Indianapolis Colts 10. 2:18 - 3rd.</description>
-      <link>https://www.espn.com/nfl/game?gameId=401873040</link>
+      <title>FINAL | Dallas Cowboys 27 - Indianapolis Colts 23</title>
+      <description>Final: Dallas Cowboys 27, Indianapolis Colts 23.</description>
+      <link>https://www.espn.com/nfl/game/_/gameId/401873040/cowboys-colts</link>
       <guid isPermaLink="false">espn-nfl-401873040</guid>
     </item>
     <item>
-      <title>LIVE | New York Jets 12 - Kansas City Chiefs 28 | 15:00 - 4th | CBS</title>
-      <description>New York Jets 12, Kansas City Chiefs 28. 15:00 - 4th.</description>
-      <link>https://www.espn.com/nfl/game?gameId=401873045</link>
+      <title>FINAL | New York Jets 12 - Kansas City Chiefs 35</title>
+      <description>Final: New York Jets 12, Kansas City Chiefs 35.</description>
+      <link>https://www.espn.com/nfl/game/_/gameId/401873045/jets-chiefs</link>
       <guid isPermaLink="false">espn-nfl-401873045</guid>
     </item>
     <item>
-      <title>LIVE | Detroit Lions 16 - Miami Dolphins 9 | 6:46 - 4th | CBS</title>
-      <description>Detroit Lions 16, Miami Dolphins 9. 6:46 - 4th.</description>
-      <link>https://www.espn.com/nfl/game?gameId=401873042</link>
+      <title>FINAL | Detroit Lions 19 - Miami Dolphins 9</title>
+      <description>Final: Detroit Lions 19, Miami Dolphins 9.</description>
+      <link>https://www.espn.com/nfl/game/_/gameId/401873042/lions-dolphins</link>
       <guid isPermaLink="false">espn-nfl-401873042</guid>
     </item>
     <item>
-      <title>LIVE | Cleveland Browns 6 - New Orleans Saints 6 | 10:32 - 4th | CBS</title>
-      <description>Cleveland Browns 6, New Orleans Saints 6. 10:32 - 4th.</description>
-      <link>https://www.espn.com/nfl/game?gameId=401873039</link>
+      <title>FINAL/OT | Cleveland Browns 22 - New Orleans Saints 23</title>
+      <description>Final: Cleveland Browns 22, New Orleans Saints 23.</description>
+      <link>https://www.espn.com/nfl/game/_/gameId/401873039/browns-saints</link>
       <guid isPermaLink="false">espn-nfl-401873039</guid>
     </item>
     <item>
-      <title>LIVE | New York Giants 13 - Philadelphia Eagles 8 | 15:00 - 4th | Fox</title>
-      <description>New York Giants 13, Philadelphia Eagles 8. 15:00 - 4th.</description>
-      <link>https://www.espn.com/nfl/game?gameId=401873044</link>
+      <title>FINAL | New York Giants 19 - Philadelphia Eagles 11</title>
+      <description>Final: New York Giants 19, Philadelphia Eagles 11.</description>
+      <link>https://www.espn.com/nfl/game/_/gameId/401873044/giants-eagles</link>
       <guid isPermaLink="false">espn-nfl-401873044</guid>
     </item>
     <item>
-      <title>LIVE | Los Angeles Rams 20 - Washington Commanders 13 | 12:51 - 4th | Fox</title>
-      <description>Los Angeles Rams 20, Washington Commanders 13. 12:51 - 4th.</description>
-      <link>https://www.espn.com/nfl/game?gameId=401873043</link>
+      <title>FINAL | Los Angeles Rams 20 - Washington Commanders 13</title>
+      <description>Final: Los Angeles Rams 20, Washington Commanders 13.</description>
+      <link>https://www.espn.com/nfl/game/_/gameId/401873043/rams-commanders</link>
       <guid isPermaLink="false">espn-nfl-401873043</guid>
     </item>
     <item>
-      <title>LIVE | Denver Broncos 19 - Carolina Panthers 14 | 10:17 - 4th | CBS</title>
-      <description>Denver Broncos 19, Carolina Panthers 14. 10:17 - 4th.</description>
-      <link>https://www.espn.com/nfl/game?gameId=401873041</link>
+      <title>FINAL | Denver Broncos 26 - Carolina Panthers 21</title>
+      <description>Final: Denver Broncos 26, Carolina Panthers 21.</description>
+      <link>https://www.espn.com/nfl/game/_/gameId/401873041/broncos-panthers</link>
       <guid isPermaLink="false">espn-nfl-401873041</guid>
     </item>
     <item>
-      <title>SUN NOV 8 | Houston Texans at Los Angeles Chargers | 4:05 PM ET | CBS</title>
-      <description>Houston Texans at Los Angeles Chargers. Kickoff 4:05 PM ET. TV: CBS.</description>
-      <link>https://www.espn.com/nfl/game/_/gameId/401873046/texans-chargers</link>
+      <title>LIVE | Houston Texans 38 - Los Angeles Chargers 15 | 8:57 - 4th | CBS</title>
+      <description>Houston Texans 38, Los Angeles Chargers 15. 8:57 - 4th.</description>
+      <link>https://www.espn.com/nfl/game?gameId=401873046</link>
       <guid isPermaLink="false">espn-nfl-401873046</guid>
     </item>
     <item>
-      <title>SUN NOV 8 | Green Bay Packers at New England Patriots | 4:25 PM ET | Fox</title>
-      <description>Green Bay Packers at New England Patriots. Kickoff 4:25 PM ET. TV: Fox.</description>
-      <link>https://www.espn.com/nfl/game/_/gameId/401873049/packers-patriots</link>
+      <title>LIVE | Green Bay Packers 42 - New England Patriots 14 | 2:29 - 3rd | Fox</title>
+      <description>Green Bay Packers 42, New England Patriots 14. 2:29 - 3rd.</description>
+      <link>https://www.espn.com/nfl/game?gameId=401873049</link>
       <guid isPermaLink="false">espn-nfl-401873049</guid>
     </item>
     <item>
-      <title>SUN NOV 8 | Las Vegas Raiders at San Francisco 49ers | 4:25 PM ET | Fox</title>
-      <description>Las Vegas Raiders at San Francisco 49ers. Kickoff 4:25 PM ET. TV: Fox.</description>
-      <link>https://www.espn.com/nfl/game/_/gameId/401873047/raiders-49ers</link>
+      <title>LIVE | Las Vegas Raiders 17 - San Francisco 49ers 38 | 5:12 - 4th | Fox</title>
+      <description>Las Vegas Raiders 17, San Francisco 49ers 38. 5:12 - 4th.</description>
+      <link>https://www.espn.com/nfl/game?gameId=401873047</link>
       <guid isPermaLink="false">espn-nfl-401873047</guid>
     </item>
     <item>
-      <title>SUN NOV 8 | Arizona Cardinals at Seattle Seahawks | 4:25 PM ET | Fox</title>
-      <description>Arizona Cardinals at Seattle Seahawks. Kickoff 4:25 PM ET. TV: Fox.</description>
-      <link>https://www.espn.com/nfl/game/_/gameId/401873048/cardinals-seahawks</link>
+      <title>LIVE | Arizona Cardinals 3 - Seattle Seahawks 17 | 7:47 - 4th | Fox</title>
+      <description>Arizona Cardinals 3, Seattle Seahawks 17. 7:47 - 4th.</description>
+      <link>https://www.espn.com/nfl/game?gameId=401873048</link>
       <guid isPermaLink="false">espn-nfl-401873048</guid>
     </item>
     <item>
