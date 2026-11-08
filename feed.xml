@@ -5,7 +5,7 @@
     <link>https://www.nfl.com/schedules/</link>
     <description>Automatic NFL schedule, live scores and final results for EVMux.</description>
     <language>en-us</language>
-    <lastBuildDate>Sun, 08 Nov 2026 16:06:29 +0000</lastBuildDate>
+    <lastBuildDate>Sun, 08 Nov 2026 20:27:23 +0000</lastBuildDate>
     <ttl>5</ttl>
     <item>
       <title>FINAL | Jacksonville Jaguars 33 - Baltimore Ravens 10</title>
@@ -14,51 +14,51 @@
       <guid isPermaLink="false">espn-nfl-401873037</guid>
     </item>
     <item>
-      <title>LIVE | Cincinnati Bengals 24 - Atlanta Falcons 10 | HALFTIME | NFL Net</title>
-      <description>Cincinnati Bengals 24, Atlanta Falcons 10. HALFTIME.</description>
-      <link>https://www.espn.com/nfl/game?gameId=401873038</link>
+      <title>FINAL | Cincinnati Bengals 34 - Atlanta Falcons 17</title>
+      <description>Final: Cincinnati Bengals 34, Atlanta Falcons 17.</description>
+      <link>https://www.espn.com/nfl/game/_/gameId/401873038/bengals-falcons</link>
       <guid isPermaLink="false">espn-nfl-401873038</guid>
     </item>
     <item>
-      <title>SUN NOV 8 | Dallas Cowboys at Indianapolis Colts | 1:00 PM ET | Fox</title>
-      <description>Dallas Cowboys at Indianapolis Colts. Kickoff 1:00 PM ET. TV: Fox.</description>
-      <link>https://www.espn.com/nfl/game/_/gameId/401873040/cowboys-colts</link>
+      <title>LIVE | Dallas Cowboys 17 - Indianapolis Colts 10 | 2:18 - 3rd | Fox</title>
+      <description>Dallas Cowboys 17, Indianapolis Colts 10. 2:18 - 3rd.</description>
+      <link>https://www.espn.com/nfl/game?gameId=401873040</link>
       <guid isPermaLink="false">espn-nfl-401873040</guid>
     </item>
     <item>
-      <title>SUN NOV 8 | New York Jets at Kansas City Chiefs | 1:00 PM ET | CBS</title>
-      <description>New York Jets at Kansas City Chiefs. Kickoff 1:00 PM ET. TV: CBS.</description>
-      <link>https://www.espn.com/nfl/game/_/gameId/401873045/jets-chiefs</link>
+      <title>LIVE | New York Jets 12 - Kansas City Chiefs 28 | 15:00 - 4th | CBS</title>
+      <description>New York Jets 12, Kansas City Chiefs 28. 15:00 - 4th.</description>
+      <link>https://www.espn.com/nfl/game?gameId=401873045</link>
       <guid isPermaLink="false">espn-nfl-401873045</guid>
     </item>
     <item>
-      <title>SUN NOV 8 | Detroit Lions at Miami Dolphins | 1:00 PM ET | Fox</title>
-      <description>Detroit Lions at Miami Dolphins. Kickoff 1:00 PM ET. TV: Fox.</description>
-      <link>https://www.espn.com/nfl/game/_/gameId/401873042/lions-dolphins</link>
+      <title>LIVE | Detroit Lions 16 - Miami Dolphins 9 | 6:46 - 4th | CBS</title>
+      <description>Detroit Lions 16, Miami Dolphins 9. 6:46 - 4th.</description>
+      <link>https://www.espn.com/nfl/game?gameId=401873042</link>
       <guid isPermaLink="false">espn-nfl-401873042</guid>
     </item>
     <item>
-      <title>SUN NOV 8 | Cleveland Browns at New Orleans Saints | 1:00 PM ET | CBS</title>
-      <description>Cleveland Browns at New Orleans Saints. Kickoff 1:00 PM ET. TV: CBS.</description>
-      <link>https://www.espn.com/nfl/game/_/gameId/401873039/browns-saints</link>
+      <title>LIVE | Cleveland Browns 6 - New Orleans Saints 6 | 10:32 - 4th | CBS</title>
+      <description>Cleveland Browns 6, New Orleans Saints 6. 10:32 - 4th.</description>
+      <link>https://www.espn.com/nfl/game?gameId=401873039</link>
       <guid isPermaLink="false">espn-nfl-401873039</guid>
     </item>
     <item>
-      <title>SUN NOV 8 | New York Giants at Philadelphia Eagles | 1:00 PM ET | Fox</title>
-      <description>New York Giants at Philadelphia Eagles. Kickoff 1:00 PM ET. TV: Fox.</description>
-      <link>https://www.espn.com/nfl/game/_/gameId/401873044/giants-eagles</link>
+      <title>LIVE | New York Giants 13 - Philadelphia Eagles 8 | 15:00 - 4th | Fox</title>
+      <description>New York Giants 13, Philadelphia Eagles 8. 15:00 - 4th.</description>
+      <link>https://www.espn.com/nfl/game?gameId=401873044</link>
       <guid isPermaLink="false">espn-nfl-401873044</guid>
     </item>
     <item>
-      <title>SUN NOV 8 | Los Angeles Rams at Washington Commanders | 1:00 PM ET | Fox</title>
-      <description>Los Angeles Rams at Washington Commanders. Kickoff 1:00 PM ET. TV: Fox.</description>
-      <link>https://www.espn.com/nfl/game/_/gameId/401873043/rams-commanders</link>
+      <title>LIVE | Los Angeles Rams 20 - Washington Commanders 13 | 12:51 - 4th | Fox</title>
+      <description>Los Angeles Rams 20, Washington Commanders 13. 12:51 - 4th.</description>
+      <link>https://www.espn.com/nfl/game?gameId=401873043</link>
       <guid isPermaLink="false">espn-nfl-401873043</guid>
     </item>
     <item>
-      <title>SUN NOV 8 | Denver Broncos at Carolina Panthers | 1:00 PM ET | CBS</title>
-      <description>Denver Broncos at Carolina Panthers. Kickoff 1:00 PM ET. TV: CBS.</description>
-      <link>https://www.espn.com/nfl/game/_/gameId/401873041/broncos-panthers</link>
+      <title>LIVE | Denver Broncos 19 - Carolina Panthers 14 | 10:17 - 4th | CBS</title>
+      <description>Denver Broncos 19, Carolina Panthers 14. 10:17 - 4th.</description>
+      <link>https://www.espn.com/nfl/game?gameId=401873041</link>
       <guid isPermaLink="false">espn-nfl-401873041</guid>
     </item>
     <item>
