@@ -1,10 +1,12 @@
 const fs=require('fs');
 const path=require('path');
+const {createHash}=require('node:crypto');
 
 const OVERLAY_HTML=fs.readFileSync(path.join(__dirname,'lower-third.html'),'utf8');
 const CONTROL_HTML=fs.readFileSync(path.join(__dirname,'lower-third-control.html'),'utf8');
 const CONTROL_SECRET=process.env.LOWER_THIRD_CONTROL_SECRET||process.env.CONFIDENCE_CONTROL_SECRET||'';
 const DATA_FILE=process.env.LOWER_THIRD_DATA_FILE||'/data/prp-lower-third.json';
+const MAX_TOPICS=40;
 const DEFAULT_TICKER='WELCOME TO THE PURPLE REIGN PODCAST, YOUR #1 SOURCE FOR BALTIMORE RAVENS NEWS AND DISCUSSIONS. LIKE THE VIDEO IF YOU ENJOY THE CONTENT! ALL SUPERCHATS/SUBS/MEMBERSHIPS ANNOUNCED LIVE ON THE SHOW!';
 const clients=new Set();
 let loaded=false,lastError='';
@@ -18,7 +20,21 @@ function json(res,code,obj){res.writeHead(code,{'Content-Type':'application/json
 function html(res,code,body){res.writeHead(code,{'Content-Type':'text/html; charset=utf-8','Cache-Control':'no-store'});res.end(body);}
 function readBody(req){return new Promise((resolve,reject)=>{let data='';req.on('data',c=>{data+=c;if(data.length>500000)reject(new Error('Body too large'));});req.on('end',()=>{try{resolve(data?JSON.parse(data):{});}catch{reject(new Error('Invalid JSON'));}});req.on('error',reject);});}
 function authorized(url,req){if(!CONTROL_SECRET)return true;return (url.searchParams.get('key')||'')===CONTROL_SECRET||String(req.headers['x-control-key']||'')===CONTROL_SECRET;}
-function cleanTopics(v){const out=(Array.isArray(v)?v:[]).map(x=>String(x||'').trim()).filter(Boolean).slice(0,40);return out.length?out:['ADD YOUR FIRST TOPIC IN THE REMOTE'];}
+function parseTopics(value) {
+  return (Array.isArray(value) ? value : []).map(topic => String(topic || '').trim()).filter(Boolean);
+}
+function cleanTopics(value) {
+  const topics = parseTopics(value).slice(0, MAX_TOPICS);
+  return topics.length ? topics : ['ADD YOUR FIRST TOPIC IN THE REMOTE'];
+}
+function rundownRevision() {
+  return createHash('sha256').update(JSON.stringify(state.topics)).digest('hex');
+}
+function topicIndex(value) {
+  const index = Number(value);
+  if (!Number.isInteger(index) || index < 0 || index >= state.topics.length) throw new Error('Invalid topic');
+  return index;
+}
 function normalize(raw={}){
   const topics=cleanTopics(raw.topics||state.topics);
   let idx=Number.isFinite(Number(raw.currentIndex))?Math.trunc(Number(raw.currentIndex)):0;
@@ -41,36 +57,78 @@ function ensureLoaded(){
     else{state=normalize(state);save();}
   }catch(e){lastError='Storage warning: '+e.message;state=normalize(state);}
 }
-function save(){
+function save(next=state){
   fs.mkdirSync(path.dirname(DATA_FILE),{recursive:true});
-  const tmp=DATA_FILE+'.tmp';fs.writeFileSync(tmp,JSON.stringify(state,null,2));fs.renameSync(tmp,DATA_FILE);lastError='';
+  const tmp=DATA_FILE+'.tmp';fs.writeFileSync(tmp,JSON.stringify(next,null,2));fs.renameSync(tmp,DATA_FILE);lastError='';
 }
 function publicState(){
   ensureLoaded();
   const selectedTopic=state.topics[state.currentIndex]||'';
-  return {...state,selectedTopic,displayTitle:(state.mode==='breaking'&&state.breakingHeadline?state.breakingHeadline:selectedTopic),displayLabel:(state.mode==='breaking'?'BREAKING NEWS':state.label),lastError};
+  return {...state,rundownRevision:rundownRevision(),topicLimit:MAX_TOPICS,selectedTopic,displayTitle:(state.mode==='breaking'&&state.breakingHeadline?state.breakingHeadline:selectedTopic),displayLabel:(state.mode==='breaking'?'BREAKING NEWS':state.label),lastError};
 }
 function broadcast(){
   const payload='data: '+JSON.stringify({ok:true,state:publicState()})+'\n\n';
   for(const res of clients){try{res.write(payload);}catch{clients.delete(res);}}
 }
-function commit(next){state=normalize({...state,...next});try{save();}catch(e){lastError='Could not save lower third: '+e.message;throw e;}broadcast();return publicState();}
-function moveTopic(from,to){
-  const arr=[...state.topics];
-  if(!Number.isInteger(from)||!Number.isInteger(to)||from<0||to<0||from>=arr.length||to>=arr.length)return;
-  const active=arr[state.currentIndex],[item]=arr.splice(from,1);arr.splice(to,0,item);
-  state.topics=arr;state.currentIndex=Math.max(0,arr.indexOf(active));
+function commit(update) {
+  const next = normalize({...state, ...update});
+  try { save(next); }
+  catch (error) { lastError = 'Could not save lower third: ' + error.message; throw error; }
+  state = next;
+  broadcast();
+  return publicState();
+}
+function moveTopic(from,to) {
+  const topics = [...state.topics];
+  if (!Number.isInteger(from) || !Number.isInteger(to) || from < 0 || to < 0 || from >= topics.length || to >= topics.length) return {};
+  const [topic] = topics.splice(from, 1);
+  topics.splice(to, 0, topic);
+  let {currentIndex} = state;
+  if (currentIndex === from) currentIndex = to;
+  else if (from < currentIndex && currentIndex <= to) currentIndex--;
+  else if (to <= currentIndex && currentIndex < from) currentIndex++;
+  return {topics, currentIndex};
 }
 async function control(body={}){
   ensureLoaded();const a=String(body.action||'');
+  if (body.rundownRevision !== undefined && body.rundownRevision !== rundownRevision()) {
+    throw new Error('The rundown changed. Review the latest topics and try again.');
+  }
   if(a==='saveSettings')return commit({label:body.label,logoText:body.logoText,ticker:body.ticker});
-  if(a==='setTopics'){const topics=cleanTopics(body.topics),active=state.topics[state.currentIndex];let idx=topics.indexOf(active);if(idx<0)idx=0;return commit({topics,currentIndex:idx,mode:'discussion'});}
+  if (a === 'setTopics' || a === 'replaceTopics') {
+    const replacing = a === 'replaceTopics';
+    const topics = replacing ? parseTopics(body.topics) : cleanTopics(body.topics);
+    if (!topics.length || topics.length > MAX_TOPICS) throw new Error(`Enter between 1 and ${MAX_TOPICS} topics.`);
+    const active = state.topics[state.currentIndex];
+    const currentIndex = replacing && topics[state.currentIndex] === active ? state.currentIndex : Math.max(0, topics.indexOf(active));
+    return commit({topics, currentIndex, mode: replacing ? state.mode : 'discussion'});
+  }
   if(a==='setCurrent')return commit({currentIndex:Math.max(0,Math.min(state.topics.length-1,Number(body.index)||0)),mode:'discussion'});
   if(a==='next')return commit({currentIndex:(state.currentIndex+1)%state.topics.length,mode:'discussion'});
   if(a==='prev')return commit({currentIndex:(state.currentIndex-1+state.topics.length)%state.topics.length,mode:'discussion'});
-  if(a==='addTopic'){const topic=String(body.topic||'').trim().slice(0,150);if(!topic)throw new Error('Enter a topic first');return commit({topics:[...state.topics,topic]});}
-  if(a==='removeTopic'){const i=Number(body.index);if(!Number.isInteger(i)||i<0||i>=state.topics.length)throw new Error('Invalid topic');if(state.topics.length===1)throw new Error('Keep at least one topic');const topics=state.topics.filter((_,n)=>n!==i);return commit({topics,currentIndex:Math.min(state.currentIndex,topics.length-1)});}
-  if(a==='moveTopic'){moveTopic(Number(body.from),Number(body.to));return commit({topics:state.topics,currentIndex:state.currentIndex});}
+  if (a === 'addTopic' || a === 'appendTopics') {
+    const values = a === 'addTopic' ? [String(body.topic || '').trim().slice(0, 150)] : body.topics;
+    const topics = parseTopics(values);
+    if (!topics.length) throw new Error('Enter a topic first');
+    if (state.topics.length + topics.length > MAX_TOPICS) throw new Error(`The rundown can hold up to ${MAX_TOPICS} topics.`);
+    return commit({topics: [...state.topics, ...topics]});
+  }
+  if (a === 'editTopic') {
+    const index = topicIndex(body.index);
+    const topic = String(body.topic || '').trim();
+    if (!topic) throw new Error('Enter a topic first');
+    const topics = [...state.topics];
+    topics[index] = topic;
+    return commit({topics});
+  }
+  if (a === 'removeTopic') {
+    const index = topicIndex(body.index);
+    if (state.topics.length === 1) throw new Error('Keep at least one topic');
+    const topics = state.topics.filter((_, position) => position !== index);
+    const currentIndex = Math.min(state.currentIndex - (index < state.currentIndex ? 1 : 0), topics.length - 1);
+    return commit({topics, currentIndex});
+  }
+  if(a==='moveTopic')return commit(moveTopic(Number(body.from),Number(body.to)));
   if(a==='breaking'){const headline=String(body.headline||'').trim().slice(0,150);if(!headline)throw new Error('Enter a breaking-news headline');return commit({mode:'breaking',breakingHeadline:headline,visible:true});}
   if(a==='discussion')return commit({mode:'discussion'});
   if(a==='toggleVisible')return commit({visible:!state.visible});
