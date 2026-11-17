@@ -5,7 +5,7 @@
     <link>https://www.nfl.com/schedules/</link>
     <description>Automatic NFL schedule, live scores and final results for EVMux.</description>
     <language>en-us</language>
-    <lastBuildDate>Tue, 17 Nov 2026 02:35:11 +0000</lastBuildDate>
+    <lastBuildDate>Tue, 17 Nov 2026 11:07:20 +0000</lastBuildDate>
     <ttl>5</ttl>
     <item>
       <title>FINAL | Washington Commanders 24 - New York Giants 21</title>
@@ -86,9 +86,9 @@
       <guid isPermaLink="false">espn-nfl-401873064</guid>
     </item>
     <item>
-      <title>LIVE | Los Angeles Chargers 17 - Baltimore Ravens 7 | 1:05 - 2nd | ESPN</title>
-      <description>Los Angeles Chargers 17, Baltimore Ravens 7. 1:05 - 2nd.</description>
-      <link>https://www.espn.com/nfl/game?gameId=401873065</link>
+      <title>FINAL | Los Angeles Chargers 23 - Baltimore Ravens 20</title>
+      <description>Final: Los Angeles Chargers 23, Baltimore Ravens 20.</description>
+      <link>https://www.espn.com/nfl/game/_/gameId/401873065/chargers-ravens</link>
       <guid isPermaLink="false">espn-nfl-401873065</guid>
     </item>
   </channel>
